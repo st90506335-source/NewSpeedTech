@@ -163,6 +163,43 @@
   .app-card .zh{font-size:13.5px;font-weight:700;color:var(--text-dark);margin-bottom:4px;}
   .app-card .en{font-size:11px;color:var(--text-light);}
 
+.app-card {
+  position: relative;
+  overflow: hidden; /* 如果不希望叉叉超出邊界 */
+}
+
+/* 叉叉的疊加層 */
+.x-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 讓點擊事件可以穿透到下方的內容 */
+  z-index: 10;
+}
+
+/* 繪製兩條對角線 */
+.x-overlay::before, 
+.x-overlay::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%; /* 寬度需大於 100% 以覆蓋對角線長度 */
+  height: 4px;  /* 叉叉的粗細 */
+  background-color: red; /* 叉叉的顏色 */
+  transform-origin: center;
+}
+
+.x-overlay::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.x-overlay::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
   /* ---------- Content description ---------- */
   .desc-section{background:var(--gray-bg);padding:64px 0;}
   .desc-inner{display:flex;gap:56px;align-items:center;}
@@ -331,7 +368,7 @@
         <div class="circle">
           <svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
         </div>
-        <div class="label">汽車級品質系統<br>(IATF 16949 認證)</div>
+        <div class="label">汽車級品質系統<br><del>(IATF 16949 認證)</del></div>
       </div>
     </div>
   </div>
@@ -360,7 +397,7 @@
     </div>
     <div class="visual">
       <div class="cert-card">
-        <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/></svg></div><div class="t">IATF 16949 汽車產業品質管理認證</div></div>
+        <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/></svg></div><div class="t"><del>IATF 16949 汽車產業品質管理認證</del></div></div>
         <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></div><div class="t">鹽霧測試 / 防水防塵 IP67</div></div>
         <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M4 12h16M4 12l4-4M4 12l4 4"/></svg></div><div class="t">高震動、高溫耐候性驗證</div></div>
         <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><div class="t">整機系統測試與可靠性驗證</div></div>
@@ -375,11 +412,11 @@
     <h2>延伸項目與應用</h2>
     <div class="sub">Extended Applications</div>
     <div class="app-grid">
-      <div class="app-card">
-        <div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M13 2 5 14h6l-1 8 9-13h-6z"/></svg></div>
+<div class="ai-style-change-1 app-card">Delete
+        <div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M13 2 5 14h6l-1 8 9-13h-6z"></path></svg></div>
         <div class="zh">電動車充電樁</div>
         <div class="en">EV Charging Station</div>
-      </div>
+      <div class="x-overlay"></div></div>
       <div class="app-card">
         <div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></div>
         <div class="zh">車用感測器</div>
