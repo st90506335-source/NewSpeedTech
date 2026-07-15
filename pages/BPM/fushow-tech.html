@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>BPM產品報價單比較分析報告</title>
+<style>
+  body { font-family: "Microsoft JhengHei","Segoe UI",Arial,sans-serif; margin:40px; color:#222; line-height:1.7; }
+  h1 { font-size:24px; border-bottom:3px solid #2c6e49; padding-bottom:8px; }
+  h2 { font-size:19px; color:#2c6e49; margin-top:36px; border-left:5px solid #2c6e49; padding-left:8px; }
+  h3 { font-size:16px; color:#444; margin-top:20px; }
+  table { border-collapse:collapse; width:100%; margin:14px 0 24px; font-size:14px; }
+  th, td { border:1px solid #ccc; padding:8px 10px; text-align:left; }
+  th { background:#2c6e49; color:#fff; }
+  tr:nth-child(even) { background:#f5f8f6; }
+  .num { text-align:right; }
+  .highlight { background:#fff3cd; font-weight:bold; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:10px; font-size:12px; color:#fff; }
+  .tagA { background:#2c6e49; }
+  .tagB { background:#996515; }
+  .note { font-size:13px; color:#666; }
+  .summary-box { display:flex; gap:20px; margin:20px 0; }
+  .card { flex:1; border:1px solid #ddd; border-radius:8px; padding:16px; background:#fafafa; }
+  .card h3 { margin-top:0; }
+  .price { font-size:22px; font-weight:bold; color:#2c6e49; }
+  footer { margin-top:40px; font-size:12px; color:#888; border-top:1px solid #eee; padding-top:10px; }
+</style>
+</head>
+<body>
+
+<h1>BPM產品報價單比較分析報告</h1>
+<p class="note">客戶：宣德科技股份有限公司　|　提供廠商：甫曉科技股份有限公司（同一代理商，代理兩條不同產品線）　|　報價日期：2026/07/10　|　報告製作日：2026/07/14</p>
+
+<h2>一、基本資訊比較</h2>
+<table>
+<tr><th>項目</th><th>Guru-X BPM <span class="tag tagA">產品A</span></th><th>SmartBPM / SmartSoft系列 <span class="tag tagB">產品B</span></th></tr>
+<tr><td>軟體研發廠商</td><td>逐鹿數位</td><td>慧智科技</td></tr>
+<tr><td>代理商</td><td>甫曉科技股份有限公司</td><td>甫曉科技股份有限公司</td></tr>
+<tr><td>報價版本／效期</td><td>GU-V2.0，30天內有效</td><td>30個日曆日內有效</td></tr>
+<tr><td>授權架構</td><td>單一主系統授權（買斷式，不含原始碼），功能模組多數內建於主系統</td><td>拆分為 SmartOffice.CORE（EIP入口）與 SmartBPM.CORE（流程引擎）兩大產品，須分別購買</td></tr>
+<tr><td>同時上線人數(CCU)</td><td>60 CCU（單一授權項目即含60 CCU）</td><td>60 CCU（每產品皆為「基礎10 CCU + 加購5組10CCU授權」，Office與BPM分別各買60 CCU）</td></tr>
+<tr><td>需求涵蓋語系</td><td>越南文、西班牙文（<b>已包含於主系統授權費內，不額外收費</b>）</td><td>越南文、西班牙文（<b>各178,000元，共356,000元須額外付費</b>）</td></tr>
+<tr><td>組織同步</td><td>內建於「組織管理」模組，未單獨列價</td><td>Office與BPM各需加購「人員組織同步模組」，共388,000元（138,000+250,000）</td></tr>
+<tr><td>流程模擬</td><td>未見獨立收費項目（推測含於「數智中台」模組內）</td><td>需加購「流程自動化模擬模組」328,000元</td></tr>
+<tr><td>企業微信(WeCom)通知需求</td><td>可透過顧問服務以API方式客製串接（一次性230,000元）</td><td>廠商明確表示<b>目前尚無法提供</b></td></tr>
+</table>
+
+<h2>二、報價項目明細</h2>
+
+<h3>2.1 Guru-X BPM</h3>
+<table>
+<tr><th>項次</th><th>產品項目</th><th>數量</th><th>單位</th><th class="num">單價</th><th class="num">合計</th></tr>
+<tr><td>1-1</td><td>Guru-X BPM主系統授權（含60 CCU、越南文/西班牙文語系）</td><td>1</td><td>套</td><td class="num">3,998,000</td><td class="num">3,998,000</td></tr>
+<tr><td>2-1</td><td>顧問服務－企業微信API通知客製</td><td>1</td><td>式</td><td class="num">230,000</td><td class="num">230,000</td></tr>
+<tr><td>2-2</td><td>顧問輔導服務（6hrs/天）</td><td>5</td><td>人天</td><td class="num">23,000</td><td class="num">115,000</td></tr>
+<tr class="highlight"><td colspan="5">未稅總計</td><td class="num">4,343,000</td></tr>
+</table>
+<p class="note">主系統內建模組（不另計價）：組織管理／使用者管理、EIP企業入口、數智中台（表單／流程設計、儀表板）、行動模組(Web APP)、套表列印、流程監控、資料互聯(ESB)、報表管理。<br>
+未列入總價之選購項目：多因子登入驗證198,000元；單一登入(SSO)驗證198,000元。</p>
+
+<h3>2.2 SmartBPM／SmartSoft系列</h3>
+<table>
+<tr><th>項次</th><th>產品項目</th><th>數量</th><th>單位</th><th class="num">單價</th><th class="num">合計</th></tr>
+<tr><td>1-1</td><td>SmartOffice.CORE ENT企業版(含手機web版)</td><td>1</td><td>套</td><td class="num">239,000</td><td class="num">239,000</td></tr>
+<tr><td>1-2</td><td>SmartOffice.CORE 10 CCU License</td><td>6</td><td>套</td><td class="num">168,000</td><td class="num">1,008,000</td></tr>
+<tr><td>1-4</td><td>SmartOffice.CORE 選購模組－人員組織同步</td><td>1</td><td>套</td><td class="num">138,000</td><td class="num">138,000</td></tr>
+<tr><td>2-1</td><td>SmartBPM.CORE ENT企業版(主系統，一台Server)</td><td>1</td><td>套</td><td class="num">1,380,000</td><td class="num">1,380,000</td></tr>
+<tr><td>2-2</td><td>SmartBPM.CORE 10 CCU License</td><td>6</td><td>套</td><td class="num">288,000</td><td class="num">1,728,000</td></tr>
+<tr><td>2-3</td><td>SmartESB.NET 6選購模組－企業版</td><td>1</td><td>套</td><td class="num">880,000</td><td class="num">880,000</td></tr>
+<tr><td>2-4</td><td>SmartBPM.CORE 選購模組－人員組織同步</td><td>1</td><td>套</td><td class="num">250,000</td><td class="num">250,000</td></tr>
+<tr><td>2-5</td><td>SmartBPM.CORE 選購模組－流程自動化模擬</td><td>1</td><td>套</td><td class="num">328,000</td><td class="num">328,000</td></tr>
+<tr><td>2-6</td><td>SmartBPM.CORE 選購模組－西班牙文語系</td><td>1</td><td>套</td><td class="num">178,000</td><td class="num">178,000</td></tr>
+<tr><td>2-7</td><td>SmartBPM.CORE 選購模組－越南文語系</td><td>1</td><td>套</td><td class="num">178,000</td><td class="num">178,000</td></tr>
+<tr><td>3-1</td><td>顧問輔導服務（6hrs/天）</td><td>5</td><td>人天</td><td class="num">23,000</td><td class="num">115,000</td></tr>
+<tr class="highlight"><td colspan="5">未稅總計</td><td class="num">6,422,000</td></tr>
+</table>
+<p class="note">線上教育訓練(1年)為贈送項目，未稅小計已列為0元。<br>
+未列入總價之選購項目（共約1,157,800元）：APP Client雙產品(9,800+120,000)、報表輸出模組168,000、代理人同步模組168,000、雙因子認證MFA 158,000、Line通知178,000、MS Teams通知178,000、Google單一登入178,000。</p>
+
+<h2>三、總價與稅額比較</h2>
+<table>
+<tr><th>項目</th><th class="num">Guru-X BPM</th><th class="num">SmartBPM/SmartSoft</th><th class="num">差額（B－A）</th></tr>
+<tr><td>未稅總計（未折扣）</td><td class="num">4,343,000</td><td class="num">6,422,000</td><td class="num">+2,079,000</td></tr>
+<tr><td>未稅優惠價</td><td class="num">3,182,060</td><td class="num">4,516,700</td><td class="num">+1,334,640</td></tr>
+<tr><td>稅額</td><td class="num">159,103</td><td class="num">225,835</td><td class="num">+66,732</td></tr>
+<tr class="highlight"><td>含稅優惠總價</td><td class="num">3,341,163</td><td class="num">4,742,535</td><td class="num">+1,401,372（約高44%）</td></tr>
+</table>
+
+<div class="summary-box">
+  <div class="card"><h3>Guru-X BPM 含稅優惠總價</h3><div class="price">NT$ 3,341,163</div></div>
+  <div class="card"><h3>SmartBPM/SmartSoft 含稅優惠總價</h3><div class="price">NT$ 4,742,535</div></div>
+</div>
+
+<h2>四、付款條件與維護服務比較</h2>
+<table>
+<tr><th>項目</th><th>Guru-X BPM</th><th>SmartBPM/SmartSoft</th></tr>
+<tr><td>付款方式</td><td>簽約60%、交貨40%，發票日起月結30天</td><td>簽約60%、交貨40%，發票日起月結30天（完全相同）</td></tr>
+<tr><td>首年保固／維護</td><td>交貨日起算一年維護服務</td><td>含一次性軟體安裝＋交貨日起算一年免費保固</td></tr>
+<tr><td>年度維護費計算基礎</td><td>軟體授權未稅成交價之<b>20%</b>（不含顧問輔導費），並提供UAT授權</td><td>軟體授權未稅成交價之<b>18%</b>（不含顧問輔導費與線上教育訓練）</td></tr>
+<tr><td>維護服務內容</td><td>5×8 On-Call（不含國定假日）；合約期間提供測試機授權；未來加購授權/客製將按加購金額20%增加維護費</td><td>免費電話/CRM客服諮詢；免費小版本更新；每年6月、12月各一次健檢與中高風險修補；贈送測試機授權(10 CCU，隨MA更新)</td></tr>
+</table>
+
+<h2>五、綜合分析</h2>
+<p>兩份報價單雖然都由甫曉科技提供且產品定位相近（皆支援60人同時上線、皆含組織同步與顧問輔導服務），但實際上代表兩個完全不同的軟體廠商與產品架構，方案結構有本質差異。Guru-X BPM採取單一主系統整合授權模式，將企業入口(EIP)、行動模組、流程設計、資料整合(ESB)、報表與流程監控等功能整合進基礎授權內，因此基礎報價中不需另外購買整合中介軟體，語系擴充也直接內含不加價。相對地，SmartBPM/SmartSoft系列將EIP入口(SmartOffice)與流程引擎(SmartBPM)拆分為兩套產品分別計價，且資料整合(SmartESB.NET，880,000元)、組織同步(共388,000元)、流程模擬(328,000元)、多語系(共356,000元)等客戶明確提出的需求項目，在此方案中都需要額外加購，導致總價明顯墊高。</p>
+<p>就總金額而言，SmartBPM/SmartSoft含稅優惠總價（4,742,535元）比Guru-X BPM（3,341,163元）高出約140萬元，價差主要來自於授權費用本身（SmartBPM.CORE與SmartOffice.CORE二項主系統合計已逾260萬元，遠高於Guru-X單一主系統399.8萬元中實際優惠後的成交價），而非顧問服務或維護條款的差異（兩案的付款條件與顧問輔導費完全相同）。年度維護費率方面，Guru-X的20%略高於SmartSoft的18%，但由於Guru-X的授權基礎金額較低，實際年度維護金額估算後仍可能低於或相近於SmartSoft方案，長期總持有成本（TCO）差距不會因維護費率而縮小太多。</p>
+<p>另需留意兩項風險與待確認事項：其一，企業微信(WeCom)通知是宣德提出的明確需求，SmartSoft廠商已表明目前無法支援，若此功能為必要條件，SmartSoft方案在現階段等同不符合需求，除非日後另尋替代通知管道(如Line或Teams，皆為SmartSoft的選購項目，需另加178,000元)；Guru-X則以一次性顧問客製服務(230,000元)方式滿足此需求，但屬客製開發，仍建議在正式簽約前確認其功能穩定性與後續維護責任歸屬。其二，甫曉業務於信中提到SmartOffice EIP部份為可拆售產品，若宣德評估後不需要企業入口(EIP)功能，可要求廠商刪減該大項報價（約986,000元優惠價），屆時SmartSoft方案總價將可望大幅拉近與Guru-X的差距，但同時也會失去SmartOffice提供的入口網站與行動web版功能，這點在決策前建議與甫曉業務進一步確認取捨後對總功能與價格的實際影響。另外，兩份報價單皆未包含30-50張表單的開發工時報價，此部分費用仍需另外向廠商確認並納入整體預算評估。</p>
+
+<footer>本報告依據甫曉科技於2026/07/10提供之兩份PDF報價單（甫曉Guru-X BPM軟體產品及服務報價單、甫曉SmartSoft產品報價單）整理製作，僅供內部評估參考，實際交易條件仍以雙方正式簽署之合約及廠商最終確認報價為準。</footer>
+
+</body>
+</html>
