@@ -253,6 +253,31 @@
       height: 38px !important;
       pointer-events: none !important;
     }
+  </style><style id="tableconvert-font-styles">
+/* TableConvert Extension - Essential Font Definition Only */
+@font-face {
+  font-family: "tableconvert-icon";
+  src: url('https://at.alicdn.com/t/c/font_1011144_jmo4009ffif.woff2?t=1719821135173') format('woff2'),
+       url('https://at.alicdn.com/t/c/font_1011144_jmo4009ffif.woff?t=1719821135173') format('woff'),
+       url('https://at.alicdn.com/t/c/font_1011144_jmo4009ffif.ttf?t=1719821135173') format('truetype');
+  font-display: swap;
+}
+
+/* Essential scrollbar styles for dropdown */
+.tableconvert-dropdown-content::-webkit-scrollbar {
+  width: 3px;
+}
+.tableconvert-dropdown-content::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.4);
+  border-radius: 1.5px;
+}
+.tableconvert-dropdown-content::-webkit-scrollbar-thumb {
+  background: rgba(203, 213, 225, 0.6);
+  border-radius: 1.5px;
+}
+.tableconvert-dropdown-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.7);
+}
   </style></head>
 <body>
 
@@ -303,7 +328,9 @@
 <div class="tabbar">
   <div class="tab-switch">
     <button class="active" data-tab="company">公司資訊</button>
-    <button data-tab="biz">業務聯絡資訊</button>
+    <button data-tab="biz" style="
+    display: none;
+">業務聯絡資訊</button>
   </div>
 </div>
 
@@ -325,7 +352,7 @@
         <div class="body">
           <div class="zh-name">宣德科技股份有限公司(總部)</div>
           <div class="en-name">Speed Tech Corp.</div>
-          <div class="func-tag">集團總部、研發、SMT、FATP、連接器生產</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>桃園市龜山區民生北路一段568號</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>電話：+886-3-2120088</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 3h9l3 3v4H6z"></path><rect x="4" y="10" width="16" height="9" rx="1"></rect><rect x="8" y="14" width="8" height="4"></rect></svg><span>傳真：+886-3-2121771</span></div>
@@ -339,7 +366,7 @@
         <div class="body">
           <div class="zh-name">宣德工業股份有限公司</div>
           <div class="en-name">Speed Tech Industrial Corp.</div>
-          <div class="func-tag">工控產品生產、銷售及研發</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>桃園市龜山區民生北路一段568號</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>電話：+886-3-2120088</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 3h9l3 3v4H6z"></path><rect x="4" y="10" width="16" height="9" rx="1"></rect><rect x="8" y="14" width="8" height="4"></rect></svg><span>傳真：+886-3-2121771</span></div>
@@ -358,7 +385,7 @@
         <div class="body">
           <div class="zh-name">宣德智能股份有限公司</div>
           <div class="en-name">Speed Tech Intelligent Corp.</div>
-          <div class="func-tag">線束製造、FATP、SMT</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>高雄市岡山區本工五路3號</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>電話：+886-7-6221088</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span>info@speedtech.com.tw</span></div>
@@ -376,7 +403,7 @@
         <div class="body">
           <div class="zh-name">天迅科技股份有限公司</div>
           <div class="en-name">Tianxun Technology Co., Ltd.</div>
-          <div class="func-tag">轉投資及買賣（集團資金調度、投資平台）</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Offshore Incorporation Centre, Tortola</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>電話：無公開代表號</span></div>
         </div>
@@ -393,7 +420,7 @@
         <div class="body">
           <div class="zh-name">宣德科技墨西哥子公司</div>
           <div class="en-name">Speed Tech Mexico</div>
-          <div class="func-tag">北美電動車、低軌衛星 SMT 與成機組裝</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Vialidad Aeroespacial 109, 66647 Cdad. Apodaca, N.L., Mexico</span></div>
         </div>
       <div class="pin ai-style-change-5"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -409,7 +436,7 @@
         <div class="body">
           <div class="zh-name">東莞立德精密工業有限公司</div>
           <div class="en-name">Dongguan Lide Precision Industry Co., Ltd.（清溪立德）</div>
-          <div class="func-tag">連接器、電線電纜、模具、Pogo-pin、SMT</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>廣東省東莞市清溪鎮青皇村吊八山地段廠房 D 棟</span></div>
         </div>
       <div class="pin ai-style-change-6"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -420,7 +447,7 @@
         <div class="body">
           <div class="zh-name">台翰模具製品(東莞)有限公司</div>
           <div class="en-name">Taihan Mould (Dongguan) Co., Ltd.（東莞台翰）</div>
-          <div class="func-tag">模具、塑膠射出成型</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>東莞市長安鎮烏沙村第六工業區第八棟</span></div>
         </div>
       <div class="pin ai-style-change-7"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -431,7 +458,7 @@
         <div class="body">
           <div class="zh-name">昆山宣德電子有限公司</div>
           <div class="en-name">Speed Tech Kunshan Electronics</div>
-          <div class="func-tag">客製化連接器、零組件</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>江蘇省昆山市巴城鎮迎賓西路</span></div>
         </div>
       <div class="pin ai-style-change-8"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -442,7 +469,7 @@
         <div class="body">
           <div class="zh-name">立訊精密組件(昆山)有限公司</div>
           <div class="en-name">Luxshare Precision Components (Kunshan) Co., Ltd.（崑山組件）</div>
-          <div class="func-tag">電子元器件、連接器、光電、感測器</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>江蘇省昆山市錦溪鎮錦東路288號</span></div>
         </div>
       <div class="pin ai-style-change-9"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -453,7 +480,7 @@
         <div class="body">
           <div class="zh-name">立訊精密組件(蘇州)有限公司</div>
           <div class="en-name">Luxshare Precision Components (Suzhou) Co., Ltd.</div>
-          <div class="func-tag">新型電子元器件、連接器、通訊產品</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>蘇州市吳中經濟開發區徐涇路99號</span></div>
         </div>
       <div class="pin ai-style-change-10"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -464,7 +491,7 @@
         <div class="body">
           <div class="zh-name">宣德科技江西子公司</div>
           <div class="en-name">Speed Tech Jiangxi（江西立德）</div>
-          <div class="func-tag">大批量連接器、線束、SMT</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>江西省吉安市萬安縣工業園五期（百嘉片區）</span></div>
         </div>
       <div class="pin ai-style-change-11"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -480,7 +507,7 @@
         <div class="body">
           <div class="zh-name">宣德科技越南子公司</div>
           <div class="en-name">Speed Tech Vietnam（永翰精密）</div>
-          <div class="func-tag">大規模量產、精密噴塗、高階SMT</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>越南海陽省錦江縣新場工業區（園區資訊，街址未公開；公開登記曾顯示 Tan Truong Industrial Zone, Cam Giang District, Hai Duong Province, Vietnam）</span></div>
         </div>
       <div class="pin ai-style-change-12"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -491,7 +518,7 @@
         <div class="body">
           <div class="zh-name">越南永翰</div>
           <div class="en-name">Yonghan Precision Technology Co., Ltd.</div>
-          <div class="func-tag">模具、塑膠射出成型、機殼製造</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>越南海陽省錦江縣福田工業區 B7, B8（Lot B7, B8, Phuc Dien Industrial Zone, Cam Giang District, Hai Duong Province, Vietnam）</span></div>
         </div>
       <div class="pin ai-style-change-13"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -502,7 +529,7 @@
         <div class="body">
           <div class="zh-name">立德精密</div>
           <div class="en-name">Leader Tech Viet Nam Co., Ltd.</div>
-          <div class="func-tag">新型電子元器件、連接器、SMT、消費電子</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>越南義安省興元縣興西社 VSIP 義安工業區第 15 號路 2 號 99B 地塊 D16A 與 D16B 廠房</span></div>
         </div>
       <div class="pin ai-style-change-14"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -518,7 +545,7 @@
         <div class="body">
           <div class="zh-name">宣德馬來</div>
           <div class="en-name">Speed Tech ICT Sdn. Bhd.</div>
-          <div class="func-tag">遙控器按鍵製造、醫療級矽膠射出成型</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>NO.2585 MK.1 Tingkat Perusahaan 6, Kawasan Perusahaan Perai, 13600 Perai, Penang</span></div>
         </div>
       <div class="pin ai-style-change-15"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -534,7 +561,7 @@
         <div class="body">
           <div class="zh-name">宣德科技菲律賓子公司</div>
           <div class="en-name">Speed Tech Philippines</div>
-          <div class="func-tag">電子產品外殼、機殼製造與組裝</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Phase 2A Block 1 Lot 1, Jose P. Rizal Ave, Lima Technology Center, Lipa City, Batangas 4217</span></div>
         </div>
       <div class="pin ai-style-change-16"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -545,7 +572,7 @@
         <div class="body">
           <div class="zh-name">菲律賓台翰</div>
           <div class="en-name">Taihan Precision Technology (Philippines) Co., Inc.</div>
-          <div class="func-tag">模具、塑膠射出成型、機殼製造</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Phase 2A Block 1 Lot 1, Jose P. Rizal Ave, Lima Technology Center, Lipa City, Batangas 4217</span></div>
         </div>
       <div class="pin ai-style-change-17"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -556,7 +583,7 @@
         <div class="body">
           <div class="zh-name">Taihanland (Philippines) Inc.</div>
           <div class="en-name">Taihanland (Philippines) Inc.</div>
-          <div class="func-tag">不動產租賃</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Lima Technology Center, Batangas</span></div>
         </div>
       <div class="pin ai-style-change-18"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -572,7 +599,7 @@
         <div class="body">
           <div class="zh-name">SPEED TECH PTE. LTD.</div>
           <div class="en-name">SPEED TECH PTE. LTD.</div>
-          <div class="func-tag">轉投資及買賣（東南亞控股、資金調配、國際接單）</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Vision Exchange, 2 Venture Drive, #06-19, Singapore 608526</span></div>
         </div>
       <div class="pin ai-style-change-19"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -588,7 +615,7 @@
         <div class="body">
           <div class="zh-name">宣德科技美國辦事處</div>
           <div class="en-name">Speed Tech USA</div>
-          <div class="func-tag">北美業務對接、JDM 協同設計</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Fremont, California（街址未公開）</span></div>
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span>sales@speedtech.com.tw</span></div>
         </div>
@@ -600,7 +627,7 @@
         <div class="body">
           <div class="zh-name">Cyber Acoustics, L.L.C.</div>
           <div class="en-name">Cyber Acoustics, L.L.C.</div>
-          <div class="func-tag">消費型電子產品設計、銷售</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>3109 NE 109th Ave., Vancouver, WA 98682-7750</span></div>
         </div>
       <div class="pin ai-style-change-21"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -616,7 +643,7 @@
         <div class="body">
           <div class="zh-name">SPEEDTECH (HK) CO., LIMITED</div>
           <div class="en-name">SPEEDTECH (HK) CO., LIMITED</div>
-          <div class="func-tag">轉投資及貿易</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Room 501, 5/F., Hing Yip Commercial Center, 272–284 Des Voeux Road Central, Hong Kong</span></div>
         </div>
       <div class="pin ai-style-change-22"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
@@ -627,7 +654,7 @@
         <div class="body">
           <div class="zh-name">Cyber Acoustics (HK) Limited</div>
           <div class="en-name">Cyber Acoustics (HK) Limited</div>
-          <div class="func-tag">消費電子產品配件</div>
+          
         <div class="info-row"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg><span>Unit A &amp; B, 8/F., Yue Hing Building, 103 Hennessy Road, Wanchai, Hong Kong</span></div>
         </div>
       <div class="pin ai-style-change-23"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></div></div>
