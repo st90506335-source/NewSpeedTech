@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEO 低軌衛星系列 Starlink / LEO Satellite – SpeedTech 宣德科技（頁面設計草案）</title>
+<style>
+
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#20539c;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --orange:#f5821f;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);
+    background:#fff;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{
+    background:#fff;border-bottom:1px solid var(--gray-line);
+    position:relative;z-index:20;
+  }
+  .nav-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:1240px;margin:0 auto;
+  }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{
+    width:34px;height:34px;border-radius:8px;
+    background:linear-gradient(135deg,var(--orange),#ffab5c);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;font-size:17px;
+  }
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;color:var(--text-dark);}
+  .nav-links li.active{color:var(--blue-primary);font-weight:700;}
+  .nav-actions{display:flex;align-items:center;gap:10px;}
+  .nav-actions .btn-circle{
+    width:34px;height:34px;border-radius:50%;border:1px solid var(--gray-line);
+    display:flex;align-items:center;justify-content:center;color:var(--text-gray);font-size:14px;
+  }
+
+  .hero{
+    position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 20% 20%, #1b3a72 0%, var(--navy-dark) 55%, #081227 100%);
+    height:300px;display:flex;align-items:center;
+  }
+  .hero .hero-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(to right, rgba(0,0,0,.9), rgba(0,0,0,0) 75%);
+  }
+  .hero .glow{
+    position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;
+  }
+  .hero .glow.g1{width:420px;height:420px;background:#2e64b3;top:-160px;right:6%;}
+  .hero .glow.g2{width:260px;height:260px;background:var(--orange);opacity:.18;bottom:-120px;right:22%;}
+  .hero-art{
+    position:absolute;right:5%;top:50%;transform:translateY(-50%);
+    width:420px;opacity:.9;
+  }
+  .hero-content{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:0 24px;color:#fff;}
+  .hero-content .eyebrow{
+    font-size:13px;letter-spacing:3px;color:var(--blue-light);font-weight:600;margin-bottom:10px;
+  }
+  .hero-content h1{font-size:40px;font-weight:800;letter-spacing:2px;}
+  .hero-content .tagline{margin-top:10px;font-size:15px;color:#c9d6ec;letter-spacing:.5px;}
+
+  .breadcrumb{background:var(--gray-bg);border-bottom:1px solid var(--gray-line);}
+  .breadcrumb .wrap{padding:12px 24px;font-size:13px;color:var(--text-gray);display:flex;gap:6px;align-items:center;}
+  .breadcrumb b{color:var(--text-dark);font-weight:600;}
+
+  .intro{background:var(--gray-bg);padding:60px 0 70px;text-align:center;}
+  .intro h2{font-size:26px;font-weight:800;color:var(--text-dark);margin-bottom:18px;letter-spacing:.5px;}
+  .intro p{max-width:820px;margin:0 auto;color:var(--text-gray);font-size:14.5px;line-height:1.9;}
+
+  .highlights{
+    display:flex;justify-content:center;gap:34px;margin-top:48px;flex-wrap:wrap;
+  }
+  .highlight-item{width:190px;text-align:center;}
+  .highlight-item .circle{
+    width:150px;height:150px;border-radius:50%;margin:0 auto 18px;
+    background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 12px 26px -8px rgba(32,83,156,.55);
+    position:relative;
+  }
+  .highlight-item .circle::before{
+    content:"";position:absolute;inset:10px;border:1.5px solid rgba(255,255,255,.35);border-radius:50%;
+  }
+  .highlight-item .circle svg{width:44px;height:44px;stroke:#fff;fill:none;}
+  .highlight-item .label{font-size:14px;font-weight:700;color:var(--text-dark);line-height:1.5;}
+
+  .band{
+    position:relative;height:250px;overflow:hidden;
+    background:
+      linear-gradient(120deg, rgba(12,31,66,.15), rgba(12,31,66,.55) 60%),
+      repeating-linear-gradient(135deg, #23477e 0px, #23477e 2px, #1b3866 2px, #1b3866 42px),
+      linear-gradient(100deg,#2c5799,#173259);
+  }
+  .band .road{
+    position:absolute;left:0;right:0;bottom:36px;height:3px;background:rgba(255,255,255,.35);
+  }
+  .band .road::after{
+    content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(90deg, transparent 0 24px, rgba(255,255,255,.75) 24px 48px);
+  }
+  .band-caption{
+    position:absolute;right:6%;top:50%;transform:translateY(-50%);
+    background:var(--navy);color:#fff;padding:20px 30px;max-width:420px;
+    border-radius:6px;box-shadow:0 18px 30px -10px rgba(0,0,0,.4);
+  }
+  .band-caption .en{font-size:12px;letter-spacing:2px;color:#a9c1e6;margin-bottom:8px;}
+  .band-caption .zh{font-size:17px;font-weight:700;line-height:1.6;}
+
+  .applications{padding:70px 0;text-align:center;}
+  .applications h2{font-size:24px;font-weight:800;margin-bottom:10px;}
+  .applications .sub{color:var(--text-gray);font-size:13.5px;margin-bottom:40px;}
+  .app-grid{display:grid;gap:18px;}
+  .app-grid.cols-5{grid-template-columns:repeat(5,1fr);}
+  .app-grid.cols-4{grid-template-columns:repeat(4,1fr);}
+  .app-grid.cols-3{grid-template-columns:repeat(3,1fr);max-width:760px;margin:0 auto;}
+  .app-grid.cols-2{grid-template-columns:repeat(2,1fr);max-width:520px;margin:0 auto;}
+  .app-card{
+    border:1px solid var(--gray-line);border-radius:var(--radius);padding:26px 14px;
+    transition:.2s;
+  }
+  .app-card .icon{
+    width:52px;height:52px;border-radius:50%;background:var(--gray-bg);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+  }
+  .app-card .icon svg{width:26px;height:26px;stroke:var(--blue-primary);fill:none;}
+  .app-card .zh{font-size:13.5px;font-weight:700;color:var(--text-dark);margin-bottom:4px;}
+  .app-card .en{font-size:11px;color:var(--text-light);}
+
+  .desc-section{background:var(--gray-bg);padding:64px 0;}
+  .desc-inner{display:flex;gap:56px;align-items:center;}
+  .desc-inner .text{flex:1.1;}
+  .desc-inner .text .kicker{color:var(--blue-primary);font-weight:700;font-size:13px;letter-spacing:2px;margin-bottom:10px;}
+  .desc-inner .text h3{font-size:22px;font-weight:800;margin-bottom:16px;line-height:1.5;}
+  .desc-inner .text p{color:var(--text-gray);font-size:14px;line-height:2;}
+  .desc-inner .visual{flex:.9;}
+  .cert-card{
+    background:#fff;border:1px solid var(--gray-line);border-radius:var(--radius);
+    padding:26px;box-shadow:0 20px 40px -20px rgba(20,40,80,.25);
+  }
+  .cert-card .row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--gray-line);}
+  .cert-card .row:last-child{border-bottom:none;}
+  .cert-card .row .dot{width:34px;height:34px;border-radius:50%;background:var(--gray-bg);display:flex;align-items:center;justify-content:center;flex:none;}
+  .cert-card .row .dot svg{width:18px;height:18px;stroke:var(--blue-primary);fill:none;}
+  .cert-card .row .t{font-size:13.5px;font-weight:600;color:var(--text-dark);}
+
+  .partners{padding:70px 0 80px;text-align:center;}
+  .partners h2{font-size:24px;font-weight:800;margin-bottom:8px;}
+  .partners .sub{color:var(--text-gray);font-size:13.5px;margin-bottom:40px;}
+  .partner-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+  .partner-badge{
+    border:1px solid var(--gray-line);border-radius:var(--radius);
+    padding:26px 46px;font-size:16px;font-weight:800;color:var(--navy);
+    letter-spacing:.5px;min-width:200px;
+  }
+  .partner-badge span{display:block;font-size:12px;font-weight:500;color:var(--text-light);margin-top:6px;}
+
+  .product-nav{
+    border-top:1px solid var(--gray-line);padding:28px 0;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .product-nav .side{font-size:13.5px;color:var(--text-gray);display:flex;align-items:center;gap:6px;}
+  .product-nav .back-btn{
+    background:var(--blue-primary);color:#fff;font-size:13.5px;font-weight:700;
+    padding:10px 22px;border-radius:999px;display:flex;align-items:center;gap:8px;
+  }
+
+  footer{background:#fff;padding-top:56px;}
+  .footer-grid{display:flex;gap:40px;padding-bottom:40px;flex-wrap:wrap;}
+  .footer-brand{width:220px;}
+  .footer-brand .logo{margin-bottom:14px;}
+  .footer-brand .social{display:flex;gap:10px;margin-top:14px;}
+  .footer-brand .social span{
+    width:28px;height:28px;border-radius:50%;background:var(--blue-primary);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .footer-col{min-width:120px;}
+  .footer-col h4{font-size:13.5px;font-weight:700;margin-bottom:14px;color:var(--text-dark);}
+  .footer-col li{font-size:13px;color:var(--text-gray);margin-bottom:10px;}
+  .footer-contact{margin-left:auto;font-size:13px;color:var(--text-gray);line-height:2;min-width:220px;}
+  .footer-bottom{
+    background:var(--navy-dark);color:#c9d2e2;font-size:12.5px;
+    padding:16px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+  .footer-bottom .wrap{display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:10px;}
+  .footer-bottom .links{display:flex;gap:18px;}
+
+  @media (max-width:900px){
+    .app-grid.cols-5,.app-grid.cols-4,.app-grid.cols-3{grid-template-columns:repeat(2,1fr);}
+    .desc-inner{flex-direction:column;}
+    .footer-grid{flex-direction:column;}
+    .footer-contact{margin-left:0;}
+    .hero-art{display:none;}
+    .hero-content h1{font-size:30px;}
+  }
+
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計草案 · LEO 低軌衛星系列</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div class="name"><b>宣德科技</b><span>SPEEDTECH</span></div>
+    </div>
+    <ul class="nav-links">
+      <li>關於我們</li>
+      <li>最新消息</li>
+      <li class="active">產品專區</li>
+      <li>投資人專區</li>
+      <li>企業永續</li>
+      <li>人力資源</li>
+      <li>員工專區</li>
+    </ul>
+    <div class="nav-actions">
+      <div class="btn-circle">✉</div>
+      <div class="btn-circle">⌕</div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+
+  <svg class="hero-art" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(50,30)">
+      <circle cx="110" cy="100" r="55" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+      <path d="M55 100h110M110 45v110" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/>
+      <path d="M70 68a90 40 0 0 1 80 0M70 132a90 40 0 0 0 80 0" stroke="rgba(255,255,255,.2)" stroke-width="1.2" fill="none"/>
+      <ellipse cx="110" cy="100" rx="95" ry="32" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.4" stroke-dasharray="3 6"/>
+      <g transform="translate(200,72) rotate(20)">
+        <rect x="-9" y="-7" width="18" height="14" rx="2" fill="rgba(12,31,66,.9)" stroke="rgba(255,255,255,.65)" stroke-width="1.6"/>
+        <path d="M-9 0h-16M9 0h16" stroke="rgba(255,255,255,.65)" stroke-width="1.6"/>
+      </g>
+      <circle cx="200" cy="72" r="3" fill="rgba(245,130,31,.9)"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <div class="eyebrow">PRODUCTS&nbsp;·&nbsp;整機組裝類 FATP</div>
+    <h1>LEO 低軌衛星系列</h1>
+    <div class="tagline">Pioneering Connectivity for the New Space Age</div>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <div class="wrap">
+    <span>⌂ 首頁</span><span>·</span><span>產品專區</span><span>·</span><span>整機組裝類 FATP</span><span>·</span><b>LEO 低軌衛星系列</b>
+  </div>
+</div>
+
+<!-- Intro + Highlights -->
+<section class="intro">
+  <div class="wrap">
+    <h2>領航新太空時代，連結無界未來</h2>
+    <p>
+      宣德積極佈局航太與衛星通訊領域，提供低軌衛星通訊設備的關鍵組件與系統整合組裝服務。我們利用垂直整合優勢，確保高頻通訊產品在極端環境下的連接品質與穩定性。
+    </p>
+
+    <div class="highlights">
+      <div class="highlight-item">
+        <div class="circle">
+          <svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M13 7l4 4-9 9-4-4z"/><path d="M17 11l3-3M7 17l-3 3"/><path d="M14 4l2 2M18 8l2 2"/></svg>
+        </div>
+        <div class="label">低軌衛星 (LEO) 相關<br>組件與系統組裝</div>
+      </div>
+      <div class="highlight-item">
+        <div class="circle">
+          <svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M5 12.5a11 11 0 0 1 14 0M8 16a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1"/></svg>
+        </div>
+        <div class="label">高頻高速訊號<br>傳輸技術整合</div>
+      </div>
+      <div class="highlight-item">
+        <div class="circle">
+          <svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="label">航太等級之耐受性<br>與可靠性驗證</div>
+      </div>
+      <div class="highlight-item">
+        <div class="circle">
+          <svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+        </div>
+        <div class="label">全球化生產佈局<br>支援快速交付</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Photo / R&D band -->
+<section class="band">
+  <div class="road"></div>
+  <div class="band-caption">
+    <div class="en">New Space Connectivity Engineering</div>
+    <div class="zh">佈局低軌衛星通訊技術，<br>連結新太空時代的穩定訊號</div>
+  </div>
+</section>
+
+<!-- Content description + certification card -->
+<section class="desc-section">
+  <div class="wrap desc-inner">
+    <div class="text">
+      <div class="kicker">CAPABILITY</div>
+      <h3>從關鍵組件到系統整合，<br>一站式衛星通訊整合服務</h3>
+      <p>
+        宣德積極佈局航太與衛星通訊領域，結合垂直整合供應鏈優勢，提供低軌衛星通訊設備關鍵組件與系統整合組裝服務，並透過全球化生產佈局支援客戶在極端環境下的高頻通訊產品快速交付與品質穩定。
+      </p>
+    </div>
+    <div class="visual">
+      <div class="cert-card">
+        <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M13 7l4 4-9 9-4-4z"/><path d="M17 11l3-3M7 17l-3 3"/></svg></div><div class="t">低軌衛星 (LEO) 組件與系統組裝</div></div>
+        <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M5 12.5a11 11 0 0 1 14 0M8 16a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1"/></svg></div><div class="t">高頻高速訊號傳輸整合</div></div>
+        <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="t">航太等級耐受性與可靠性驗證</div></div>
+        <div class="row"><div class="dot"><svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div><div class="t">全球化生產佈局快速交付</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Extended applications -->
+<section class="applications">
+  <div class="wrap">
+    <h2>延伸項目與應用</h2>
+    <div class="sub">Extended Applications</div>
+    <div class="app-grid cols-2">
+      <div class="app-card">
+        <div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.6"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/></svg></div>
+        <div class="zh">低軌衛星地面接收站組件</div>
+        <div class="en">LEO Ground Station Components</div>
+      </div>
+      <div class="app-card">
+        <div class="icon"><svg viewBox="0 0 24 24" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3"/></svg></div>
+        <div class="zh">高頻連接器</div>
+        <div class="en">High-Frequency Connectors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product nav -->
+<div class="wrap product-nav">
+  <div class="side">‹ 上一個產品：網通系列</div>
+  <a class="back-btn">⚏ 返回列表</a>
+  <div class="side">下一個產品：工控系列 ›</div>
+</div>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="mark" style="width:30px;height:30px;font-size:15px;">S</div>
+      </div>
+      <b>宣德科技</b><br><span style="color:var(--text-light);font-size:12px;">SpeedTech</span>
+      <div style="margin-top:14px;font-size:13px;color:var(--text-gray);">歡迎追蹤我們</div>
+      <div class="social"><span>f</span><span>▶</span><span>◎</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>關於我們</h4>
+      <ul><li>公司簡介</li><li>年度記事</li><li>供應商須知</li><li>政策及驗證系統</li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>最新消息</h4>
+      <ul><li>最新新聞</li><li>參展訊息</li><li>產品訊息</li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>產品專區</h4>
+      <ul><li>整機組裝類 FATP</li><li>連接器 Components Level</li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>投資人專區</h4>
+      <ul><li>財務報表</li><li>股東專區</li><li>公司治理</li><li>投資人服務窗口</li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>企業永續</h4>
+      <ul><li>ESG永續報告書</li><li>智慧財產管理</li><li>資訊安全管理</li><li>環境保護</li></ul>
+    </div>
+    <div class="footer-col">
+      <h4>人力資源</h4>
+      <ul><li>勞資關係</li><li>員工薪酬</li><li>福利制度</li><li>退休制度</li><li>教育訓練制度</li><li>招募</li></ul>
+    </div>
+    <div class="footer-contact">
+      📞 電話：+886-3-2120088<br>
+      🖨 傳真：+886-3-2121771<br>
+      📍 桃園市龜山區民生北路一段568號
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <span>Copyright© Speed Tech Corp. All rights reserved | Designed By MINMAX 網頁設計</span>
+      <span class="links"><a>員工專區</a><a>聯絡我們</a><a>隱私權政策</a><a>網站地圖</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

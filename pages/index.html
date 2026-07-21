@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>產品專區 頁面設計原型索引 – SpeedTech 宣德科技</title>
+<style>
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#20539c;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --orange:#f5821f;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1240px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;}
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+
+  .hero{
+    position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 20% 20%, #1b3a72 0%, var(--navy-dark) 55%, #081227 100%);
+    padding:70px 0 64px;color:#fff;
+  }
+  .hero .hero-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:42px 42px;mask-image:linear-gradient(to right, rgba(0,0,0,.9), rgba(0,0,0,0) 75%);
+  }
+  .hero .glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;}
+  .hero .glow.g1{width:420px;height:420px;background:#2e64b3;top:-160px;right:6%;}
+  .hero .glow.g2{width:260px;height:260px;background:var(--orange);opacity:.16;bottom:-140px;right:22%;}
+  .hero-content{position:relative;z-index:2;}
+  .hero-content .eyebrow{font-size:13px;letter-spacing:3px;color:var(--blue-light);font-weight:600;margin-bottom:12px;}
+  .hero-content h1{font-size:34px;font-weight:800;letter-spacing:1px;margin-bottom:14px;}
+  .hero-content p{font-size:14px;color:#c9d6ec;max-width:600px;line-height:1.8;}
+
+  /* Carousel */
+  .carousel-section{padding:56px 0 80px;background:var(--gray-bg);}
+  .carousel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .carousel-head h2{font-size:20px;font-weight:800;color:var(--text-dark);}
+  .carousel-head .hint{font-size:12.5px;color:var(--text-light);}
+  .carousel-controls{display:flex;gap:10px;}
+  .nav-btn{
+    width:40px;height:40px;border-radius:50%;border:1px solid var(--gray-line);background:#fff;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-gray);
+    transition:.15s;flex:none;
+  }
+  .nav-btn:hover{border-color:var(--blue-primary);color:var(--blue-primary);}
+  .nav-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
+
+  .carousel-track{
+    display:flex;gap:22px;overflow-x:auto;padding:28px 4px 20px;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .carousel-track::-webkit-scrollbar{display:none;}
+
+  .card{
+    flex:none;width:270px;scroll-snap-align:start;background:#fff;border:1px solid var(--gray-line);
+    border-radius:var(--radius);overflow:hidden;box-shadow:0 14px 34px -20px rgba(20,40,80,.3);
+    transition:transform .2s, box-shadow .2s;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -18px rgba(20,40,80,.4);}
+  .card .card-top{
+    height:150px;display:flex;align-items:center;justify-content:center;position:relative;
+    background:radial-gradient(circle at 30% 20%, #2e64b3 0%, var(--navy-dark) 70%);
+  }
+  .card .card-top .tag{
+    position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;letter-spacing:.5px;
+    background:rgba(255,255,255,.15);color:#fff;padding:4px 10px;border-radius:999px;backdrop-filter:blur(2px);
+  }
+  .card .icon-circle{
+    width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));
+    display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -6px rgba(0,0,0,.4);
+  }
+  .card .icon-circle svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:1.6;}
+  .card .card-body{padding:20px 20px 24px;flex:1;display:flex;flex-direction:column;}
+  .card .zh{font-size:16px;font-weight:800;color:var(--text-dark);margin-bottom:4px;}
+  .card .en{font-size:11px;color:var(--blue-primary);font-weight:700;margin-bottom:12px;letter-spacing:.2px;}
+  .card .desc{font-size:12.5px;color:var(--text-gray);line-height:1.7;flex:1;}
+  .card .enter{
+    margin-top:16px;font-size:12.5px;font-weight:700;color:var(--blue-primary);
+    display:flex;align-items:center;gap:6px;
+  }
+  .card .enter svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .15s;}
+  .card:hover .enter svg{transform:translateX(4px);}
+
+  .dots{display:flex;justify-content:center;gap:8px;margin-top:8px;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--gray-line);transition:.2s;}
+  .dot.active{background:var(--blue-primary);width:18px;border-radius:4px;}
+
+  footer{background:#fff;border-top:1px solid var(--gray-line);padding:22px 0;text-align:center;}
+  footer p{font-size:12px;color:var(--text-light);}
+
+  @media (max-width:600px){
+    .hero-content h1{font-size:26px;}
+    .card{width:230px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計原型 · 索引</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div class="name"><b>宣德科技</b><span>SPEEDTECH</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">PRODUCT ZONE PROTOTYPE</div>
+    <h1>產品專區 頁面設計原型</h1>
+    <p>左右滑動或點選箭頭瀏覽各系列頁面設計草案，點擊卡片即可進入該頁面預覽。</p>
+  </div>
+</section>
+
+<section class="carousel-section">
+  <div class="wrap">
+    <div class="carousel-head">
+      <div>
+        <h2>選擇一個系列</h2>
+        <div class="hint">Swipe or click to explore each series</div>
+      </div>
+      <div class="carousel-controls">
+        <div class="nav-btn" id="prevBtn" aria-label="prev">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div class="nav-btn" id="nextBtn" aria-label="next">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-track" id="track">
+
+      <a class="card" href="pages/industrial-control.html" target="_blank">
+        <div class="card-top">
+          <span class="tag">原頁面轉製</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M8 11h5M8 15h3"/><circle cx="16" cy="16" r="3"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">工控系列</div>
+          <div class="en">Industrial Control</div>
+          <div class="desc">極端環境穩定運作，智慧製造可靠整合。以官網原頁面素材忠實轉製。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="pages/automotive.html" target="_blank">
+        <div class="card-top">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="2.4"/><circle cx="18" cy="17" r="2.4"/><path d="M6 17h6l3-9h4M12 17l2-6h3"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">車用系列</div>
+          <div class="en">Automotive Products</div>
+          <div class="desc">Driving Mobility through Reliable Integration，涵蓋 E-Bike 與車用電子整合服務。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="pages/medical.html" target="_blank">
+        <div class="card-top">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">醫療系列</div>
+          <div class="en">Medical</div>
+          <div class="desc">Precision Assembly for Life-Saving Innovation，內含真實產品研發時程。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="pages/acoustics.html" target="_blank">
+        <div class="card-top">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 15v-6M9 18v-12M14 20v-16M19 15v-6"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">聲學系列</div>
+          <div class="en">Acoustics</div>
+          <div class="desc">Empowering the Sound of Innovation，收錄真實聲學元件設計案例。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="pages/networking.html" target="_blank">
+        <div class="card-top">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="4" y="13" width="16" height="6" rx="1"/><path d="M8 13V9M12 13V7M16 13v-2"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">網通系列</div>
+          <div class="en">Networking &amp; Comm</div>
+          <div class="desc">Connecting the World with Integrated FATP Solutions，內含真實產品規格卡。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="pages/starlink.html" target="_blank">
+        <div class="card-top">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M13 7l4 4-9 9-4-4z"/><path d="M17 11l3-3M7 17l-3 3"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">LEO 低軌衛星系列</div>
+          <div class="en">Starlink / LEO Satellite</div>
+          <div class="desc">Pioneering Connectivity for the New Space Age，示意設計，待補充實際資料。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="pages/connectors.html" target="_blank">
+        <div class="card-top">
+          <span class="tag">總覽頁</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">連接器 Components Level</div>
+          <div class="en">Connectors</div>
+          <div class="desc">單頁＋分頁籤呈現 8 大連接器系列，點選分頁籤切換查看規格。</div>
+          <div class="enter">進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="dots" id="dots"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Copyright© Speed Tech Corp. — 頁面設計原型，僅供內部評估使用</p>
+</footer>
+
+<script>
+  const track = document.getElementById('track');
+  const cards = Array.from(track.children);
+  const dotsWrap = document.getElementById('dots');
+  cards.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function updateDots(){
+    const scrollLeft = track.scrollLeft;
+    const cardWidth = cards[0].offsetWidth + 22;
+    const idx = Math.round(scrollLeft / cardWidth);
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+  track.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateDots);
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    track.scrollBy({left: cards[0].offsetWidth + 22, behavior: 'smooth'});
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    track.scrollBy({left: -(cards[0].offsetWidth + 22), behavior: 'smooth'});
+  });
+  dots.forEach((d, i) => {
+    d.addEventListener('click', () => {
+      track.scrollTo({left: i * (cards[0].offsetWidth + 22), behavior: 'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
