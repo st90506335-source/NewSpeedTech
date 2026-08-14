@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ODM 系統解決方案 – SpeedTech 宣德科技</title>
+<style>
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#20539c;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --orange:#f5821f;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:10px;}
+  @media (min-width:961px){ .nav-bar{padding-right:180px;} }
+  @media (max-width:760px){ .site-nav{display:none;} }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;}
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+  .site-nav{display:flex;gap:22px;flex-wrap:wrap;}
+  .site-nav span{font-size:12.5px;font-weight:600;color:var(--text-gray);}
+  .site-nav span.on{color:var(--blue-primary);font-weight:800;}
+
+  /* Hero band per product-line (no real photo available -> pattern/gradient hero) */
+  .ph-hero{
+    position:relative;overflow:hidden;min-height:210px;display:flex;align-items:center;
+    background:
+      radial-gradient(circle at 20% 25%, rgba(46,100,179,.55), transparent 55%),
+      radial-gradient(circle at 82% 70%, rgba(245,130,31,.2), transparent 50%),
+      linear-gradient(120deg, var(--navy-dark) 0%, #071229 100%);
+  }
+  .ph-hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:38px 38px;mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.9), rgba(0,0,0,.15) 80%);
+  }
+  .ph-hero .wrap{position:relative;z-index:2;padding:38px 24px;color:#fff;text-align:center;}
+  .ph-hero h2{font-size:26px;font-weight:800;letter-spacing:1px;}
+  .crumb{
+    background:#fff;border-bottom:1px solid var(--gray-line);
+    font-size:11.5px;color:var(--text-light);padding:10px 0;
+  }
+  .crumb .wrap{display:flex;gap:6px;align-items:center;}
+  .crumb b{color:var(--text-gray);font-weight:700;}
+
+  .back-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue-light);}
+  .back-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+  .back-link:hover{color:#fff;}
+
+  .top-hero{
+    position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 20% 20%, #1b3a72 0%, var(--navy-dark) 55%, #081227 100%);
+    padding:36px 0 30px;color:#fff;
+  }
+  .top-hero .eyebrow{font-size:12px;letter-spacing:3px;color:var(--blue-light);font-weight:600;margin-bottom:10px;}
+  .top-hero h1{font-size:28px;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  .top-hero .sub{font-size:13px;color:#a9c3e8;font-weight:600;margin-bottom:12px;}
+  .top-hero p{font-size:13px;color:#c9d6ec;max-width:680px;line-height:1.8;}
+  .flow-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .flow-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px;}
+  .flow-arrow{color:var(--blue-light);font-size:13px;}
+  .jump-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+  .jump-chip{font-size:12px;font-weight:700;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:999px;}
+  .jump-chip:hover{background:rgba(255,255,255,.2);}
+
+  .section{padding:44px 0;}
+  .section.alt{background:var(--gray-bg);}
+
+  .circle-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:30px 0 10px;}
+  .circle-item{width:180px;text-align:center;}
+  .circle-ring{
+    width:82px;height:82px;border-radius:50%;margin:0 auto 12px;
+    background:#fff;border:3px solid var(--blue-light);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 24px -14px rgba(20,40,80,.4);
+  }
+  .circle-ring svg{width:30px;height:30px;stroke:var(--blue-primary);fill:none;stroke-width:1.6;}
+  .circle-item .f-label{font-size:10px;font-weight:800;color:var(--blue-primary);letter-spacing:1px;margin-bottom:6px;}
+  .circle-item p{font-size:12.5px;font-weight:700;color:var(--text-dark);line-height:1.6;}
+
+  .intro-panel{text-align:center;max-width:740px;margin:0 auto 30px;}
+  .intro-panel .kicker{font-size:12px;font-weight:700;color:var(--blue-primary);letter-spacing:2px;margin-bottom:10px;}
+  .intro-panel h3{font-size:21px;font-weight:800;color:var(--text-dark);margin-bottom:12px;}
+  .intro-panel p{font-size:13px;color:var(--text-gray);line-height:1.85;}
+
+  .feature-card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:34px;}
+  .feature-card-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+  .feature-card{background:#fff;border:1px solid var(--gray-line);border-radius:12px;padding:20px 16px;text-align:center;box-shadow:0 10px 26px -20px rgba(20,40,80,.25);}
+  .feature-card .fc-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+  .feature-card .fc-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.7;}
+  .feature-card h4{font-size:12.5px;font-weight:800;color:var(--text-dark);margin-bottom:7px;line-height:1.5;}
+  .feature-card p{font-size:11.5px;color:var(--text-gray);line-height:1.7;}
+
+  .banner-photo{
+    position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:36px;
+    min-height:200px;display:flex;align-items:flex-end;justify-content:flex-end;
+    background:
+      radial-gradient(circle at 25% 30%, rgba(46,100,179,.55), transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(245,130,31,.22), transparent 50%),
+      linear-gradient(135deg, var(--navy-dark), #060d1c);
+  }
+  .banner-photo::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:34px 34px;
+  }
+  .banner-cap{
+    position:relative;z-index:2;background:rgba(12,31,66,.85);color:#fff;
+    padding:15px 20px;margin:18px;border-radius:10px;max-width:340px;
+  }
+  .banner-cap .en{font-size:10.5px;color:var(--blue-light);font-weight:700;letter-spacing:.5px;margin-bottom:4px;}
+  .banner-cap .zh{font-size:13px;font-weight:800;line-height:1.6;}
+
+  .block-title{font-size:14px;font-weight:800;color:var(--text-dark);margin:0 0 16px;display:flex;align-items:center;gap:8px;}
+  .block-title .bar{width:4px;height:14px;background:var(--blue-primary);border-radius:2px;}
+  .block-title.center{justify-content:center;text-align:center;}
+
+  .spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+  .spec-card{border:1px solid var(--gray-line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:0 10px 26px -20px rgba(20,40,80,.3);}
+  .spec-photo{height:120px;background:linear-gradient(135deg, var(--gray-bg), #e4e9f1);display:flex;align-items:center;justify-content:center;}
+  .spec-photo svg{width:42px;height:42px;stroke:var(--blue-mid);fill:none;stroke-width:1.3;}
+  .spec-card .spec-top{background:linear-gradient(135deg,var(--blue-mid),var(--navy-dark));color:#fff;padding:12px 16px;font-size:13px;font-weight:800;}
+  .spec-card dl{padding:12px 16px 14px;display:flex;flex-direction:column;gap:7px;}
+  .spec-card .row{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;border-bottom:1px dashed var(--gray-line);padding-bottom:7px;}
+  .spec-card .row:last-child{border-bottom:none;padding-bottom:0;}
+  .spec-card .row dt{color:var(--text-light);flex:none;width:56px;}
+  .spec-card .row dd{color:var(--text-dark);font-weight:600;text-align:right;}
+
+  .module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:8px;}
+  .module-chip{background:#fff;border:1px solid var(--gray-line);border-radius:10px;padding:14px 10px;text-align:center;font-size:11.5px;font-weight:700;color:var(--text-dark);}
+  .module-chip .m-icon{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));margin:0 auto 8px;display:flex;align-items:center;justify-content:center;}
+  .module-chip .m-icon svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:1.8;}
+
+  .partner-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
+  .partner-card{flex:1;min-width:210px;border:1px solid var(--gray-line);border-radius:12px;padding:15px 17px;background:#fff;}
+  .partner-card b{display:block;font-size:13.5px;color:var(--text-dark);margin-bottom:4px;}
+  .partner-card span{font-size:11.5px;color:var(--text-gray);}
+
+  .diagram-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:8px;}
+  .diagram-card{background:#fff;border:1px solid var(--gray-line);border-radius:12px;padding:20px 20px 18px;}
+  .diagram-card .dc-head{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--blue-primary);padding:6px 12px;border-radius:8px;margin-bottom:12px;}
+  .diagram-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .diagram-card li{font-size:11.5px;color:var(--text-gray);padding-left:14px;position:relative;line-height:1.6;}
+  .diagram-card li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--blue-primary);}
+
+  .ai-block{background:#fff;border:1px solid var(--gray-line);border-radius:var(--radius);padding:26px 26px;margin-bottom:8px;}
+  .ai-block h3{font-size:16px;font-weight:800;margin-bottom:10px;}
+  .ai-block p{font-size:12.5px;color:var(--text-gray);line-height:1.85;margin-bottom:22px;}
+  .partner-flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .partner-flow .pf-box{flex:1;min-width:150px;background:var(--gray-bg);border:1px solid var(--gray-line);border-radius:10px;padding:16px;text-align:center;}
+  .partner-flow .pf-box .pf-label{font-size:10.5px;color:var(--text-light);font-weight:700;margin-bottom:8px;}
+  .partner-flow .pf-box .pf-names{font-size:12px;font-weight:800;color:var(--text-dark);}
+  .partner-flow .pf-op{font-size:20px;font-weight:800;color:var(--blue-primary);flex:none;}
+
+  .pager-row{display:flex;align-items:center;justify-content:space-between;padding:22px 0 0;border-top:1px solid var(--gray-line);margin-top:36px;}
+  .pager-row a{font-size:12.5px;font-weight:700;color:var(--text-gray);display:flex;align-items:center;gap:6px;}
+  .pager-row a:hover{color:var(--blue-primary);}
+  .pager-row a svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+  .pager-row .pager-mid{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--blue-primary);background:var(--gray-bg);padding:8px 16px;border-radius:999px;}
+  .pager-row .stub{visibility:hidden;}
+
+  /* Footer */
+  .footer-main{background:var(--navy-dark);color:#c9d6ec;padding:44px 0 22px;margin-top:10px;}
+  .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:26px;margin-bottom:30px;}
+  .footer-brand .f-logo{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .footer-brand .f-logo .mark{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
+  .footer-brand .f-logo b{font-size:14px;color:#fff;}
+  .footer-brand .social{display:flex;gap:8px;margin:14px 0;}
+  .footer-brand .social span{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;}
+  .footer-brand .social svg{width:12px;height:12px;stroke:#c9d6ec;fill:none;stroke-width:1.8;}
+  .footer-brand .contact{font-size:11.5px;line-height:2;color:#93a5c4;}
+  .footer-col h5{font-size:12px;font-weight:800;color:#fff;margin-bottom:12px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .footer-col li{font-size:11.5px;color:#93a5c4;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:#7d90b3;}
+  .footer-bottom .flinks{display:flex;gap:16px;flex-wrap:wrap;}
+
+  @media (max-width:760px){
+    .top-hero h1{font-size:24px;}
+    .feature-card-grid, .feature-card-grid.cols-3{grid-template-columns:1fr 1fr;}
+    .diagram-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計原型 · ODM</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div class="name"><b>宣德科技</b><span>SPEEDTECH</span></div>
+    </div>
+    <nav class="site-nav">
+      <span>關於我們</span><span>最新消息</span><span class="on">產品專區</span><span>投資人專區</span><span>企業永續</span><span>人力資源</span>
+    </nav>
+  </div>
+</header>
+
+<section class="top-hero">
+  <div class="wrap">
+    <a class="back-link" href="index0804.html">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      返回產品專區索引
+    </a>
+    <div style="height:14px"></div>
+    <div class="eyebrow">ODM SOLUTIONS PROTOTYPE</div>
+    <h1>ODM 系統解決方案</h1>
+    <div class="sub">含系統設計 / 軟韌體 / NPI</div>
+    <p>提供完整的系統級產品組裝服務，涵蓋多個高成長與高附加價值的應用領域，整合 SMT、FATP 與 ODM／JDM／OEM 為一體化流程。以下彙整「網通與無線設備」「智慧聲學與消費電子」「工業控制與智慧終端」三條產品線的完整內容，直接呈現於本頁。</p>
+    <div class="flow-row">
+      <span class="flow-chip">SMT</span><span class="flow-arrow">→</span>
+      <span class="flow-chip">FATP</span><span class="flow-arrow">→</span>
+      <span class="flow-chip">ODM / JDM / OEM</span>
+    </div>
+    <div class="jump-row">
+      <a class="jump-chip" href="#sec-networking">網通與無線設備</a>
+      <a class="jump-chip" href="#sec-acoustics">智慧聲學與消費電子</a>
+      <a class="jump-chip" href="#sec-industrial">工業控制與智慧終端</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 網通與無線設備 ============ -->
+<div id="sec-networking"></div>
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>產品專區</span><span>›</span><span>整機組裝類 FATP</span><span>›</span><b>網通系列</b></div></div>
+<div class="ph-hero"><div class="wrap"><h2>網通系列</h2></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center" style="justify-content:center;margin-bottom:6px;">
+      <span class="bar"></span>串聯全球網路，打造穩定連結
+    </div>
+    <p style="text-align:center;color:var(--text-gray);font-size:13px;max-width:680px;margin:0 auto;line-height:1.8;">我們為全球網通品牌提供一站式 FATP 服務，涵蓋路由器、網關與小型基地台。透過自動化組裝與精密檢測設備，確保產品具備高數據傳輸穩定性及安全性。</p>
+
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M4 8a12 12 0 0 1 16 0M7 11.5a7.5 7.5 0 0 1 10 0M10.5 15a3 3 0 0 1 3 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+        <div class="f-label">FEATURE 01</div>
+        <p>路由器與基地台整機組裝經驗</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M4 20l3-9 4 6 3-11 3 8 3-5"/></svg></div>
+        <div class="f-label">FEATURE 02</div>
+        <p>具備 10G / 25G / 100G 高速訊號測試能力</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.5 7.5a7 7 0 0 0 0 9M16.5 7.5a7 7 0 0 1 0 9M4 4a11 11 0 0 0 0 16M20 4a11 11 0 0 1 0 16"/></svg></div>
+        <div class="f-label">FEATURE 03</div>
+        <p>多協定測試環境（RF, Wi-Fi, 5G, NB-IoT）</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <div class="f-label">FEATURE 04</div>
+        <p>自動化產測與嚴格品質監控系統</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="intro-panel">
+      <div class="kicker">一站式網通產品整合服務</div>
+      <h3>從高速訊號測試到整機組裝</h3>
+      <p>宣德為全球網通品牌提供一站式 FATP 服務，結合自動化組裝與 10G / 25G / 100G 高速訊號測試設備，支援 RF、Wi-Fi、5G、NB-IoT 等多協定測試環境，協助客戶確保產品在複雜網路環境下的數據傳輸穩定性與安全性。</p>
+    </div>
+
+    <div class="feature-card-grid">
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M4 20l3-9 4 6 3-11 3 8 3-5"/></svg></div>
+        <h4>10G / 25G / 100G<br>高速訊號測試</h4>
+        <p>高速訊號驗證，確保傳輸穩定。</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.5 7.5a7 7 0 0 0 0 9M16.5 7.5a7 7 0 0 1 0 9"/></svg></div>
+        <h4>RF, Wi-Fi, 5G, NB-IoT<br>多協定驗證</h4>
+        <p>支援多種無線通訊標準，滿足不同產品驗證需求。</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <h4>自動化產測系統</h4>
+        <p>結合智慧化測試設備，提高生產效率與產品良率。</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+        <h4>嚴格品質監控流程</h4>
+        <p>建立完善品質管理，確保產品可靠。</p>
+      </div>
+    </div>
+
+    <div class="banner-photo">
+      <div class="banner-cap">
+        <div class="en">High-Speed Connectivity Testing</div>
+        <div class="zh">全面高速訊號測試驗證，確保穩定安全的數據傳輸</div>
+      </div>
+    </div>
+
+    <div class="block-title"><span class="bar"></span>產品規格</div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3"/><circle cx="8" cy="12.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="16" cy="12.5" r="1.3" fill="currentColor" stroke="none"/></svg></div>
+        <div class="spec-top">5G CPE 室內單元（Qualcomm 平台）</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>Qualcomm IPQ8072A + SDX62</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>2.4GHz(4x4) / 5GHz(4x4) / 6GHz(4x4)</dd></div>
+          <div class="row"><dt>連網</dt><dd>5G FR1 全頻段 + 4G LTE 全頻段</dd></div>
+          <div class="row"><dt>埠數</dt><dd>1G Ethernet x2、2.5G Ethernet x1</dd></div>
+          <div class="row"><dt>規範</dt><dd>3GPP Release 16、FOTA 支援</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>Φ120 x 120 x 219.3 mm</dd></div>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+        <div class="spec-top">5G CPE 室內單元（MTK 平台）</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>MTK T750 + MT7915 + MT7975</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>Wi-Fi 6E 雙頻支援</dd></div>
+          <div class="row"><dt>連網</dt><dd>5G FR1 全頻段 + 4G LTE 全頻段</dd></div>
+          <div class="row"><dt>埠數</dt><dd>1G Ethernet x4</dd></div>
+          <div class="row"><dt>規範</dt><dd>3GPP Release 16、FOTA 支援</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>210 x 146 x 79 mm</dd></div>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div class="spec-top">5G MiFi 移動熱點</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>Qualcomm SDX62</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>2.4GHz(2x2) / 5GHz(2x2)</dd></div>
+          <div class="row"><dt>連網</dt><dd>5G FR1 全頻段 + 4G LTE 全頻段</dd></div>
+          <div class="row"><dt>介面</dt><dd>USB Type-C 連接、4000mAh 電池</dd></div>
+          <div class="row"><dt>規範</dt><dd>3GPP Release 16、FOTA 支援</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>依客戶需求</dd></div>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 3 6.3"/><path d="M4 12v5h5"/></svg></div>
+        <div class="spec-top">GPON 光纖網路設備</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>MTK EN7529 + MT7916 + MT7976</dd></div>
+          <div class="row"><dt>WAN</dt><dd>GPON ITU-T G.984</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>AX3000，2.4G(2x2) + 5G(2x2)</dd></div>
+          <div class="row"><dt>埠數</dt><dd>1G Ethernet x4、FXS x1、USB2.0/3.0</dd></div>
+          <div class="row"><dt>光介面</dt><dd>SC/APC</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>150 x 180 x 30 mm</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="pager-row">
+      <span class="stub"></span>
+      <a class="pager-mid" href="index0804.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>返回列表</a>
+      <a href="#sec-acoustics">下一個產品<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 智慧聲學與消費電子 ============ -->
+<div id="sec-acoustics"></div>
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>產品專區</span><span>›</span><span>整機組裝類 FATP</span><span>›</span><b>聲學系列</b></div></div>
+<div class="ph-hero"><div class="wrap"><h2>聲學系列</h2></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center" style="justify-content:center;margin-bottom:6px;">
+      <span class="bar"></span>精雕聲學工藝，成就極致音效
+    </div>
+    <p style="text-align:center;color:var(--text-gray);font-size:13px;max-width:680px;margin:0 auto;line-height:1.8;">整合聲學腔體、麥克風、喇叭與 PCBA，搭配即時頻響測試，應用於藍牙耳機、智慧音箱與助聽器。音頻設備、聲學傳感器及相關解決方案的組裝。</p>
+
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M9 18V6l8-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></div>
+        <div class="f-label">FEATURE 01</div>
+        <p>精密聲學模組整合與自動化校準</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+        <div class="f-label">FEATURE 02</div>
+        <p>微型化組裝與高良率生產技術</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <div class="f-label">FEATURE 03</div>
+        <p>完善的音質測試與環境驗證系統</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="f-label">FEATURE 04</div>
+        <p>支援從零組件到整機（ODM/OEM）開發</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+
+    <div class="banner-photo">
+      <div class="banner-cap">
+        <div class="en">Empowering the Sound of Innovation</div>
+        <div class="zh">精雕聲學工藝，成就極致音效，支援 ODM/OEM 全流程開發</div>
+      </div>
+    </div>
+
+    <div class="block-title"><span class="bar"></span>耳機相關應用</div>
+    <div class="module-grid">
+      <div class="module-chip"><div class="m-icon"><svg viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h1v10H8a4 4 0 0 1-4-4z"/><path d="M20 10a4 4 0 0 0-4-4h-1v10h1a4 4 0 0 0 4-4z"/></svg></div>TWS／耳機微型喇叭</div>
+    </div>
+
+    <div class="pager-row">
+      <a href="#sec-networking"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>上一個產品</a>
+      <a class="pager-mid" href="index0804.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>返回列表</a>
+      <a href="#sec-industrial">下一個產品<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 工業控制與智慧終端 ============ -->
+<div id="sec-industrial"></div>
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>產品專區</span><span>›</span><span>整機組裝類 FATP</span><span>›</span><b>工控系列</b></div></div>
+<div class="ph-hero"><div class="wrap"><h2>工控系列</h2></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center" style="justify-content:center;margin-bottom:6px;">
+      <span class="bar"></span>極端環境穩定運作，智慧製造可靠整合
+    </div>
+    <p style="text-align:center;color:var(--text-gray);font-size:13px;max-width:700px;margin:0 auto;line-height:1.8;">提供從 PC、I/O 模組、控制面板到智慧工控系統的整合代工服務。具備高溫、高 EMI、高振動等嚴苛環境測試能力，確保產品能在極端工業環境長期穩定運作。配備完善的追溯與資料紀錄系統（MES），確保生產透明與品質可靠，協助客戶邁向智慧製造與可靠自動化。</p>
+
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4V2M15 4V2M9 22v-2M15 22v-2M4 9H2M4 15H2M22 9h-2M22 15h-2"/></svg></div>
+        <div class="f-label">FEATURE 01</div>
+        <p>工控模組與控制面板組裝</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+        <div class="f-label">FEATURE 02</div>
+        <p>耐高溫與耐干擾環境測試</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/><circle cx="19" cy="19" r="2"/></svg></div>
+        <div class="f-label">FEATURE 03</div>
+        <p>長期穩定量產與品質追溯系統</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg></div>
+        <div class="f-label">FEATURE 04</div>
+        <p>工業級壽命驗證與模組化管理</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="intro-panel">
+      <div class="kicker">工控技術研發規劃</div>
+      <h3>Firmware and SW × Dedicated IPC Vertical Team × Flexible NPI H/W Design</h3>
+    </div>
+
+    <div class="diagram-grid">
+      <div class="diagram-card">
+        <span class="dc-head">深耕垂直市場技術</span>
+        <ul>
+          <li>行動式 ADC</li>
+          <li>POS／自動服務終端（Kiosk）</li>
+          <li>自動結帳（Self Checkout）</li>
+          <li>工廠自動化</li>
+          <li>博奕機台</li>
+          <li>邊緣 AI 伺服器</li>
+        </ul>
+      </div>
+      <div class="diagram-card">
+        <span class="dc-head">架構軟體／面板／機構／電子</span>
+        <ul>
+          <li>X86 平台</li>
+          <li>ARM 架構／RTOS 即時作業系統</li>
+          <li>RISC 解決方案</li>
+          <li>FPGA 內嵌偵測技術</li>
+          <li>金屬／塑膠／壓鑄製程／機構設計</li>
+          <li>面板／顯示／相機整合資源</li>
+        </ul>
+      </div>
+      <div class="diagram-card">
+        <span class="dc-head">主動式經營策略採購</span>
+        <ul>
+          <li>跨 IC、機構（ME）、電子（EE）、面板與關鍵組模的 AVL 供應鏈管理</li>
+          <li>彈性採購資源配置</li>
+          <li>專責 NPI／ME／PE 團隊</li>
+          <li>多 SKU 與版本控管能力</li>
+        </ul>
+      </div>
+      <div class="diagram-card">
+        <span class="dc-head">佈局歐美前線技術資源</span>
+        <ul>
+          <li>當地 PM 與 FAE 技術支援</li>
+          <li>當地 VMI Hub 與／或倉儲點</li>
+          <li>當地 RMA／維修服務中心</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="height:30px"></div>
+
+    <div class="banner-photo">
+      <div class="banner-cap">
+        <div class="en">Industrial Control Technology R&amp;D</div>
+        <div class="zh">導入 MES 系統，實現全程追溯與品質透明化</div>
+      </div>
+    </div>
+
+    <div class="ai-block">
+      <h3>宣德 AI 技術佈局－邊緣 AI 運算</h3>
+      <p>市場對於終端設備 AI 的需求更著重於低耗能、低延遲、低成本，需要離線處理的應用也大幅增加，AI 的功能逐漸從雲端移轉到 Edge 設備終端，由設備本身的算力來處理 AI。宣德與 AI 國際夥伴投入「模型壓縮與量化技術」「演算法支援多任務並行」「模組化 API 與多晶片群體 SDK 支援」，已有超過 45 種輕量化 AI 演算法模型可供客戶延續開發，支援歐美攝影機客戶直接整合 NPU AI 運算引擎導入模型，降低 BOM 與產品開發成本，已獲得美國品牌大廠青睞並展開大量合作。</p>
+      <div class="partner-flow">
+        <div class="pf-box"><div class="pf-label">晶片方案商</div><div class="pf-names">Arm · Realtek<br>Qualcomm · Ambarella</div></div>
+        <div class="pf-op">+</div>
+        <div class="pf-box"><div class="pf-label">AI 演算法整合商</div><div class="pf-names">AIOTEK</div></div>
+        <div class="pf-op">=</div>
+        <div class="pf-box"><div class="pf-label">宣德 ODM AI 攝影機</div><div class="pf-names">SpeedTech</div></div>
+      </div>
+    </div>
+
+    <div class="block-title" style="margin-top:30px;"><span class="bar"></span>延伸項目與應用</div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div class="spec-top">寵物看護 App 整合</div>
+        <dl><div class="row"><dt>應用</dt><dd>邊緣 AI 攝影機 + 寵物辨識推播</dd></div></dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="6" y="10" width="12" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <div class="spec-top">智慧門鎖 / 居家保全 App 整合</div>
+        <dl><div class="row"><dt>應用</dt><dd>邊緣 AI 攝影機 + 門鎖／保全事件辨識</dd></div></dl>
+      </div>
+    </div>
+
+    <div class="pager-row">
+      <a href="#sec-acoustics"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>上一個產品</a>
+      <a class="pager-mid" href="index0804.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>返回列表</a>
+      <a href="#sec-networking">下一個產品<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-main">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="f-logo"><div class="mark">S</div><b>宣德科技 SpeedTech</b></div>
+        <div class="social">
+          <span><svg viewBox="0 0 24 24"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v6h3v-6h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        </div>
+        <div class="contact">
+          電話：+886-3-2120088<br>
+          傳真：+886-3-2121771<br>
+          地址：桃園市龜山區民生北路一段568號
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>關於我們</h5>
+        <ul><li>公司簡介</li><li>年度紀事</li><li>供應商須知</li><li>政策及驗證系統</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>產品專區</h5>
+        <ul><li>整機組裝類 FATP</li><li>連接器 Components Level</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>企業永續</h5>
+        <ul><li>ESG 永續報告書</li><li>智慧財產管理</li><li>資訊安全管理</li><li>環境保護</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright© Speed Tech Corp. All rights reserved — 頁面設計原型，僅供內部評估使用</span>
+      <div class="flinks"><span>員工專區</span><span>聯絡我們</span><span>隱私權政策</span><span>網站地圖</span></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
