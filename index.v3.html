@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>產品專區 頁面設計原型索引 – SpeedTech 宣德科技</title>
+<style>
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#20539c;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --orange:#f5821f;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1240px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;}
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+
+  .hero{
+    position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 20% 20%, #1b3a72 0%, var(--navy-dark) 55%, #081227 100%);
+    padding:70px 0 64px;color:#fff;
+  }
+  .hero .hero-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:42px 42px;mask-image:linear-gradient(to right, rgba(0,0,0,.9), rgba(0,0,0,0) 75%);
+  }
+  .hero .glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;}
+  .hero .glow.g1{width:420px;height:420px;background:#2e64b3;top:-160px;right:6%;}
+  .hero .glow.g2{width:260px;height:260px;background:var(--orange);opacity:.16;bottom:-140px;right:22%;}
+  .hero-content{position:relative;z-index:2;}
+  .hero-content .eyebrow{font-size:13px;letter-spacing:3px;color:var(--blue-light);font-weight:600;margin-bottom:12px;}
+  .hero-content h1{font-size:34px;font-weight:800;letter-spacing:1px;margin-bottom:14px;}
+  .hero-content p{font-size:14px;color:#c9d6ec;max-width:600px;line-height:1.8;}
+
+  /* Main categories */
+  .cat-section{padding:60px 0 20px;}
+  .section-head{margin-bottom:28px;}
+  .section-head h2{font-size:20px;font-weight:800;color:var(--text-dark);margin-bottom:6px;}
+  .section-head .hint{font-size:12.5px;color:var(--text-light);}
+
+  .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .cat-card{
+    display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;
+    background:#fff;border:1px solid var(--gray-line);box-shadow:0 16px 38px -22px rgba(20,40,80,.32);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .cat-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px -20px rgba(20,40,80,.42);}
+  .cat-card .cat-top{
+    padding:28px 26px;color:#fff;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 20% 0%, #2e64b3 0%, var(--navy-dark) 70%);
+  }
+  .cat-card .cat-top .cat-tag{
+    display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+    background:rgba(255,255,255,.15);padding:4px 10px;border-radius:999px;margin-bottom:14px;
+  }
+  .cat-card .cat-top h3{font-size:22px;font-weight:800;margin-bottom:6px;}
+  .cat-card .cat-top .cat-sub{font-size:12.5px;color:#c9d6ec;}
+  .cat-card .cat-body{padding:22px 26px 26px;display:flex;flex-direction:column;gap:14px;flex:1;}
+  .cat-card .cat-lines{display:flex;flex-direction:column;gap:8px;}
+  .cat-line-item{
+    display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-gray);
+    padding:9px 12px;background:var(--gray-bg);border-radius:8px;
+  }
+  .cat-line-item svg{width:14px;height:14px;stroke:var(--blue-primary);fill:none;stroke-width:2;flex:none;}
+  .cat-card .enter{
+    margin-top:auto;font-size:13px;font-weight:700;color:var(--blue-primary);
+    display:flex;align-items:center;gap:6px;
+  }
+  .cat-card .enter svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .15s;}
+  .cat-card:hover .enter svg{transform:translateX(4px);}
+
+  /* Other section */
+  .other-section{padding:52px 0 80px;background:var(--gray-bg);margin-top:40px;}
+  .other-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;}
+
+  .info-card{
+    background:#fff;border:1px solid var(--gray-line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:0 14px 34px -22px rgba(20,40,80,.28);display:flex;flex-direction:column;
+  }
+  .info-card .card-top{
+    height:120px;display:flex;align-items:center;justify-content:center;position:relative;
+    background:radial-gradient(circle at 30% 20%, #2e64b3 0%, var(--navy-dark) 70%);
+  }
+  .info-card.disabled .card-top{background:radial-gradient(circle at 30% 20%, #5a6472 0%, #2c333c 70%);}
+  .info-card .card-top .tag{
+    position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;letter-spacing:.5px;
+    background:rgba(255,255,255,.15);color:#fff;padding:4px 10px;border-radius:999px;backdrop-filter:blur(2px);
+  }
+  .info-card .icon-circle{
+    width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));
+    display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px -6px rgba(0,0,0,.4);
+  }
+  .info-card.disabled .icon-circle{background:linear-gradient(135deg,#8892a0,#5a6472);}
+  .info-card .icon-circle svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.6;}
+  .info-card .card-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column;}
+  .info-card .zh{font-size:14.5px;font-weight:800;color:var(--text-dark);margin-bottom:4px;}
+  .info-card .desc{font-size:12px;color:var(--text-gray);line-height:1.6;flex:1;}
+  .info-card .link-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+  .info-card .link-row a{font-size:12px;font-weight:700;display:flex;align-items:center;gap:5px;}
+  .info-card .link-row .primary-link{color:var(--blue-primary);}
+  .info-card .link-row .primary-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+  .info-card .link-row .img-link{color:var(--text-gray);}
+  .info-card .link-row .img-link:hover{color:var(--blue-primary);}
+  .info-card .link-row .disabled-note{font-size:12px;color:var(--text-light);font-weight:600;}
+
+  footer{background:#fff;border-top:1px solid var(--gray-line);padding:22px 0;text-align:center;}
+  footer p{font-size:12px;color:var(--text-light);}
+
+  @media (max-width:760px){
+    .hero-content h1{font-size:26px;}
+    .cat-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計原型 · 索引</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div class="name"><b>宣德科技</b><span>SPEEDTECH</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">PRODUCT ZONE PROTOTYPE</div>
+    <h1>產品專區 頁面設計原型</h1>
+    <p>依最新調整後的順序瀏覽全部頁面草案。</p>
+  </div>
+</section>
+
+<section class="other-section" style="margin-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>全部頁面</h2>
+      <div class="hint">依指定順序排列</div>
+    </div>
+
+    <div class="other-grid">
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">1 · 上線前確認</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M8 11h5M8 15h3"/><circle cx="16" cy="16" r="3"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">廠商暫時網站</div>
+          <div class="desc">首頁、關於我們、隱私權頁面、(部分)產品專區</div>
+          <div class="link-row">
+            <a class="primary-link" href="https://m000493.layout.minmax.website/" target="_blank" rel="noopener">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card disabled">
+        <div class="card-top">
+          <span class="tag">2 · 待補充</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">公司資訊</div>
+          <div class="desc">尚未提供內容，待你確認要放哪些資料（公司簡介／年度紀事／供應商須知等）後再補上連結。</div>
+          <div class="link-row">
+            <span class="disabled-note">尚未開放</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">3 · 企業永續</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">供應商管理政策</div>
+          <div class="desc">供應商管理策略、能力評比、RBA、評比等級與 DPP 數位產品護照規劃方向。</div>
+          <div class="link-row">
+            <a class="primary-link" href="supplier-policy.html">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="img-link" href="image/ESG-供應商.jpg" target="_blank" rel="noopener">查看示意圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">4 · 一級分類</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13"/><rect x="3" y="13" width="18" height="5" rx="1.5"/><circle cx="7.5" cy="18" r="1.6"/><circle cx="16.5" cy="18" r="1.6"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">OEM</div>
+          <div class="desc">OEM 專業代工（含 PCBA／模組／線束組裝）：車用電子與動力控制、衛星與高頻傳輸模組。</div>
+          <div class="link-row">
+            <a class="primary-link" href="oem.html">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">5 · 一級分類</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 8a12 12 0 0 1 16 0M7 11.5a7.5 7.5 0 0 1 10 0M10.5 15a3 3 0 0 1 3 0"/><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">ODM</div>
+          <div class="desc">ODM 系統解決方案（含系統設計／軟韌體／NPI）：網通與無線設備、智慧聲學與消費電子、工業控制與智慧終端。</div>
+          <div class="link-row">
+            <a class="primary-link" href="odm.html">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">6 · 總覽頁</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">連接器 Components Level</div>
+          <div class="desc">單頁＋分頁籤呈現 8 大連接器系列，點選分頁籤切換查看規格。</div>
+          <div class="link-row">
+            <a class="primary-link" href="https://www.figma.com/proto/tmGLFeknQKjQGl1hIWOpH1/m000493-%E5%AE%A3%E5%BE%B7%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8?node-id=13280-37302&amp;p=f&amp;t=oCAeNvMBbsW8bGGG-0&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;page-id=7175%3A23249&amp;starting-point-node-id=7175%3A27185" target="_blank" rel="noopener">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="img-link" href="image/連接器.jpg" target="_blank" rel="noopener">查看示意圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">7 · 職場霸凌法</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M8 11h5M8 15h3"/><circle cx="16" cy="16" r="3"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">人權政策</div>
+          <div class="desc">HR</div>
+          <div class="link-row">
+            <a class="primary-link" href="https://www.figma.com/proto/tmGLFeknQKjQGl1hIWOpH1/m000493-%E5%AE%A3%E5%BE%B7%E7%A7%91%E6%8A%80%E8%82%A1%E4%BB%BD%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8?node-id=10195-31502&amp;p=f&amp;t=oCAeNvMBbsW8bGGG-0&amp;scaling=min-zoom&amp;content-scaling=fixed&amp;page-id=7175%3A23249&amp;starting-point-node-id=7175%3A27185" target="_blank" rel="noopener">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="img-link" href="image/人權政策及職場多元化政策.jpg" target="_blank" rel="noopener">查看示意圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="card-top">
+          <span class="tag">8 · New Category</span>
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M8 11h5M8 15h3"/><circle cx="16" cy="16" r="3"/></svg></div>
+        </div>
+        <div class="card-body">
+          <div class="zh">AI智慧應用系列</div>
+          <div class="desc">HR</div>
+          <div class="link-row">
+            <a class="primary-link" href="newcategory/pages/ai-solutions.html" target="_blank" rel="noopener">
+              進入頁面 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="img-link" href="files/企业微信截图_17848695294224.png" target="_blank" rel="noopener">查看示意圖</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Copyright© Speed Tech Corp. — 頁面設計原型，僅供內部評估使用</p>
+</footer>
+
+</body>
+</html>
