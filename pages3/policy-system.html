@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>政策及驗證系統 – 宣德工業股份有限公司 – SpeedTech 宣德科技</title>
+<style>
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#20539c;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --teal:#0e9488;
+    --orange:#f5821f;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:10px;}
+  @media (min-width:961px){ .nav-bar{padding-right:180px;} }
+  @media (max-width:760px){ .site-nav{display:none;} }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;}
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+  .site-nav{display:flex;gap:22px;flex-wrap:wrap;}
+  .site-nav span{font-size:12.5px;font-weight:600;color:var(--text-gray);}
+  .site-nav span.on{color:var(--blue-primary);font-weight:800;}
+
+  .back-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue-light);}
+  .back-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+  .back-link:hover{color:#fff;}
+
+  /* Section 1 — Hero Banner (full-bleed, dark overlay) */
+  .ind-hero{
+    position:relative;overflow:hidden;min-height:340px;display:flex;align-items:center;
+    background:
+      radial-gradient(circle at 22% 30%, rgba(46,100,179,.55), transparent 55%),
+      radial-gradient(circle at 80% 75%, rgba(14,148,136,.3), transparent 55%),
+      linear-gradient(125deg, var(--navy-dark) 0%, #060d1c 100%);
+  }
+  .ind-hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:40px 40px;mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.9), rgba(0,0,0,.1) 80%);
+  }
+  .ind-hero .wrap{position:relative;z-index:2;padding:54px 24px;color:#fff;}
+  .ind-hero .en-tag{font-size:12px;letter-spacing:3px;color:var(--blue-light);font-weight:700;margin-bottom:14px;}
+  .ind-hero h1{font-size:32px;font-weight:800;letter-spacing:1px;margin-bottom:6px;}
+  .ind-hero .en-name{font-size:14px;color:#a9c3e8;font-weight:600;margin-bottom:18px;}
+  .ind-hero .slogan{font-size:15px;font-weight:700;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);display:inline-block;padding:10px 20px;border-radius:999px;}
+
+  .crumb{background:#fafbfc;border-bottom:1px solid var(--gray-line);font-size:11.5px;color:var(--text-light);padding:10px 0;}
+  .crumb .wrap{display:flex;gap:6px;align-items:center;}
+  .crumb b{color:var(--text-gray);font-weight:700;}
+
+  .section{padding:52px 0;}
+  .section.alt{background:var(--gray-bg);}
+  .block-title{font-size:20px;font-weight:800;color:var(--text-dark);margin:0 0 6px;display:flex;align-items:center;gap:10px;}
+  .block-title .bar{width:4px;height:18px;background:var(--teal);border-radius:2px;}
+  .block-title.center{justify-content:center;text-align:center;}
+  .block-sub{font-size:12.5px;color:var(--text-light);margin-bottom:30px;}
+
+  /* Section 2 — About Us (two-column) */
+  .about-grid{display:grid;grid-template-columns:5fr 6fr;gap:40px;align-items:center;}
+  .about-visual{
+    border-radius:var(--radius);overflow:hidden;min-height:260px;position:relative;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(46,100,179,.5), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(14,148,136,.35), transparent 50%),
+      linear-gradient(135deg, var(--navy-dark), #071229);
+  }
+  .about-visual::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+  .about-visual .cap{position:absolute;left:20px;bottom:20px;z-index:2;color:#fff;background:rgba(12,31,66,.8);padding:12px 16px;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:.5px;}
+  .about-text p{font-size:13.5px;color:var(--text-gray);line-height:2;margin-bottom:16px;}
+  .about-text p:last-child{margin-bottom:0;}
+  .about-text b{color:var(--text-dark);}
+
+  /* Section 3 — Core Capabilities (4-card grid) */
+  .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .cap-card{background:#fff;border:1px solid var(--gray-line);border-radius:var(--radius);padding:24px 20px;box-shadow:0 12px 28px -20px rgba(20,40,80,.28);transition:transform .18s, box-shadow .18s;}
+  .cap-card:hover{transform:translateY(-5px);box-shadow:0 18px 34px -18px rgba(20,40,80,.35);}
+  .cap-card .cc-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .cap-card .cc-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.6;}
+  .cap-card h4{font-size:13.5px;font-weight:800;color:var(--text-dark);margin-bottom:10px;line-height:1.5;}
+  .cap-card p{font-size:11.5px;color:var(--text-gray);line-height:1.8;margin-bottom:14px;}
+  .cap-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .cap-tags span{font-size:10px;font-weight:700;color:var(--teal);background:rgba(14,148,136,.1);padding:3px 9px;border-radius:999px;}
+
+  /* Section 4 — Policy & Standards (3 cards) */
+  .policy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .policy-card{background:#fff;border:1px solid var(--gray-line);border-radius:var(--radius);padding:26px 24px;text-align:center;box-shadow:0 12px 28px -20px rgba(20,40,80,.28);}
+  .policy-card .pc-icon{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--teal),#0a6a61);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+  .policy-card .pc-icon svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.6;}
+  .policy-card h4{font-size:14px;font-weight:800;color:var(--text-dark);margin-bottom:10px;}
+  .policy-card .pc-slogan{font-size:12px;font-weight:700;color:var(--blue-primary);margin-bottom:12px;line-height:1.7;}
+  .policy-card p{font-size:11.5px;color:var(--text-gray);line-height:1.8;}
+
+  /* Section 5 — Group Synergy */
+  .synergy-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;}
+  .synergy-visual{
+    border-radius:var(--radius);overflow:hidden;min-height:280px;position:relative;
+    background:linear-gradient(135deg, var(--navy-dark), #071229);
+    display:flex;align-items:center;justify-content:center;padding:30px;
+  }
+  .synergy-chain{display:flex;flex-direction:column;gap:0;width:100%;max-width:280px;}
+  .chain-node{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:14px 16px;color:#fff;font-size:12px;font-weight:700;text-align:center;}
+  .chain-link{width:2px;height:22px;background:rgba(255,255,255,.25);margin:0 auto;}
+  .synergy-points{display:flex;flex-direction:column;gap:22px;}
+  .synergy-point{padding-left:18px;border-left:3px solid var(--teal);}
+  .synergy-point h5{font-size:13.5px;font-weight:800;color:var(--text-dark);margin-bottom:8px;}
+  .synergy-point p{font-size:12px;color:var(--text-gray);line-height:1.85;}
+
+  .footer-main{background:var(--navy-dark);color:#c9d6ec;padding:44px 0 22px;margin-top:10px;}
+  .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:26px;margin-bottom:30px;}
+  .footer-brand .f-logo{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .footer-brand .f-logo .mark{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
+  .footer-brand .f-logo b{font-size:14px;color:#fff;}
+  .social{display:flex;gap:10px;margin-bottom:14px;}
+  .social span{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;}
+  .social svg{width:14px;height:14px;stroke:#c9d6ec;fill:none;stroke-width:1.6;}
+  .contact{font-size:11.5px;line-height:2;color:#93a3bd;}
+  .footer-col h5{font-size:12.5px;color:#fff;margin-bottom:14px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .footer-col li{font-size:11.5px;color:#93a3bd;}
+  .footer-col li.on{color:#fff;font-weight:700;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:#7c8bab;}
+  .flinks{display:flex;gap:16px;}
+
+  @media (max-width:960px){
+    .about-grid,.synergy-grid{grid-template-columns:1fr;}
+    .cap-grid{grid-template-columns:1fr 1fr;}
+    .policy-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .cap-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計原型 · 關於我們</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div class="name"><b>宣德科技</b><span>SPEEDTECH</span></div>
+    </div>
+    <nav class="site-nav">
+      <span class="on">關於我們</span><span>最新消息</span><span>產品專區</span><span>投資人專區</span><span>企業永續</span><span>人力資源</span>
+    </nav>
+  </div>
+</header>
+
+<section class="ind-hero">
+  <div class="wrap">
+    <a class="back-link" href="index0804.html">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      返回產品專區索引
+    </a>
+    <div style="height:16px"></div>
+    <div class="en-tag">SPEED TECH INDUSTRIAL CORP.</div>
+    <h1>宣德工業股份有限公司</h1>
+    <div class="en-name">Speed Tech Industrial Corp.</div>
+    <div class="slogan">賦能智慧工業・深耕精密材料與工控技術</div>
+  </div>
+</section>
+
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>關於我們</span><span>›</span><b>政策及驗證系統</b></div></div>
+
+<!-- Section 2: About Us -->
+<section class="section">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="cap">宣德工業・精密材料與工控技術</div>
+      </div>
+      <div class="about-text">
+        <div class="block-title"><span class="bar"></span>專注高階工控・深化垂直整合</div>
+        <p><b>宣德工業股份有限公司</b>隸屬於宣德科技集團，專注於工業控制系統零組件、高階工控模組及精密材料工藝之研發、生產與銷售。</p>
+        <p>面對全球智慧製造與工業 4.0 浪潮，宣德工業結合集團三十餘年的精密研發實力與靈活生產機制，為全球工控、智慧自動化及高階設備客戶提供高穩定性、客製化且具備高度韌性的一站式解決方案。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Core Capabilities -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="block-title center">核心技術與產品範疇</div>
+    <div class="block-sub" style="text-align:center;">Core Capabilities &amp; Solutions</div>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div>
+        <h4>工業控制模組<br>Industrial Control Modules</h4>
+        <p>工控主板周邊、PLC 模組與自動化傳輸組件。具備高抗干擾（Anti-Interference）、寬溫運作與高耐用度特性，滿足惡劣工業環境需求。</p>
+        <div class="cap-tags"><span>#抗干擾</span><span>#寬溫設計</span><span>#高耐久度</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 3v18M4 7.5l8 4.5 8-4.5"/></svg></div>
+        <h4>精密材料工藝<br>Precision Material Engineering</h4>
+        <p>高階工程塑膠、精密金屬沖壓與模具開發。掌握關鍵基礎材料特性與微型化加工工藝，顯著提升零組件結構強度與導熱效能。</p>
+        <div class="cap-tags"><span>#高階工程塑膠</span><span>#精密模具</span><span>#結構優化</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M14 14c2.8 0 5 2.2 5 6"/></svg></div>
+        <h4>客製化協同開發<br>JDM／ODM Co-Development</h4>
+        <p>提供工控專案協同開發、快速打樣與試產驗證。具備 DFM（可製造性設計）評估能力，協助客戶大幅縮短產品開發週期。</p>
+        <div class="cap-tags"><span>#敏捷打樣</span><span>#DFM評估</span><span>#協同設計</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cc-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>嚴苛環境驗證<br>Reliability &amp; Environmental Testing</h4>
+        <p>具備耐震、耐溫、耐蝕與高信賴性測試設備。全面符合工業級測試標準，確保關鍵設備長期運行的穩定與零失誤。</p>
+        <div class="cap-tags"><span>#工業級認證</span><span>#信賴性測試</span><span>#零失誤承諾</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Policy & Standards -->
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center">品質與環境管理政策</div>
+    <div class="block-sub" style="text-align:center;">Policy &amp; Standards</div>
+    <div class="policy-grid">
+      <div class="policy-card">
+        <div class="pc-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg></div>
+        <h4>品質政策<br>Quality Policy</h4>
+        <div class="pc-slogan">精準品質・全員落實<br>持續改善・客戶滿意</div>
+        <p>建立全生命週期產品溯源機制，導入高標準 IPQC 與 OQC 檢驗流程，確保交付客戶之工控組件均具備一致性的高品質。</p>
+      </div>
+      <div class="policy-card">
+        <div class="pc-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10z"/></svg></div>
+        <h4>環境與永續承諾<br>ESG &amp; EHS Policy</h4>
+        <div class="pc-slogan">綠色製程・永續循環<br>低碳製造</div>
+        <p>嚴格遵循 RoHS、REACH 等國際環保規範，從原物料選用到生產製造落實有害物質禁用（HSF）與資源循環利用。</p>
+      </div>
+      <div class="policy-card">
+        <div class="pc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M8 11h5M8 15h3"/><circle cx="16" cy="16" r="3"/></svg></div>
+        <h4>誠信與資訊安全<br>Integrity &amp; InfoSec</h4>
+        <div class="pc-slogan">嚴守誠信・機密防護<br>智慧財產</div>
+        <p>秉持母公司誠信經營原則，建立完善的營業秘密控管機制與資安防護體系，保護客戶與合作夥伴之智慧財產。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Group Synergy -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="block-title center">依託集團能量・發揮極致綜效</div>
+    <div class="block-sub" style="text-align:center;">Group Synergy &amp; Vertical Integration</div>
+    <div class="synergy-grid">
+      <div class="synergy-visual">
+        <div class="synergy-chain">
+          <div class="chain-node">基礎材料與精密機構件研發</div>
+          <div class="chain-link"></div>
+          <div class="chain-node">宣德工業｜工控模組與精密材料工藝</div>
+          <div class="chain-link"></div>
+          <div class="chain-node">宣德科技｜高速連接器製造</div>
+          <div class="chain-link"></div>
+          <div class="chain-node">SMT／FATP 成機組裝</div>
+        </div>
+      </div>
+      <div class="synergy-points">
+        <div class="synergy-point">
+          <h5>垂直整合能力</h5>
+          <p>向上結合基礎材料與精密機構件研發，向下串接母公司（宣德科技）之高速連接器製造與表面黏著（SMT）／成機組裝（FATP）能量，提供完整串聯的垂直製造鏈。</p>
+        </div>
+        <div class="synergy-point">
+          <h5>全球供應鏈韌性</h5>
+          <p>配合宣德科技集團於台灣、東南亞及美洲的全球生產據點布局，為客戶提供靈活調配的生產排程與在地供貨支援，有效規避地緣政治風險。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-main">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="f-logo"><div class="mark">S</div><b>宣德科技 SpeedTech</b></div>
+        <div class="social">
+          <span><svg viewBox="0 0 24 24"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v6h3v-6h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        </div>
+        <div class="contact">
+          電話：+886-3-2120088<br>
+          傳真：+886-3-2121771<br>
+          地址：桃園市龜山區民生北路一段568號
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>關於我們</h5>
+        <ul><li>公司簡介</li><li>年度紀事</li><li>供應商須知</li><li class="on">政策及驗證系統</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>產品專區</h5>
+        <ul><li>整機組裝類 FATP</li><li>連接器 Components Level</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>企業永續</h5>
+        <ul><li>ESG 永續報告書</li><li>智慧財產管理</li><li>資訊安全管理</li><li>環境保護</li><li>供應商管理政策</li><li>利害關係人專區</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright© Speed Tech Corp. All rights reserved — 頁面設計原型，僅供內部評估使用</span>
+      <div class="flinks"><span>員工專區</span><span>聯絡我們</span><span>隱私權政策</span><span>網站地圖</span></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
