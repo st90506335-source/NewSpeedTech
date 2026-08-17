@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>供應商管理政策 – 企業永續 – SpeedTech 宣德科技</title>
+<style>
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#20539c;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --teal:#0e9488;
+    --orange:#f5821f;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:10px;}
+  @media (min-width:961px){ .nav-bar{padding-right:180px;} }
+  @media (max-width:760px){ .site-nav{display:none;} }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;}
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+  .site-nav{display:flex;gap:22px;flex-wrap:wrap;}
+  .site-nav span{font-size:12.5px;font-weight:600;color:var(--text-gray);}
+  .site-nav span.on{color:var(--blue-primary);font-weight:800;}
+
+  .back-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue-light);}
+  .back-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+  .back-link:hover{color:#fff;}
+
+  .ph-hero{
+    position:relative;overflow:hidden;min-height:230px;display:flex;align-items:center;
+    background:
+      radial-gradient(circle at 18% 25%, rgba(14,148,136,.5), transparent 55%),
+      radial-gradient(circle at 82% 65%, rgba(46,100,179,.35), transparent 55%),
+      linear-gradient(120deg, var(--navy-dark) 0%, #071229 100%);
+  }
+  .ph-hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:38px 38px;mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.9), rgba(0,0,0,.15) 80%);
+  }
+  .ph-hero .wrap{position:relative;z-index:2;padding:44px 24px;color:#fff;text-align:center;}
+  .ph-hero .back-link{justify-content:center;margin-bottom:14px;}
+  .ph-hero h1{font-size:28px;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  .ph-hero p{font-size:13px;color:#c9d6ec;}
+
+  .subnav{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .subnav-row{display:flex;gap:0;max-width:1200px;margin:0 auto;overflow-x:auto;}
+  .subnav-row span{padding:14px 20px;font-size:12.5px;font-weight:700;color:var(--text-gray);white-space:nowrap;}
+  .subnav-row span.active{color:#fff;background:var(--teal);}
+
+  .crumb{background:#fafbfc;border-bottom:1px solid var(--gray-line);font-size:11.5px;color:var(--text-light);padding:10px 0;}
+  .crumb .wrap{display:flex;gap:6px;align-items:center;}
+  .crumb b{color:var(--text-gray);font-weight:700;}
+
+  .section{padding:44px 0;}
+  .section.alt{background:var(--gray-bg);}
+  .h2{font-size:19px;font-weight:800;color:var(--text-dark);margin-bottom:16px;}
+  .h2 .num{color:var(--teal);}
+  .lead{font-size:12.5px;color:var(--text-gray);line-height:1.85;max-width:900px;margin-bottom:24px;}
+
+  /* Hub diagram */
+  .hub-wrap{display:grid;grid-template-columns:1fr 190px 1fr;gap:20px 30px;align-items:center;max-width:920px;margin:0 auto;}
+  .hub-col{display:flex;flex-direction:column;gap:20px;}
+  .hub-item{display:flex;gap:12px;align-items:flex-start;}
+  .hub-item.right{flex-direction:row-reverse;text-align:right;}
+  .hub-icon{width:52px;height:52px;border-radius:50%;background:#fff;border:2px solid var(--gray-line);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 8px 20px -12px rgba(20,40,80,.3);}
+  .hub-icon svg{width:23px;height:23px;stroke:var(--teal);fill:none;stroke-width:1.7;}
+  .hub-item h5{font-size:12.5px;font-weight:800;margin-bottom:4px;}
+  .hub-item p{font-size:11px;color:var(--text-gray);line-height:1.6;}
+  .hub-center{grid-row:1/5;display:flex;align-items:center;justify-content:center;}
+  .hub-core{width:172px;height:172px;border-radius:50%;background:conic-gradient(from 0deg,#0e9488,#2e64b3,#0e9488);padding:8px;display:flex;align-items:center;justify-content:center;}
+  .hub-core-inner{width:100%;height:100%;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;gap:6px;}
+  .hub-core-inner svg{width:26px;height:26px;stroke:var(--teal);fill:none;stroke-width:1.6;}
+  .hub-core-inner b{font-size:13.5px;font-weight:800;color:var(--text-dark);}
+
+  /* Cards */
+  .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .card-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+  .info-card2{background:#fff;border:1px solid var(--gray-line);border-radius:12px;padding:20px 20px 18px;}
+  .info-card2 .ic-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .info-card2 .ic-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--teal),#0a6a61);display:flex;align-items:center;justify-content:center;flex:none;}
+  .info-card2 .ic-icon svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.7;}
+  .info-card2 h4{font-size:13.5px;font-weight:800;}
+  .info-card2 ol,.info-card2 ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .info-card2 li{font-size:11.5px;color:var(--text-gray);line-height:1.7;padding-left:16px;position:relative;}
+  .info-card2 li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:var(--teal);}
+  .info-card2 p{font-size:11.5px;color:var(--text-gray);line-height:1.75;}
+
+  /* RBA banner */
+  .rba-banner{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border-radius:var(--radius);overflow:hidden;box-shadow:0 16px 40px -24px rgba(20,40,80,.4);}
+  .rba-text{background:#fff;padding:32px 34px;display:flex;flex-direction:column;justify-content:center;}
+  .rba-text p{font-size:12.5px;color:var(--text-gray);line-height:1.9;margin-bottom:10px;}
+  .rba-photo{
+    position:relative;min-height:220px;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(46,100,179,.55), transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(14,148,136,.35), transparent 50%),
+      linear-gradient(135deg, var(--navy-dark), #060d1c);
+  }
+  .rba-photo::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+  .rba-badge{
+    position:absolute;left:20px;bottom:20px;z-index:2;background:#fff;border-radius:12px;
+    padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 24px -12px rgba(0,0,0,.35);
+  }
+  .rba-badge .rb-icon{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--teal),#0a6a61);display:flex;align-items:center;justify-content:center;}
+  .rba-badge .rb-icon svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.8;}
+  .rba-badge b{font-size:12px;color:var(--text-dark);}
+  @media (max-width:760px){ .rba-banner{grid-template-columns:1fr;} }
+
+  /* Steps timeline */
+  .step-row{display:flex;justify-content:space-between;position:relative;max-width:920px;margin:0 auto;flex-wrap:wrap;gap:20px;}
+  .step-row::before{content:"";position:absolute;top:34px;left:70px;right:70px;height:2px;background:var(--gray-line);z-index:0;}
+  .step-item{position:relative;z-index:1;flex:1;min-width:150px;text-align:center;padding:0 8px;}
+  .step-num{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));color:#fff;font-size:19px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 10px 22px -10px rgba(20,40,80,.4);}
+  .step-item h5{font-size:12.5px;font-weight:800;margin-bottom:8px;}
+  .step-item p{font-size:11px;color:var(--text-gray);line-height:1.7;}
+
+  /* Grade table */
+  .grade-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 26px -20px rgba(20,40,80,.3);}
+  .grade-table th{background:var(--blue-primary);color:#fff;font-size:12px;font-weight:800;padding:12px 18px;text-align:left;}
+  .grade-table td{padding:13px 18px;font-size:12px;color:var(--text-gray);border-bottom:1px solid var(--gray-line);vertical-align:top;}
+  .grade-table tr:last-child td{border-bottom:none;}
+  .grade-cell{font-weight:800;color:var(--text-dark);white-space:nowrap;}
+
+  .note-card{border:1px dashed var(--gray-line);border-radius:12px;padding:16px 18px;font-size:12px;color:var(--text-gray);background:var(--gray-bg);line-height:1.8;margin-top:20px;}
+  .note-card b{color:var(--text-dark);}
+
+  /* DPP flow */
+  .dpp-flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .dpp-node{background:#fff;border:1px solid var(--gray-line);border-radius:12px;padding:16px 18px;text-align:center;min-width:150px;box-shadow:0 10px 24px -18px rgba(20,40,80,.28);}
+  .dpp-node .dn-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--blue-primary));display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+  .dpp-node .dn-icon svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.7;}
+  .dpp-node span{font-size:11.5px;font-weight:700;color:var(--text-dark);}
+  .dpp-arrow{color:var(--text-light);font-size:16px;flex:none;}
+
+  .timeline-strip{display:flex;gap:0;border-radius:12px;overflow:hidden;margin-top:24px;box-shadow:0 10px 26px -20px rgba(20,40,80,.3);}
+  .tl-seg{flex:1;padding:16px 18px;background:#fff;border-right:1px solid var(--gray-line);}
+  .tl-seg:last-child{border-right:none;}
+  .tl-seg .tl-year{font-size:11px;font-weight:800;color:var(--teal);margin-bottom:6px;}
+  .tl-seg p{font-size:11px;color:var(--text-gray);line-height:1.6;}
+  @media (max-width:760px){ .timeline-strip{flex-direction:column;} .tl-seg{border-right:none;border-bottom:1px solid var(--gray-line);} }
+
+  /* DPP readiness stat cards */
+
+  /* Status badges */
+  .status-badge{display:inline-block;padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;}
+  .status-badge.ok{background:#e6f5ec;color:#1e7e34;}
+  .status-badge.partial{background:#fdf1dc;color:#a66a06;}
+  .status-badge.external{background:#e8eef7;color:var(--blue-primary);}
+  .status-badge.pending{background:#fbe9e7;color:#c0392b;}
+
+  /* Trust badges (standards alignment) */
+  .trust-badge-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 30px;}
+  .trust-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border:1px solid var(--gray-line);border-radius:20px;font-size:11.5px;font-weight:700;color:var(--text-dark);background:#fff;}
+  .trust-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none;}
+
+  /* DPP pillar cards */
+  .pillar-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--gray-line);}
+
+  .footer-main{background:var(--navy-dark);color:#c9d6ec;padding:44px 0 22px;margin-top:10px;}
+  .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:26px;margin-bottom:30px;}
+  .footer-brand .f-logo{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .footer-brand .f-logo .mark{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
+  .footer-brand .f-logo b{font-size:14px;color:#fff;}
+  .footer-brand .social{display:flex;gap:8px;margin:14px 0;}
+  .footer-brand .social span{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;}
+  .footer-brand .social svg{width:12px;height:12px;stroke:#c9d6ec;fill:none;stroke-width:1.8;}
+  .footer-brand .contact{font-size:11.5px;line-height:2;color:#93a5c4;}
+  .footer-col h5{font-size:12px;font-weight:800;color:#fff;margin-bottom:12px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .footer-col li{font-size:11.5px;color:#93a5c4;}
+  .footer-col li.on{color:#fff;font-weight:700;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:#7d90b3;}
+  .footer-bottom .flinks{display:flex;gap:16px;flex-wrap:wrap;}
+
+  @media (max-width:760px){
+    .hub-wrap{grid-template-columns:1fr;}
+    .hub-center{grid-row:auto;order:-1;margin-bottom:10px;}
+    .hub-item.right{flex-direction:row;text-align:left;}
+    .card-grid,.card-grid.cols-3{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計原型 · 企業永續</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="mark">S</div>
+      <div class="name"><b>宣德科技</b><span>SPEEDTECH</span></div>
+    </div>
+    <nav class="site-nav">
+      <span>關於我們</span><span>最新消息</span><span>產品專區</span><span>投資人專區</span><span class="on">企業永續</span><span>人力資源</span>
+    </nav>
+  </div>
+</header>
+
+<section class="ph-hero">
+  <div class="wrap">
+    <a class="back-link" href="index0804.html">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      返回產品專區索引
+    </a>
+    <h1>企業永續</h1>
+    <p>推動企業永續發展，創造長遠共好價值</p>
+  </div>
+</section>
+
+<div class="subnav">
+  <div class="subnav-row">
+    <span>ESG永續報告書</span><span>智慧財產管理</span><span>資訊安全管理</span><span>環境保護</span><span class="active">供應商管理政策</span><span>利害關係人專區</span>
+  </div>
+</div>
+
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>企業永續</span><span>›</span><b>供應商管理政策</b></div></div>
+
+<!-- 供應商管理策略 hub -->
+<section class="section">
+  <div class="wrap">
+    <div class="hub-wrap">
+      <div class="hub-col">
+        <div class="hub-item">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10z"/></svg></div>
+          <div><h5>節能減碳</h5><p>偕同供應商一起響應節能減碳。</p></div>
+        </div>
+        <div class="hub-item">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg></div>
+          <div><h5>職場安全</h5><p>重視職場安全，降低職業災害。</p></div>
+        </div>
+        <div class="hub-item">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <div><h5>永續發展</h5><p>倡同供應商重視經濟、社會、環境的永續發展，在地採購82%。</p></div>
+        </div>
+        <div class="hub-item">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="12" cy="17" r="2.5"/><path d="M9 8.5L11 15M15 8.5L13 15"/></svg></div>
+          <div><h5>整合資源</h5><p>創造競爭最大化。</p></div>
+        </div>
+      </div>
+
+      <div class="hub-center">
+        <div class="hub-core">
+          <div class="hub-core-inner">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg>
+            <b>供應商管理策略</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="hub-col">
+        <div class="hub-item right">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4M4 7v10l8 4 8-4V7M4 7l8 4 8-4M12 11v10"/></svg></div>
+          <div><h5>環境友善</h5><p>資源再利用，降低環境污染，攜手夥伴落實友善的供應鏈。</p></div>
+        </div>
+        <div class="hub-item right">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><path d="M12 3l2 5 5 .8-3.6 3.5.9 5-4.3-2.3-4.3 2.3.9-5L4 8.8 9 8z"/><path d="M4 20l16-16" stroke-dasharray="2 2"/></svg></div>
+          <div><h5>衝突礦產</h5><p>不使用衝突礦產。</p></div>
+        </div>
+        <div class="hub-item right">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+          <div><h5>風險管理</h5><p>對於不合遵之供應商進行評比及輔導。</p></div>
+        </div>
+        <div class="hub-item right">
+          <div class="hub-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.5-4.5"/></svg></div>
+          <div><h5>道德廉潔</h5><p>要求供應商誠信經營，遵守道德行為準則。</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 二、供應商永續管理能力評比 -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="h2"><span class="num">二、</span>供應商永續管理能力評比</div>
+    <p class="lead">本公司秉持「將供應商視為合作夥伴，以長期合作為基本方針」之供應鏈政策，規劃供應商管理方式，以下列準則進行評核與輔導，期許建立永續成長之供應鏈管理機制。</p>
+
+    <div class="card-grid" style="margin-bottom:16px;">
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 6-6"/><path d="M20 12a8 8 0 1 1-3-6.2"/></svg></div><h4>執行準則</h4></div>
+        <ol>
+          <li>遵循本公司「供應商企業社會責任評核作業」。</li>
+          <li>評估對象為超過 20 大供應商、主要供應商及認證供應商。</li>
+        </ol>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg></div><h4>風險評比</h4></div>
+        <ol>
+          <li>評核時參採財務及企業信用，依評核結果區分為 A 級／B 級／C 級供應商。</li>
+          <li>供應商評選風險說明：A 級供應商為 90 分以上（優良）供應商；B 級供應商為 70 到 89 分（合格）供應商；C 級供應商為評比分數低於 70 分之不合格供應商，須輔導至合格為止。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card-grid cols-3">
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M8 15l3-4 3 3 4-6"/></svg></div><h4>實地稽核</h4></div>
+        <ol>
+          <li>遵循本公司「供應商企業社會責任評核作業」進行實地稽核。</li>
+          <li>開放供應商與關鍵廠商每年進行實地稽核。</li>
+        </ol>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 3 6.3"/><path d="M4 12v5h5"/></svg></div><h4>輔導改善與追蹤</h4></div>
+        <ol>
+          <li>每一次文審或現場稽核後，須追蹤矯正對策落實成效，由 SQE 覆查。</li>
+          <li>輔導至合格為止。</li>
+        </ol>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></div><h4>供應商永續評估</h4></div>
+        <p>供應商依循下方「三、供應鏈管理具體做法」相關評估機制定期進行評核，並依評核結果與因應措施持續追蹤改善成效。</p>
+      </div>
+    </div>
+
+    <div class="note-card">
+      <b>內容標示：</b>本節依你提供的截圖重新整理製作；小字說明因原圖解析度限制，逐字轉錄可能與正式文件略有出入，正式對外發布前建議再核對一次原始文案。
+    </div>
+  </div>
+</section>
+
+<!-- RBA banner -->
+<section class="section">
+  <div class="wrap">
+    <div class="rba-banner">
+      <div class="rba-text">
+        <p>本公司重視社會企業責任，於 2021 年起加入 RBA 正式會員，宣德以 RBA 目標願景及規範，盡企業公民之社會責任，與 RBA 聯盟會員共同維持電子產業的永續發展。</p>
+        <p>本公司秉持「將供應商視為合作夥伴，以長期合作為基本方針」之供應鏈政策，規劃供應商管理方式，以下列準則進行評核與輔導，期許建立永續成長之供應鏈管理機制。</p>
+      </div>
+      <div class="rba-photo">
+        <div class="rba-badge">
+          <div class="rb-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg></div>
+          <b>RBA 為目標</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 三、供應鏈管理具體做法 -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="h2" style="text-align:center;"><span class="num">三、</span>供應鏈管理具體做法</div>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto;">成立供應商評鑑小組，由申請單位召集品管、工程、採購等單位，共同對供應商評鑑分數，對供應商表現不佳者進行了解與評估，將供應商視為合作夥伴，將永續風險管理列為重要的考核項目，每年審視供應商品質、價格、交貨狀況，滾動調整優良供應商。</p>
+
+    <div class="card-grid cols-3">
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 6-6"/><path d="M20 12a8 8 0 1 1-3-6.2"/></svg></div><h4>供應商評估</h4></div>
+        <p>所有供應商均須通過供應商管理程序，通過供應商評鑑，並提出所需之相關資料，以求供應商符合本公司之要求，建立公司所需之供應鏈。</p>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h4>供應商稽核</h4></div>
+        <p>為維持合作之供應商品質，持續進行實地考核，同時就品質及供應能力，以及公司之要求，進行相關供應鏈風險或稽核缺失事項，並依供應商品質、採購、SQE、安全等相關單位進行考核。</p>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M8 10h8M8 14h5"/><rect x="4" y="4" width="16" height="16" rx="3"/></svg></div><h4>供應商會議</h4></div>
+        <p>本公司會不定期辦理供應鏈會議，透過各項形式的行銷傳達，或就供應商的品質，並要求供應商共同遵循本公司相關政策。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 利害關係人溝通管道 -->
+<section class="section">
+  <div class="wrap">
+    <div class="h2" style="text-align:center;">利害關係人溝通管道</div>
+    <div class="step-row">
+      <div class="step-item"><div class="step-num">01</div><h5>供應商評估</h5><p>對現有供應商進行評估、供應商依據行為準則進行評估，再由客戶審評。</p></div>
+      <div class="step-item"><div class="step-num">02</div><h5>稽核</h5><p>透過實地稽核或線上稽核，針對評分較低的供應商進行實地稽核或以線上輔導的方式，要求供應商符合行為準則要求。</p></div>
+      <div class="step-item"><div class="step-num">03</div><h5>績效評估</h5><p>每年檢視供應商績效，快速排除等級落後之供應商。</p></div>
+      <div class="step-item"><div class="step-num">04</div><h5>輔導溝通</h5><p>針對不合格的供應商進行溝通與改善，輔導合格或取消供應商資格。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 四、永續供應商評比等級與因應措施 -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="h2"><span class="num">四、</span>永續供應商評比等級與因應措施</div>
+    <p class="lead">本公司供應商評比依「供應商社會責任評鑑」，針對供應商在信用、職業安全衛生與勞動人權各項指標之作分，透過RBA認證或ISO相關驗證，或提供供應類別之管理政策。</p>
+
+    <table class="grade-table">
+      <thead><tr><th>評分等級</th><th>評比分數</th><th>因應措施</th></tr></thead>
+      <tbody>
+        <tr><td class="grade-cell">A</td><td>90-100 分</td><td>建議增加採購量。</td></tr>
+        <tr><td class="grade-cell">B</td><td>70-89 分</td><td>維持既有作業，但要求供應商持續強化管理機制。</td></tr>
+        <tr><td class="grade-cell">C</td><td>70 分以下</td><td>1. 每季一次文審或現場稽核。<br>2. 須追蹤矯正對應改善資料由 SQE 覆查。<br>3. 須輔導至合格為止。</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-card">
+      <b>內容標示：</b>本節（含表格內因應措施文字）依你提供的截圖重新整理，部分小字因截圖解析度較低，屬盡力還原後的版本，正式採用前建議對照原始文件覆核一次用字與分數級距。
+    </div>
+  </div>
+</section>
+
+<!-- 五、DPP 數位產品護照（會議修訂版） -->
+<section class="section">
+  <div class="wrap">
+    <div class="h2"><span class="num">五、</span>數位產品護照（Digital Product Passport, DPP）導入佈局</div>
+    <p class="lead">
+      為因應歐盟《永續產品生態設計法規》（ESPR, EU 2024/1781）及北美核心客戶對低碳透明供應鏈之要求，宣德科技整合內部 <b>SAP、MES、QMS 與 GPM 供應鏈管理平台</b>，建立「單品／批次級」數位產品護照治理體系，落實全生命週期之數位溯源與合規揭露。
+    </p>
+
+    <!-- 標準與驗證徽章 -->
+    <div class="trust-badge-row">
+      <span class="trust-badge">歐盟 ESPR（EU）2024/1781</span>
+      <span class="trust-badge">GS1 Digital Link 標準</span>
+      <span class="trust-badge">D-U-N-S 鄧白氏全球企業編碼</span>
+      <span class="trust-badge">GPM 供應鏈管理平台</span>
+      <span class="trust-badge">RoHS／REACH／SVHC 驗證</span>
+    </div>
+
+    <!-- 導入策略 -->
+    <div class="card-grid" style="margin-bottom:36px;">
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg></div><h4>分階段合規路徑</h4></div>
+        <p>依據歐盟 Delegated Acts 授權法案進度與客戶專案時程，優先鎖定車用電子、工業充電設備與網通產品，逐步建立單品級製造數據對應能力，因應客戶產品導入數位護照時之資料串接需求。</p>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5"/></svg></div><h4>GPM 供應鏈數據標準化</h4></div>
+        <p>透過 GPM 平台建立結構化資料交換機制，串聯 Tier-1 及 Tier-2 供應商之材料成分、原產地與合規文件，統一欄位格式並即時更新，杜絕資料斷鏈。</p>
+        <ul>
+          <li><b>對供應商：</b>單一入口提交 RoHS／REACH／SVHC 等合規文件與檢測報告，減少重複填報與版本混亂。</li>
+          <li><b>對客戶：</b>資料格式標準化、可追溯來源，加快盡職調查與稽核回覆速度，降低供應鏈斷鏈風險。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 追溯機制流程圖 -->
+    <div class="h2" style="font-size:15px;">製造端資料介接架構</div>
+    <p class="lead" style="margin-bottom:20px;">
+      本公司以 OEM／ODM 專業製造夥伴角色，協助品牌客戶完成產品開發、設計與組裝；產品是否於實體貼附 QR Code／NFC 等識別碼、及消費者查詢介面之呈現，均由客戶主導決定。本公司聚焦於將產線端批次、物料與合規數據標準化建檔，依客戶指定格式介接至其數位產品護照系統，確保客戶端揭露之製造履歷完整可信。
+    </p>
+    <div class="dpp-flow">
+      <div class="dpp-node"><div class="dn-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v16M16 4v16M4 8h16M4 16h16"/></svg></div><span>產線批次／物料資料建檔（MES／SAP）</span></div>
+      <div class="dpp-arrow">→</div>
+      <div class="dpp-node"><div class="dn-icon"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><span>品保與合規資料勾稽（QMS／GPM）</span></div>
+      <div class="dpp-arrow">→</div>
+      <div class="dpp-node"><div class="dn-icon"><svg viewBox="0 0 24 24"><path d="M7 17a4 4 0 0 1-1-7.9A5 5 0 0 1 15 7a4.5 4.5 0 0 1 1 8.9"/></svg></div><span>依客戶格式標準化輸出（JSON-LD／GS1）</span></div>
+      <div class="dpp-arrow">→</div>
+      <div class="dpp-node"><div class="dn-icon"><svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 20c0-3 2-5.5 5-5.5M13 14.5c3 0 5 2.5 5 5.5"/></svg></div><span>介接客戶端 DPP 系統／識別碼</span></div>
+    </div>
+
+    <!-- 四大維度排查結果 -->
+    <div class="h2" style="font-size:15px;margin-top:36px;">DPP 關鍵維度與內部整備現況</div>
+    <p class="lead" style="margin-bottom:20px;">
+      依據最新內部盤點，宣德科技於「數位身分識別」與「有害物質合規」已具備成熟之系統支援能量；「碳足跡核算」與「循環維修資訊」已納入第二階段開發藍圖。
+    </p>
+    <div class="card-grid">
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h4>數位身分與單品追溯</h4></div>
+        <ol>
+          <li>D-U-N-S 企業編碼與 GTIN／唯一產品識別碼（UPI）</li>
+          <li>批號／序號、生產廠區、產線與製造日期（MES 支援）</li>
+          <li>關鍵零件批次與供應商溯源（QMS／SAP 支援）</li>
+        </ol>
+        <div class="pillar-foot"><span class="status-badge ok">系統已完整支援（SAP/MES/QMS）</span></div>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg></div><h4>材料組成與環境安全</h4></div>
+        <ol>
+          <li>RoHS／REACH／SVHC 宣告書與測試報告（GPM 平台）</li>
+          <li>無衝突礦產宣告（CMRT／EMRT 治理清單）</li>
+          <li>材料成分重量與塑膠／金屬比例拆解（BOM／圖面）</li>
+        </ol>
+        <div class="pillar-foot"><span class="status-badge ok">系統已完整支援（GPM 平台）</span></div>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10z"/></svg></div><h4>產品碳足跡與再生材料</h4></div>
+        <ol>
+          <li>PCR 消費後再生塑膠／再生金屬使用比例</li>
+          <li>產品生命週期碳足跡（PCF／ISO 14067）量測</li>
+          <li>包裝材料規格與減塑指標宣告</li>
+        </ol>
+        <div class="pillar-foot"><span class="status-badge partial">資料已掌握，依客戶專案規格協同導入</span></div>
+      </div>
+      <div class="info-card2">
+        <div class="ic-head"><div class="ic-icon"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 3 6.3"/><path d="M4 12v5h5"/></svg></div><h4>循環經濟與客戶協同</h4></div>
+        <ol>
+          <li>協同客戶建立易拆解、模組化與高耐久度設計（DfD）</li>
+          <li>提供零組件更換手冊與包裝規格文件（User／Service Guide）</li>
+          <li>配合品牌客戶端之 WEEE 回收與報廢處置指引</li>
+        </ol>
+        <div class="pillar-foot"><span class="status-badge partial">依客戶專案規格協同建置</span></div>
+      </div>
+    </div>
+
+    <!-- 法規時程軸 -->
+    <div class="timeline-strip" style="margin-top:28px;">
+      <div class="tl-seg"><div class="tl-year">2024.07</div><p>歐盟 ESPR 生態設計法規正式生效，奠定數位產品護照母法基礎。</p></div>
+      <div class="tl-seg"><div class="tl-year">2026.07</div><p>歐盟中央登記處（Registry）啟用；企業建立 GPM 數據治理結構。</p></div>
+      <div class="tl-seg"><div class="tl-year">2027.02</div><p>首波強制規範：電池護照（Battery Passport）上線施行。</p></div>
+      <div class="tl-seg"><div class="tl-year">2028～2030</div><p>分階段延伸至資通訊（ICT）、工業控制、車用電子與消費性設備。</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-main">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="f-logo"><div class="mark">S</div><b>宣德科技 SpeedTech</b></div>
+        <div class="social">
+          <span><svg viewBox="0 0 24 24"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v6h3v-6h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        </div>
+        <div class="contact">
+          電話：+886-3-2120088<br>
+          傳真：+886-3-2121771<br>
+          地址：桃園市龜山區民生北路一段568號
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>關於我們</h5>
+        <ul><li>公司簡介</li><li>年度紀事</li><li>供應商須知</li><li>政策及驗證系統</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>產品專區</h5>
+        <ul><li>整機組裝類 FATP</li><li>連接器 Components Level</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>企業永續</h5>
+        <ul><li>ESG 永續報告書</li><li>智慧財產管理</li><li>資訊安全管理</li><li>環境保護</li><li class="on">供應商管理政策</li><li>利害關係人專區</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright© Speed Tech Corp. All rights reserved — 頁面設計原型，僅供內部評估使用</span>
+      <div class="flinks"><span>員工專區</span><span>聯絡我們</span><span>隱私權政策</span><span>網站地圖</span></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
