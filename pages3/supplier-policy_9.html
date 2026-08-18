@@ -224,6 +224,98 @@
     .card-grid,.card-grid.cols-3{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
   }
+
+/* 方案 A 樣式 */
+.compliance-banner-wrap {
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);
+  border: 1px solid var(--gray-line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin: 16px 0 32px;
+}
+
+.compliance-slogan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.slogan-tag {
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.slogan-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.3px;
+}
+
+.compliance-banner-wrap .trust-badge-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 0;
+}
+
+.trust-badge-card {
+  background: #fff;
+  border: 1px solid var(--gray-line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px -6px rgba(20,40,80,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trust-badge-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -6px rgba(20,40,80,0.15);
+}
+
+.trust-badge-card .tb-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.trust-badge-card .tb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex: none;
+}
+
+.trust-badge-card b {
+  font-size: 12px;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.trust-badge-card .tb-desc {
+  display: block;
+  font-size: 11px;
+  color: var(--text-gray);
+  line-height: 1.5;
+  padding-left: 15px;
+}
+
+@media (max-width: 768px) {
+  .compliance-banner-wrap .trust-badge-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -453,11 +545,39 @@
     <div class="dpp-slogan-tag">「宣德科技：以 GPM 智慧系統精準管控，點亮 RoHS 與 REACH 全球綠色通行證。」</div>
 
     <!-- 標準與驗證徽章 -->
-    <div class="trust-badge-row">
-      <span class="trust-badge">D-U-N-S 鄧白氏全球企業編碼</span>
-      <span class="trust-badge">GPM 綠色產品管理系統</span>
-      <span class="trust-badge">RoHS／REACH／無鹵素／SVHC</span>
+<!-- 信任與合規標語橫幅 -->
+<div class="compliance-banner-wrap">
+  <div class="compliance-slogan">
+    <span class="slogan-tag">Global Compliance</span>
+    <p class="slogan-text">以國際標準建構可信賴的綠色供應鏈・落實全生命週期之數位溯源</p>
+  </div>
+  
+  <div class="trust-badge-row">
+    <div class="trust-badge-card">
+      <div class="tb-header">
+        <span class="tb-dot"></span>
+        <b>D-U-N-S® 鄧白氏企業編碼</b>
+      </div>
+      <span class="tb-desc">全球唯一企業身分識別・供應鏈透明度認證</span>
     </div>
+
+    <div class="trust-badge-card">
+      <div class="tb-header">
+        <span class="tb-dot"></span>
+        <b>GPM 綠色產品管理系統</b>
+      </div>
+      <span class="tb-desc">BOM 表自動比對・MCD/SDS 數據雲端治理</span>
+    </div>
+
+    <div class="trust-badge-card">
+      <div class="tb-header">
+        <span class="tb-dot"></span>
+        <b>全球環境法規全面合規</b>
+      </div>
+      <span class="tb-desc">RoHS / REACH / 無鹵素 (HF) / SVHC 嚴格把關</span>
+    </div>
+  </div>
+</div>
 
     <!-- 三大核心價值矩陣 -->
     <div class="h2" style="font-size:15px;margin-top:8px;">宣德三大核心價值矩陣</div>
