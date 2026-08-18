@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ODM 系統解決方案 – SpeedTech 宣德科技</title>
+<style>
+  :root{
+    --navy-dark:#0c1f42;
+    --navy:#15305e;
+    --blue-primary:#11397b;
+    --blue-mid:#2e64b3;
+    --blue-light:#5c93d6;
+    --orange:#f38427;
+    --gray-bg:#f3f3f3;
+    --gray-line:#e3e5e9;
+    --text-dark:#1d1f24;
+    --text-gray:#5a6472;
+    --text-light:#8892a0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:var(--text-dark);background:#fff;-webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+  .draft-badge{
+    position:fixed;top:14px;right:14px;z-index:999;
+    background:var(--orange);color:#fff;font-size:12px;font-weight:700;
+    padding:6px 14px;border-radius:999px;letter-spacing:.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+  }
+
+  header{background:#fff;border-bottom:1px solid var(--gray-line);}
+  .nav-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:10px;}
+  @media (min-width:961px){ .nav-bar{padding-right:180px;} }
+  @media (max-width:760px){ .site-nav{display:none;} }
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo .mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;}
+  .logo .name{line-height:1.15;}
+  .logo .name b{display:block;font-size:15px;color:var(--text-dark);letter-spacing:1px;}
+  .logo .name span{display:block;font-size:11px;color:var(--text-light);letter-spacing:1.5px;}
+  .logo .real-logo{height:38px;width:auto;}
+  .logo .real-logo svg{height:100%;width:auto;display:block;}
+  .footer-brand .f-logo .real-logo{height:30px;width:auto;}
+  .footer-brand .f-logo .real-logo svg{height:100%;width:auto;display:block;}
+  .site-nav{display:flex;gap:22px;flex-wrap:wrap;}
+  .site-nav span{font-size:12.5px;font-weight:600;color:var(--text-gray);}
+  .site-nav span.on{color:var(--blue-primary);font-weight:800;}
+
+  /* Hero band per product-line (no real photo available -> pattern/gradient hero) */
+  .ph-hero{
+    position:relative;overflow:hidden;min-height:210px;display:flex;align-items:center;
+    background:
+      radial-gradient(circle at 20% 25%, rgba(46,100,179,.55), transparent 55%),
+      radial-gradient(circle at 82% 70%, rgba(245,130,31,.2), transparent 50%),
+      linear-gradient(120deg, var(--navy-dark) 0%, #071229 100%);
+  }
+  .ph-hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:38px 38px;mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.9), rgba(0,0,0,.15) 80%);
+  }
+  .ph-hero .wrap{position:relative;z-index:2;padding:38px 24px;color:#fff;text-align:center;}
+  .ph-hero h2{font-size:26px;font-weight:800;letter-spacing:1px;}
+  .crumb{
+    background:#fff;border-bottom:1px solid var(--gray-line);
+    font-size:11.5px;color:var(--text-light);padding:10px 0;
+  }
+  .crumb .wrap{display:flex;gap:6px;align-items:center;}
+  .crumb b{color:var(--text-gray);font-weight:700;}
+
+  .back-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue-light);}
+  .back-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+  .back-link:hover{color:#fff;}
+
+  .top-hero{
+    position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 20% 20%, #1b3a72 0%, var(--navy-dark) 55%, #081227 100%);
+    padding:36px 0 30px;color:#fff;
+  }
+  .top-hero .eyebrow{font-size:12px;letter-spacing:3px;color:var(--blue-light);font-weight:600;margin-bottom:10px;}
+  .top-hero h1{font-size:28px;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+  .top-hero .sub{font-size:13px;color:#a9c3e8;font-weight:600;margin-bottom:12px;}
+  .top-hero p{font-size:13px;color:#c9d6ec;max-width:680px;line-height:1.8;}
+  .flow-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .flow-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px;}
+  .flow-arrow{color:var(--blue-light);font-size:13px;}
+  .jump-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+  .jump-chip{font-size:12px;font-weight:700;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:999px;}
+  .jump-chip:hover{background:rgba(255,255,255,.2);}
+
+  /* Category quick-nav cards (referencing real site's 產品專區 photo-card pattern) */
+  .cat-nav-section{padding:0;margin-top:-34px;position:relative;z-index:5;}
+  .cat-nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .cat-nav-card{display:block;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 18px 34px -18px rgba(15,30,60,.35);transition:transform .15s ease;}
+  .cat-nav-card:hover{transform:translateY(-3px);}
+  .cnc-photo{height:108px;position:relative;display:flex;align-items:center;justify-content:center;}
+  .cnc-photo::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);background-size:22px 22px;}
+  .cnc-photo.cnc-1{background:radial-gradient(circle at 30% 30%, rgba(46,100,179,.65), transparent 60%), linear-gradient(135deg,var(--navy-dark),#081227);}
+  .cnc-photo.cnc-2{background:radial-gradient(circle at 30% 30%, rgba(52,149,224,.65), transparent 60%), linear-gradient(135deg,var(--blue-primary),#081227);}
+  .cnc-photo.cnc-3{background:radial-gradient(circle at 30% 30%, rgba(245,132,39,.55), transparent 60%), linear-gradient(135deg,var(--navy-dark),#081227);}
+  .cnc-icon{position:relative;z-index:2;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;}
+  .cnc-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.6;}
+  .cnc-body{padding:16px 18px 18px;}
+  .cnc-num{font-size:10.5px;font-weight:800;color:var(--orange);letter-spacing:1px;}
+  .cnc-body h4{font-size:14px;font-weight:800;color:var(--text-dark);margin:5px 0 4px;}
+  .cnc-en{font-size:10.5px;color:var(--text-light);letter-spacing:1px;font-weight:700;}
+
+  .section{padding:44px 0;}
+  .section.alt{background:var(--gray-bg);}
+
+  .circle-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:30px 0 10px;}
+  .circle-item{width:180px;text-align:center;}
+  .circle-ring{
+    width:82px;height:82px;border-radius:50%;margin:0 auto 12px;
+    background:#fff;border:3px solid var(--blue-light);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 10px 24px -14px rgba(20,40,80,.4);
+  }
+  .circle-ring svg{width:30px;height:30px;stroke:var(--blue-primary);fill:none;stroke-width:1.6;}
+  .circle-item .f-label{font-size:10px;font-weight:800;color:var(--blue-primary);letter-spacing:1px;margin-bottom:6px;}
+  .circle-item p{font-size:12.5px;font-weight:700;color:var(--text-dark);line-height:1.6;}
+
+  .intro-panel{text-align:center;max-width:740px;margin:0 auto 30px;}
+  .intro-panel .kicker{font-size:12px;font-weight:700;color:var(--blue-primary);letter-spacing:2px;margin-bottom:10px;}
+  .intro-panel h3{font-size:21px;font-weight:800;color:var(--text-dark);margin-bottom:12px;}
+  .intro-panel p{font-size:13px;color:var(--text-gray);line-height:1.85;}
+
+  .feature-card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:34px;}
+  .feature-card-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+  .feature-card{background:#fff;border:1px solid var(--gray-line);border-radius:12px;padding:20px 16px;text-align:center;box-shadow:0 10px 26px -20px rgba(20,40,80,.25);}
+  .feature-card .fc-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+  .feature-card .fc-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.7;}
+  .feature-card h4{font-size:12.5px;font-weight:800;color:var(--text-dark);margin-bottom:7px;line-height:1.5;}
+  .feature-card p{font-size:11.5px;color:var(--text-gray);line-height:1.7;}
+
+  .banner-photo{
+    position:relative;border-radius:var(--radius);overflow:hidden;margin-bottom:36px;
+    min-height:200px;display:flex;align-items:flex-end;justify-content:flex-end;
+    background:
+      radial-gradient(circle at 25% 30%, rgba(46,100,179,.55), transparent 55%),
+      radial-gradient(circle at 75% 70%, rgba(245,130,31,.22), transparent 50%),
+      linear-gradient(135deg, var(--navy-dark), #060d1c);
+  }
+  .banner-photo::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:34px 34px;
+  }
+  .banner-cap{
+    position:relative;z-index:2;background:rgba(12,31,66,.85);color:#fff;
+    padding:15px 20px;margin:18px;border-radius:10px;max-width:340px;
+  }
+  .banner-cap .en{font-size:10.5px;color:var(--blue-light);font-weight:700;letter-spacing:.5px;margin-bottom:4px;}
+  .banner-cap .zh{font-size:13px;font-weight:800;line-height:1.6;}
+
+  .block-title{font-size:14px;font-weight:800;color:var(--text-dark);margin:0 0 16px;display:flex;align-items:center;gap:8px;}
+  .block-title .bar{width:4px;height:14px;background:var(--blue-primary);border-radius:2px;}
+  .block-title.center{justify-content:center;text-align:center;}
+
+  .spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+  .spec-card{border:1px solid var(--gray-line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:0 10px 26px -20px rgba(20,40,80,.3);}
+  .spec-photo{height:120px;background:linear-gradient(135deg, var(--gray-bg), #e4e9f1);display:flex;align-items:center;justify-content:center;}
+  .spec-photo svg{width:42px;height:42px;stroke:var(--blue-mid);fill:none;stroke-width:1.3;}
+  .spec-card .spec-top{background:linear-gradient(135deg,var(--blue-mid),var(--navy-dark));color:#fff;padding:12px 16px;font-size:13px;font-weight:800;}
+  .spec-card dl{padding:12px 16px 14px;display:flex;flex-direction:column;gap:7px;}
+  .spec-card .row{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;border-bottom:1px dashed var(--gray-line);padding-bottom:7px;}
+  .spec-card .row:last-child{border-bottom:none;padding-bottom:0;}
+  .spec-card .row dt{color:var(--text-light);flex:none;width:56px;}
+  .spec-card .row dd{color:var(--text-dark);font-weight:600;text-align:right;}
+
+  .module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:8px;}
+  .module-chip{background:#fff;border:1px solid var(--gray-line);border-radius:10px;padding:14px 10px;text-align:center;font-size:11.5px;font-weight:700;color:var(--text-dark);}
+  .module-chip .m-icon{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-primary));margin:0 auto 8px;display:flex;align-items:center;justify-content:center;}
+  .module-chip .m-icon svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:1.8;}
+
+  .partner-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
+  .partner-card{flex:1;min-width:210px;border:1px solid var(--gray-line);border-radius:12px;padding:15px 17px;background:#fff;}
+  .partner-card b{display:block;font-size:13.5px;color:var(--text-dark);margin-bottom:4px;}
+  .partner-card span{font-size:11.5px;color:var(--text-gray);}
+
+  .diagram-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:8px;}
+  .diagram-card{background:#fff;border:1px solid var(--gray-line);border-radius:12px;padding:20px 20px 18px;}
+  .diagram-card .dc-head{display:inline-block;font-size:12px;font-weight:800;color:#fff;background:var(--blue-primary);padding:6px 12px;border-radius:8px;margin-bottom:12px;}
+  .diagram-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .diagram-card li{font-size:11.5px;color:var(--text-gray);padding-left:14px;position:relative;line-height:1.6;}
+  .diagram-card li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--blue-primary);}
+
+  .ai-block{background:#fff;border:1px solid var(--gray-line);border-radius:var(--radius);padding:26px 26px;margin-bottom:8px;}
+  .ai-block h3{font-size:16px;font-weight:800;margin-bottom:10px;}
+  .ai-block p{font-size:12.5px;color:var(--text-gray);line-height:1.85;margin-bottom:22px;}
+  .partner-flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .partner-flow .pf-box{flex:1;min-width:150px;background:var(--gray-bg);border:1px solid var(--gray-line);border-radius:10px;padding:16px;text-align:center;}
+  .partner-flow .pf-box .pf-label{font-size:10.5px;color:var(--text-light);font-weight:700;margin-bottom:8px;}
+  .partner-flow .pf-box .pf-names{font-size:12px;font-weight:800;color:var(--text-dark);}
+  .partner-flow .pf-op{font-size:20px;font-weight:800;color:var(--blue-primary);flex:none;}
+
+  .pager-row{display:flex;align-items:center;justify-content:space-between;padding:22px 0 0;border-top:1px solid var(--gray-line);margin-top:36px;}
+  .pager-row a{font-size:12.5px;font-weight:700;color:var(--text-gray);display:flex;align-items:center;gap:6px;}
+  .pager-row a:hover{color:var(--blue-primary);}
+  .pager-row a svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+  .pager-row .pager-mid{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--blue-primary);background:var(--gray-bg);padding:8px 16px;border-radius:999px;}
+  .pager-row .stub{visibility:hidden;}
+
+  /* Footer */
+  .footer-main{background:var(--navy-dark);color:#c9d6ec;padding:44px 0 22px;margin-top:10px;}
+  .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:26px;margin-bottom:30px;}
+  .footer-brand .f-logo{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .footer-brand .f-logo .mark{width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--orange),#ffab5c);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;}
+  .footer-brand .f-logo b{font-size:14px;color:#fff;}
+  .footer-brand .social{display:flex;gap:8px;margin:14px 0;}
+  .footer-brand .social span{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;}
+  .footer-brand .social svg{width:12px;height:12px;stroke:#c9d6ec;fill:none;stroke-width:1.8;}
+  .footer-brand .contact{font-size:11.5px;line-height:2;color:#93a5c4;}
+  .footer-col h5{font-size:12px;font-weight:800;color:#fff;margin-bottom:12px;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .footer-col li{font-size:11.5px;color:#93a5c4;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:#7d90b3;}
+  .footer-bottom .flinks{display:flex;gap:16px;flex-wrap:wrap;}
+
+  @media (max-width:760px){
+    .top-hero h1{font-size:24px;}
+    .feature-card-grid, .feature-card-grid.cols-3{grid-template-columns:1fr 1fr;}
+    .diagram-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="draft-badge">頁面設計原型 · ODM</div>
+
+<header>
+  <div class="nav-bar">
+    <div class="logo">
+      <div class="real-logo"><svg viewBox="0 0 232 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M89.0107 0.381913C89.3425 0.169043 89.7307 0.100174 90.1064 0L68.9557 10.6685C68.6364 10.8501 68.2983 11.0003 67.9727 11.1631C66.2571 12.0584 64.6792 13.223 63.3957 14.6692C61.7051 16.6664 60.6407 19.1082 59.8831 21.5875C59.1943 23.785 58.7247 26.0452 58.2865 28.3117C57.773 30.8849 57.3097 33.4643 56.8651 36.0501C56.6272 36.9704 56.502 37.9158 56.2202 38.8299C56.0512 39.5812 55.8821 40.3263 55.6191 41.0525C55.1996 42.7179 54.5359 44.3082 53.7908 45.8546C53.5842 46.4682 53.1084 46.9377 52.8141 47.5075C52.2819 48.215 51.8185 48.9788 51.1486 49.561C50.3283 50.4188 49.4267 51.1889 48.475 51.8838C47.9929 52.1906 47.517 52.4911 47.0474 52.8167L10.2998 72L36.5284 42.073C36.7037 41.159 36.8853 40.2511 37.0794 39.337C37.1483 38.6609 37.3862 38.0035 37.3612 37.321L0 60.1043L38.3755 32.112C38.7011 31.9117 38.7136 31.4421 38.6385 31.1165L0.713788 54.5322L35.4577 28.656C35.4577 28.656 38.2941 28.5183 39.3961 28.4807C39.5652 28.1489 39.6528 27.7857 39.753 27.4351C40.2101 26.0515 40.6734 24.6678 41.1743 23.303C41.6126 22.2637 42.0572 21.2306 42.5518 20.2163C43.3908 18.4758 44.4365 16.8355 45.6136 15.3016C46.8846 13.7363 48.3623 12.3089 50.1217 11.2946C52.1379 10.0925 54.4545 9.38504 56.8025 9.30365C57.6541 9.17844 58.5056 9.29739 59.3509 9.37252C60.1774 9.40383 60.9851 9.6167 61.8053 9.72313C62.3563 9.64174 62.8572 9.37878 63.3957 9.2473M54.9179 13.5423C54.2417 13.6487 53.6907 14.2998 53.7345 14.9885C53.722 15.2953 53.9035 15.5583 54.0601 15.815C54.4358 16.1343 55.0243 16.272 55.4626 15.9965C55.976 15.7837 56.2578 15.2077 56.2641 14.6755C56.2766 14.0056 55.5941 13.367 54.9179 13.5423Z" fill="#F68427"/>
+<path d="M6.26129 27.9795L11.8652 28.1485L5.05286 32.4811L6.26129 27.9795Z" fill="#F68427"/>
+<path d="M13.1863 28.1992L19.2723 28.2806L4.45178 37.434L13.1863 28.1992Z" fill="#F68427"/>
+<path d="M20.6247 28.249L26.5855 28.3242L3.89453 42.9621L20.6247 28.249Z" fill="#F68427"/>
+<path d="M27.8878 28.4434C32.6026 28.4747 28.8834 28.4434 34.0051 28.4872C3.21831 48.5971 32.8969 29.1634 2.42313 48.9164C27.1866 29.1195 6.0359 45.9049 27.8878 28.4434Z" fill="#F68427"/>
+<path d="M90.6504 49.0189L90.2324 51.1223C89.5178 50.7358 88.8031 50.4481 88.0885 50.2549C87.3873 50.0571 86.7041 49.9582 86.0434 49.9582C84.7535 49.9582 83.7287 50.2369 82.9691 50.7987C82.2095 51.3605 81.8275 52.1065 81.8275 53.0413C81.8275 53.5537 81.9668 53.9492 82.2455 54.2233C82.5287 54.493 83.2523 54.7851 84.4209 55.0997L85.7108 55.4188C87.1671 55.7963 88.1829 56.2772 88.7537 56.8615C89.32 57.4367 89.6032 58.2457 89.6032 59.2929C89.6032 60.8973 88.9739 62.2052 87.7064 63.2164C86.4479 64.2276 84.7849 64.731 82.7219 64.731C81.8769 64.731 81.0275 64.6456 80.1735 64.4748C79.3195 64.313 78.4655 64.0613 77.6026 63.7198L78.0385 61.4996C78.8296 61.9895 79.6206 62.358 80.4072 62.6097C81.2072 62.8569 81.9983 62.9827 82.7893 62.9827C84.1332 62.9827 85.2119 62.6816 86.021 62.0883C86.83 61.4906 87.2345 60.7086 87.2345 59.7513C87.2345 59.1086 87.0727 58.6277 86.7446 58.2996C86.4255 57.9671 85.7333 57.6615 84.6636 57.3918L83.3736 57.0637C81.9039 56.6772 80.8971 56.2368 80.3578 55.7379C79.8229 55.2345 79.5577 54.5289 79.5577 53.6256C79.5577 52.0391 80.1645 50.7447 81.378 49.7335C82.6051 48.7178 84.1917 48.21 86.1468 48.21C86.9109 48.21 87.6615 48.2774 88.4121 48.4122C89.1582 48.547 89.9043 48.7493 90.6504 49.0189Z" fill="#1C1919"/>
+<path d="M102.184 57.0638C102.184 56.0166 101.954 55.2167 101.5 54.6639C101.046 54.1066 100.39 53.8279 99.5362 53.8279C98.9519 53.8279 98.3946 53.9807 97.8642 54.2773C97.3339 54.5785 96.8664 55.0099 96.4529 55.5807C96.0484 56.1425 95.7248 56.8211 95.4821 57.6166C95.2394 58.4121 95.1225 59.2031 95.1225 59.9851C95.1225 60.9783 95.3472 61.7469 95.8012 62.2907C96.2596 62.821 96.9069 63.0906 97.7429 63.0906C98.3631 63.0906 98.9339 62.9423 99.4643 62.6502C99.9947 62.3581 100.453 61.9356 100.826 61.3828C101.235 60.7986 101.559 60.1109 101.81 59.3244C102.058 58.5334 102.184 57.7784 102.184 57.0638ZM96.1023 54.2863C96.6282 53.5987 97.2485 53.0774 97.9586 52.7223C98.6777 52.3628 99.4733 52.1875 100.35 52.1875C101.572 52.1875 102.521 52.5875 103.195 53.392C103.874 54.1875 104.211 55.311 104.211 56.7537C104.211 57.9312 103.999 59.0593 103.581 60.1334C103.159 61.203 102.557 62.1558 101.766 63.0053C101.24 63.567 100.646 63.994 99.9857 64.2951C99.325 64.5872 98.6283 64.7311 97.8957 64.7311C97.0462 64.7311 96.3361 64.5558 95.7608 64.2097C95.1854 63.8547 94.754 63.3288 94.4708 62.6322L93.2438 68.9647H91.2796L94.4888 52.4751H96.4529L96.1023 54.2863Z" fill="#1C1919"/>
+<path d="M115.721 57.3829C115.744 57.266 115.757 57.1492 115.762 57.0279C115.78 56.911 115.784 56.7897 115.784 56.6683C115.784 55.8009 115.528 55.1133 115.016 54.6099C114.512 54.1021 113.82 53.8504 112.948 53.8504C111.973 53.8504 111.11 54.1605 110.364 54.7807C109.618 55.3919 109.051 56.2638 108.669 57.3919L115.721 57.3829ZM117.429 58.9199H108.296C108.251 59.1896 108.224 59.4008 108.211 59.5581C108.197 59.7154 108.188 59.8503 108.188 59.9626C108.188 60.9514 108.489 61.7154 109.096 62.2592C109.707 62.7985 110.566 63.0682 111.676 63.0682C112.53 63.0682 113.339 62.9738 114.099 62.7805C114.858 62.5873 115.568 62.3086 116.22 61.9356L115.847 63.8771C115.146 64.1648 114.413 64.376 113.663 64.5198C112.917 64.6592 112.153 64.7311 111.379 64.7311C109.721 64.7311 108.444 64.3356 107.55 63.5491C106.66 62.7491 106.215 61.6255 106.215 60.1649C106.215 58.9199 106.435 57.7649 106.876 56.6998C107.325 55.6256 107.977 54.6683 108.84 53.8279C109.393 53.3021 110.054 52.8976 110.813 52.6145C111.582 52.3313 112.395 52.1875 113.258 52.1875C114.607 52.1875 115.681 52.592 116.476 53.401C117.281 54.2144 117.685 55.302 117.685 56.6683C117.685 56.9964 117.663 57.3469 117.618 57.7245C117.577 58.093 117.515 58.493 117.429 58.9199Z" fill="#1C1919"/>
+<path d="M129.165 57.3829C129.183 57.266 129.196 57.1492 129.205 57.0279C129.219 56.911 129.228 56.7897 129.228 56.6683C129.228 55.8009 128.971 55.1133 128.459 54.6099C127.956 54.1021 127.263 53.8504 126.387 53.8504C125.416 53.8504 124.553 54.1605 123.807 54.7807C123.061 55.3919 122.495 56.2638 122.113 57.3919L129.165 57.3829ZM130.868 58.9199H121.74C121.695 59.1896 121.668 59.4008 121.654 59.5581C121.636 59.7154 121.632 59.8503 121.632 59.9626C121.632 60.9514 121.933 61.7154 122.54 62.2592C123.151 62.7985 124.009 63.0682 125.12 63.0682C125.973 63.0682 126.778 62.9738 127.542 62.7805C128.302 62.5873 129.007 62.3086 129.664 61.9356L129.291 63.8771C128.585 64.1648 127.857 64.376 127.102 64.5198C126.356 64.6592 125.596 64.7311 124.818 64.7311C123.164 64.7311 121.888 64.3356 120.989 63.5491C120.104 62.7491 119.659 61.6255 119.659 60.1649C119.659 58.9199 119.879 57.7649 120.319 56.6998C120.769 55.6256 121.42 54.6683 122.283 53.8279C122.836 53.3021 123.492 52.8976 124.257 52.6145C125.025 52.3313 125.839 52.1875 126.697 52.1875C128.05 52.1875 129.124 52.592 129.92 53.401C130.724 54.2144 131.124 55.302 131.124 56.6683C131.124 56.9964 131.106 57.3469 131.061 57.7245C131.021 58.093 130.954 58.493 130.868 58.9199Z" fill="#1C1919"/>
+<path d="M141.228 62.6319C140.702 63.3196 140.078 63.8409 139.363 64.2004C138.644 64.5555 137.848 64.7308 136.972 64.7308C135.776 64.7308 134.832 64.3263 134.136 63.5173C133.443 62.6993 133.097 61.5803 133.097 60.1646C133.097 58.9871 133.309 57.8635 133.727 56.7938C134.149 55.7197 134.756 54.7624 135.551 53.913C136.077 53.3512 136.671 52.9243 137.336 52.6366C137.997 52.3355 138.689 52.1872 139.412 52.1872C140.181 52.1872 140.86 52.3715 141.439 52.74C142.033 53.113 142.487 53.6389 142.806 54.331L144.087 47.8232H146.06L142.828 64.4207H140.855L141.228 62.6319ZM135.138 59.814C135.138 60.8432 135.367 61.6477 135.83 62.2229C136.298 62.8027 136.945 63.0903 137.772 63.0903C138.383 63.0903 138.949 62.942 139.466 62.6499C139.992 62.3533 140.455 61.9173 140.855 61.3376C141.273 60.7398 141.606 60.0522 141.848 59.2702C142.087 58.4882 142.208 57.7152 142.208 56.9556C142.208 55.9669 141.974 55.1939 141.507 54.6411C141.044 54.0838 140.401 53.8096 139.583 53.8096C138.967 53.8096 138.392 53.9535 137.857 54.2456C137.322 54.5377 136.868 54.9557 136.491 55.504C136.077 56.0927 135.749 56.7804 135.498 57.5624C135.259 58.3444 135.138 59.0949 135.138 59.814Z" fill="#1C1919"/>
+<path d="M148.974 48.4971H162.449L162.107 50.3083H156.422L153.689 64.4203H151.523L154.255 50.3083H148.624L148.974 48.4971Z" fill="#1C1919"/>
+<path d="M168.858 57.3829C168.881 57.266 168.894 57.1492 168.903 57.0279C168.917 56.911 168.926 56.7897 168.926 56.6683C168.926 55.8009 168.67 55.1133 168.157 54.6099C167.649 54.1021 166.962 53.8504 166.085 53.8504C165.11 53.8504 164.251 54.1605 163.505 54.7807C162.759 55.3919 162.193 56.2638 161.806 57.3919L168.858 57.3829ZM170.566 58.9199H161.433C161.393 59.1896 161.366 59.4008 161.348 59.5581C161.334 59.7154 161.33 59.8503 161.33 59.9626C161.33 60.9514 161.631 61.7154 162.233 62.2592C162.845 62.7985 163.707 63.0682 164.818 63.0682C165.672 63.0682 166.476 62.9738 167.24 62.7805C168 62.5873 168.705 62.3086 169.362 61.9356L168.989 63.8771C168.283 64.1648 167.555 64.376 166.8 64.5198C166.054 64.6592 165.294 64.7311 164.516 64.7311C162.862 64.7311 161.586 64.3356 160.687 63.5491C159.797 62.7491 159.357 61.6255 159.357 60.1649C159.357 58.9199 159.577 57.7649 160.017 56.6998C160.462 55.6256 161.119 54.6683 161.977 53.8279C162.534 53.3021 163.191 52.8976 163.955 52.6145C164.719 52.3313 165.537 52.1875 166.395 52.1875C167.748 52.1875 168.822 52.592 169.618 53.401C170.422 54.2144 170.822 55.302 170.822 56.6683C170.822 56.9964 170.8 57.3469 170.759 57.7245C170.715 58.093 170.652 58.493 170.566 58.9199Z" fill="#1C1919"/>
+<path d="M183.506 52.9336L183.111 54.8751C182.643 54.5335 182.14 54.2773 181.609 54.1066C181.084 53.9358 180.535 53.8504 179.964 53.8504C179.34 53.8504 178.742 53.9627 178.171 54.183C177.609 54.4032 177.137 54.7133 176.755 55.1223C176.144 55.738 175.668 56.4661 175.335 57.2975C175.002 58.129 174.836 58.9874 174.836 59.8772C174.836 60.9514 175.101 61.7514 175.636 62.2772C176.175 62.803 176.993 63.0682 178.086 63.0682C178.63 63.0682 179.2 62.9873 179.807 62.821C180.418 62.6592 181.052 62.412 181.713 62.0884L181.34 64.03C180.773 64.2637 180.185 64.4389 179.582 64.5513C178.985 64.6726 178.369 64.7311 177.735 64.7311C176.149 64.7311 174.93 64.3356 174.076 63.5491C173.223 62.7491 172.796 61.6165 172.796 60.1469C172.796 58.9065 173.016 57.7694 173.456 56.7312C173.906 55.6841 174.566 54.7492 175.443 53.9133C176.041 53.347 176.742 52.9156 177.542 52.6234C178.346 52.3313 179.227 52.1875 180.18 52.1875C180.733 52.1875 181.286 52.2504 181.834 52.3808C182.378 52.5021 182.94 52.6864 183.506 52.9336Z" fill="#1C1919"/>
+<path d="M196.001 57.2118L194.603 64.4207H192.63L194.028 57.2837C194.091 56.9511 194.14 56.6545 194.176 56.3983C194.212 56.1422 194.23 55.9399 194.23 55.7916C194.23 55.1939 194.042 54.731 193.664 54.3939C193.286 54.0613 192.761 53.895 192.086 53.895C191.03 53.895 190.118 54.2501 189.345 54.9602C188.576 55.6703 188.077 56.6186 187.848 57.7961L186.558 64.4207H184.594L187.826 47.8232H189.79L188.522 54.3534C189.021 53.6838 189.655 53.158 190.432 52.7715C191.205 52.3805 192.019 52.1872 192.873 52.1872C193.925 52.1872 194.743 52.4703 195.318 53.0411C195.898 53.6074 196.19 54.4074 196.19 55.4411C196.19 55.6972 196.172 55.9714 196.136 56.2635C196.109 56.5512 196.064 56.8703 196.001 57.2118Z" fill="#1C1919"/>
+<path d="M85.9236 19.007H102.143V21.8343H85.9236V19.007ZM80.8642 35.7326H107.232V38.9467H80.8642V35.7326ZM88.8996 30.078V31.7446H98.9588V30.078H88.8996ZM88.8996 26.0008V27.6079H98.9588V26.0008H88.8996ZM85.4772 23.3223H102.56V34.4231H85.4772V23.3223ZM81.3404 14.2452H106.845V20.8819H103.185V17.3999H84.8224V20.8819H81.3404V14.2452ZM91.3996 12.5786L94.8816 11.5965C95.2189 12.1521 95.5363 12.7572 95.8339 13.4119C96.1315 14.0667 96.3399 14.652 96.4589 15.1678L92.7686 16.269C92.6892 15.7928 92.5205 15.2075 92.2626 14.5131C92.0047 13.7988 91.717 13.154 91.3996 12.5786ZM123.392 13.9476H142.142V16.7452H123.392V13.9476ZM123.006 27.5781H142.261V30.4054H123.006V27.5781ZM130.356 30.9411L133.005 30.0482C133.323 30.5839 133.67 31.1891 134.047 31.8637C134.424 32.5184 134.711 33.0839 134.91 33.56L132.172 34.5719C131.973 34.0957 131.696 33.5104 131.339 32.816C131.001 32.1216 130.674 31.4966 130.356 30.9411ZM127.113 32.2505H130.208V35.8814C130.208 36.2385 130.277 36.4667 130.416 36.5659C130.555 36.6651 130.862 36.7147 131.339 36.7147C131.458 36.7147 131.646 36.7147 131.904 36.7147C132.162 36.7147 132.44 36.7147 132.737 36.7147C133.055 36.7147 133.352 36.7147 133.63 36.7147C133.908 36.7147 134.116 36.7147 134.255 36.7147C134.553 36.7147 134.771 36.6651 134.91 36.5659C135.049 36.4468 135.148 36.2087 135.207 35.8516C135.267 35.4746 135.317 34.929 135.356 34.2148C135.674 34.433 136.1 34.6413 136.636 34.8397C137.192 35.0381 137.678 35.177 138.094 35.2564C137.995 36.3675 137.817 37.2107 137.559 37.7861C137.301 38.3813 136.934 38.7979 136.457 39.036C136.001 39.2741 135.386 39.3931 134.612 39.3931C134.454 39.3931 134.206 39.3931 133.868 39.3931C133.531 39.3931 133.164 39.3931 132.767 39.3931C132.37 39.3931 132.003 39.3931 131.666 39.3931C131.329 39.3931 131.081 39.3931 130.922 39.3931C129.89 39.3931 129.097 39.284 128.541 39.0658C128.005 38.8475 127.628 38.4805 127.41 37.9646C127.212 37.4686 127.113 36.7841 127.113 35.9111V32.2505ZM123.958 31.5958L126.666 32.6077C126.388 33.6195 126.051 34.681 125.654 35.7921C125.277 36.9032 124.811 37.8753 124.256 38.7086L121.607 37.1313C121.944 36.6552 122.262 36.1095 122.559 35.4945C122.857 34.8794 123.125 34.2346 123.363 33.56C123.601 32.8656 123.799 32.2109 123.958 31.5958ZM136.755 32.5779L139.344 31.4172C139.801 31.9926 140.237 32.6176 140.654 33.2922C141.09 33.9668 141.477 34.6314 141.814 35.2862C142.152 35.9409 142.4 36.546 142.558 37.1016L139.761 38.3515C139.622 37.8158 139.394 37.2206 139.076 36.5659C138.779 35.8913 138.422 35.2068 138.005 34.5124C137.608 33.7981 137.192 33.1533 136.755 32.5779ZM136.19 20.7926V23.6794H138.332V20.7926H136.19ZM131.696 20.7926V23.6794H133.779V20.7926H131.696ZM127.232 20.7926V23.6794H129.255V20.7926H127.232ZM124.464 18.263H141.249V26.2091H124.464V18.263ZM131.041 11.7156L134.791 11.8346C134.692 12.7274 134.573 13.6203 134.434 14.5131C134.315 15.4059 134.196 16.2591 134.077 17.0725C133.958 17.8661 133.829 18.5606 133.69 19.1558L130.356 18.9475C130.476 18.2927 130.585 17.5487 130.684 16.7154C130.783 15.8622 130.862 14.9992 130.922 14.1262C130.981 13.2532 131.021 12.4497 131.041 11.7156ZM120.476 18.382L123.66 19.5129C123.025 20.8422 122.281 22.2013 121.428 23.5901C120.575 24.979 119.672 26.2984 118.72 27.5483C117.787 28.7983 116.855 29.8994 115.922 30.8518C115.803 30.5939 115.625 30.2566 115.387 29.8399C115.149 29.4034 114.901 28.9669 114.643 28.5304C114.405 28.094 114.177 27.7368 113.958 27.4591C114.772 26.725 115.575 25.8619 116.369 24.8699C117.163 23.8778 117.916 22.8263 118.631 21.7152C119.345 20.6041 119.96 19.4931 120.476 18.382ZM120 11.8049L123.184 13.1441C122.529 14.0766 121.785 15.0488 120.952 16.0607C120.139 17.0725 119.285 18.0447 118.393 18.9772C117.52 19.9097 116.666 20.743 115.833 21.4771C115.714 21.2192 115.555 20.9117 115.357 20.5545C115.178 20.1776 114.98 19.8105 114.762 19.4534C114.563 19.0764 114.375 18.7689 114.196 18.5308C114.871 17.9554 115.575 17.2808 116.309 16.5071C117.063 15.7134 117.758 14.9099 118.393 14.0964C119.047 13.2631 119.583 12.4993 120 11.8049ZM118.095 24.8103L119.762 23.1437L121.398 23.6794V39.78H118.095V24.8103ZM153.153 14.6024H156.606V39.7503H153.153V14.6024ZM148.63 20.1974H160.534V23.5009H148.63V20.1974ZM153.332 21.5366L155.415 22.4295C155.137 23.5009 154.8 24.6119 154.403 25.7627C154.006 26.9134 153.57 28.0543 153.094 29.1852C152.618 30.2963 152.112 31.3478 151.576 32.3398C151.04 33.3319 150.485 34.1949 149.909 34.929C149.731 34.4132 149.473 33.8378 149.136 33.2029C148.818 32.5482 148.521 31.9926 148.243 31.5363C148.759 30.9411 149.265 30.2467 149.761 29.453C150.276 28.6396 150.762 27.7765 151.219 26.8638C151.675 25.9512 152.082 25.0385 152.439 24.1258C152.796 23.2132 153.094 22.3501 153.332 21.5366ZM158.451 12.0727L160.445 14.9893C159.413 15.3662 158.292 15.7035 157.082 16.0011C155.891 16.2987 154.671 16.5567 153.421 16.7749C152.171 16.9733 150.961 17.142 149.79 17.2808C149.731 16.884 149.602 16.4277 149.403 15.9119C149.205 15.3762 149.017 14.9099 148.838 14.5131C149.989 14.3345 151.139 14.1262 152.29 13.8881C153.441 13.6302 154.552 13.3524 155.623 13.0548C156.695 12.7374 157.637 12.41 158.451 12.0727ZM156.516 23.6794C156.715 23.858 156.992 24.1457 157.35 24.5425C157.727 24.9393 158.123 25.3857 158.54 25.8817C158.976 26.3579 159.373 26.8043 159.73 27.221C160.088 27.6178 160.336 27.9154 160.474 28.1138L158.421 30.9113C158.242 30.5145 158.004 30.0582 157.707 29.5423C157.429 29.0066 157.121 28.461 156.784 27.9055C156.447 27.3499 156.119 26.8242 155.802 26.3281C155.485 25.8321 155.207 25.4254 154.969 25.1079L156.516 23.6794ZM169.611 11.7751H173.153V39.7205H169.611V11.7751ZM160.028 31.0006L176.099 28.2328L176.664 31.5958L160.593 34.3933L160.028 31.0006ZM161.962 15.6142L164.284 13.6203C164.839 14.0171 165.405 14.4635 165.98 14.9595C166.575 15.4555 167.131 15.9615 167.647 16.4773C168.182 16.9932 168.599 17.4693 168.897 17.9058L166.397 20.1379C166.139 19.7014 165.762 19.2153 165.266 18.6796C164.77 18.1439 164.234 17.6082 163.659 17.0725C163.083 16.5368 162.518 16.0507 161.962 15.6142ZM160.861 23.4711L163.153 21.4176C163.728 21.8144 164.333 22.2707 164.968 22.7866C165.603 23.2826 166.189 23.7985 166.724 24.3342C167.28 24.85 167.726 25.3163 168.063 25.7329L165.623 28.0543C165.325 27.5979 164.909 27.1019 164.373 26.5662C163.837 26.0107 163.262 25.4651 162.647 24.9294C162.032 24.3937 161.437 23.9076 160.861 23.4711ZM193.36 16.0607H209.996V19.3641H193.36V16.0607ZM193.866 22.9354H206.604V26.1496H193.866V22.9354ZM199.759 11.8049H203.3V24.6913H199.759V11.8049ZM197.735 25.4948C198.826 28.2527 200.493 30.6137 202.735 32.5779C204.977 34.5223 207.784 35.9012 211.157 36.7147C210.899 36.9726 210.621 37.2801 210.324 37.6373C210.026 37.9944 209.748 38.3614 209.491 38.7384C209.252 39.1352 209.044 39.4923 208.866 39.8098C205.294 38.7582 202.348 37.1016 200.027 34.8397C197.725 32.5779 195.89 29.7705 194.521 26.4174L197.735 25.4948ZM206.217 22.9354H206.901L207.497 22.8164L209.788 23.7389C209.193 25.9413 208.379 27.9055 207.348 29.6316C206.336 31.3577 205.126 32.8656 203.717 34.1552C202.328 35.4449 200.771 36.546 199.044 37.4587C197.338 38.3714 195.503 39.1154 193.539 39.6908C193.42 39.3931 193.251 39.036 193.033 38.6194C192.815 38.2226 192.576 37.8257 192.319 37.4289C192.08 37.052 191.852 36.7345 191.634 36.4766C193.42 36.0599 195.096 35.4746 196.664 34.7207C198.251 33.9668 199.679 33.0442 200.949 31.9529C202.219 30.8617 203.3 29.6118 204.193 28.2031C205.106 26.7746 205.78 25.2072 206.217 23.5009V22.9354ZM182.676 26.9234C183.549 26.7448 184.541 26.5365 185.652 26.2984C186.763 26.0405 187.924 25.7627 189.134 25.4651C190.364 25.1476 191.575 24.8401 192.765 24.5425L193.211 27.8162C191.584 28.2725 189.918 28.7288 188.212 29.1852C186.525 29.6217 184.987 30.0086 183.599 30.3459L182.676 26.9234ZM183.063 17.4892H192.973V20.7926H183.063V17.4892ZM186.515 11.8049H190.027V35.8218C190.027 36.675 189.928 37.3396 189.729 37.8158C189.551 38.3118 189.204 38.6987 188.688 38.9765C188.192 39.2344 187.577 39.4031 186.843 39.4824C186.108 39.5618 185.206 39.6015 184.134 39.6015C184.075 39.1451 183.946 38.5995 183.747 37.9646C183.549 37.3496 183.341 36.8139 183.122 36.3575C183.718 36.3774 184.283 36.3873 184.819 36.3873C185.374 36.3873 185.751 36.3873 185.95 36.3873C186.327 36.3873 186.515 36.1889 186.515 35.7921V11.8049Z" fill="#1C1919"/>
+</svg></div>
+    </div>
+    <nav class="site-nav">
+      <span>關於我們</span><span>最新消息</span><span class="on">產品專區</span><span>投資人專區</span><span>企業永續</span><span>人力資源</span>
+    </nav>
+  </div>
+</header>
+
+<section class="top-hero">
+  <div class="wrap">
+    <a class="back-link" href="index0804.html">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      返回產品專區索引
+    </a>
+    <div style="height:14px"></div>
+    <div class="eyebrow">ODM SOLUTIONS PROTOTYPE</div>
+    <h1>ODM 系統解決方案</h1>
+    <div class="sub">含系統設計 / 軟韌體 / NPI</div>
+    <p>提供完整的系統級產品組裝服務，涵蓋多個高成長與高附加價值的應用領域，整合 SMT、FATP 與 ODM／JDM／OEM 為一體化流程。以下依「工控應用、網通設備、消費性電子」順序，彙整「工業控制與智慧終端」「網通與無線設備」「智慧聲學與消費電子」三條產品線的完整內容，直接呈現於本頁。</p>
+    <div class="flow-row">
+      <span class="flow-chip">SMT</span><span class="flow-arrow">→</span>
+      <span class="flow-chip">FATP</span><span class="flow-arrow">→</span>
+      <span class="flow-chip">ODM / JDM / OEM</span>
+    </div>
+  </div>
+</section>
+
+<section class="cat-nav-section">
+  <div class="wrap">
+    <div class="cat-nav-grid">
+      <a class="cat-nav-card" href="#sec-industrial">
+        <div class="cnc-photo cnc-1"><span class="cnc-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4V2M15 4V2M9 22v-2M15 22v-2M4 9H2M4 15H2M22 9h-2M22 15h-2"/></svg></span></div>
+        <div class="cnc-body"><span class="cnc-num">01</span><h4>工業控制與智慧終端</h4><span class="cnc-en">Industrial</span></div>
+      </a>
+      <a class="cat-nav-card" href="#sec-networking">
+        <div class="cnc-photo cnc-2"><span class="cnc-icon"><svg viewBox="0 0 24 24"><path d="M4 8a12 12 0 0 1 16 0M7 11.5a7.5 7.5 0 0 1 10 0M10.5 15a3 3 0 0 1 3 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/></svg></span></div>
+        <div class="cnc-body"><span class="cnc-num">02</span><h4>網通與無線設備</h4><span class="cnc-en">Networking</span></div>
+      </a>
+      <a class="cat-nav-card" href="#sec-acoustics">
+        <div class="cnc-photo cnc-3"><span class="cnc-icon"><svg viewBox="0 0 24 24"><path d="M9 18V6l8-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span></div>
+        <div class="cnc-body"><span class="cnc-num">03</span><h4>智慧聲學與消費電子</h4><span class="cnc-en">Consumer Electronics</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 工業控制與智慧終端 ============ -->
+<div id="sec-industrial"></div>
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>產品專區</span><span>›</span><span>整機組裝類 FATP</span><span>›</span><b>工控系列</b></div></div>
+<div class="ph-hero"><div class="wrap"><h2>工控系列</h2></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center" style="justify-content:center;margin-bottom:6px;">
+      <span class="bar"></span>極端環境穩定運作，智慧製造可靠整合
+    </div>
+    <p style="text-align:center;color:var(--text-gray);font-size:13px;max-width:700px;margin:0 auto;line-height:1.8;">提供從 PC、I/O 模組、控制面板到智慧工控系統的整合代工服務。具備高溫、高 EMI、高振動等嚴苛環境測試能力，確保產品能在極端工業環境長期穩定運作。配備完善的追溯與資料紀錄系統（MES），確保生產透明與品質可靠，協助客戶邁向智慧製造與可靠自動化。</p>
+
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4V2M15 4V2M9 22v-2M15 22v-2M4 9H2M4 15H2M22 9h-2M22 15h-2"/></svg></div>
+        <div class="f-label">FEATURE 01</div>
+        <p>工控模組與控制面板組裝</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+        <div class="f-label">FEATURE 02</div>
+        <p>耐高溫與耐干擾環境測試</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/><circle cx="19" cy="19" r="2"/></svg></div>
+        <div class="f-label">FEATURE 03</div>
+        <p>長期穩定量產與品質追溯系統</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3z"/></svg></div>
+        <div class="f-label">FEATURE 04</div>
+        <p>工業級壽命驗證與模組化管理</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="intro-panel">
+      <div class="kicker">工控技術研發規劃</div>
+      <h3>Firmware and SW × Dedicated IPC Vertical Team × Flexible NPI H/W Design</h3>
+    </div>
+
+    <div class="diagram-grid">
+      <div class="diagram-card">
+        <span class="dc-head">深耕垂直市場技術</span>
+        <ul>
+          <li>行動式 ADC</li>
+          <li>POS／自動服務終端（Kiosk）</li>
+          <li>自動結帳（Self Checkout）</li>
+          <li>工廠自動化</li>
+          <li>博奕機台</li>
+          <li>邊緣 AI 伺服器</li>
+        </ul>
+      </div>
+      <div class="diagram-card">
+        <span class="dc-head">架構軟體／面板／機構／電子</span>
+        <ul>
+          <li>X86 平台</li>
+          <li>ARM 架構／RTOS 即時作業系統</li>
+          <li>RISC 解決方案</li>
+          <li>FPGA 內嵌偵測技術</li>
+          <li>金屬／塑膠／壓鑄製程／機構設計</li>
+          <li>面板／顯示／相機整合資源</li>
+        </ul>
+      </div>
+      <div class="diagram-card">
+        <span class="dc-head">主動式經營策略採購</span>
+        <ul>
+          <li>跨 IC、機構（ME）、電子（EE）、面板與關鍵組模的 AVL 供應鏈管理</li>
+          <li>彈性採購資源配置</li>
+          <li>專責 NPI／ME／PE 團隊</li>
+          <li>多 SKU 與版本控管能力</li>
+        </ul>
+      </div>
+      <div class="diagram-card">
+        <span class="dc-head">佈局歐美前線技術資源</span>
+        <ul>
+          <li>當地 PM 與 FAE 技術支援</li>
+          <li>當地 VMI Hub 與／或倉儲點</li>
+          <li>當地 RMA／維修服務中心</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="height:30px"></div>
+
+    <div class="banner-photo">
+      <div class="banner-cap">
+        <div class="en">Industrial Control Technology R&amp;D</div>
+        <div class="zh">導入 MES 系統，實現全程追溯與品質透明化</div>
+      </div>
+    </div>
+
+    <div class="ai-block">
+      <h3>宣德 AI 技術佈局－邊緣 AI 運算</h3>
+      <p>市場對於終端設備 AI 的需求更著重於低耗能、低延遲、低成本，需要離線處理的應用也大幅增加，AI 的功能逐漸從雲端移轉到 Edge 設備終端，由設備本身的算力來處理 AI。宣德與 AI 國際夥伴投入「模型壓縮與量化技術」「演算法支援多任務並行」「模組化 API 與多晶片群體 SDK 支援」，已有超過 45 種輕量化 AI 演算法模型可供客戶延續開發，支援歐美攝影機客戶直接整合 NPU AI 運算引擎導入模型，降低 BOM 與產品開發成本，已獲得美國品牌大廠青睞並展開大量合作。</p>
+      <div class="partner-flow">
+        <div class="pf-box"><div class="pf-label">晶片方案商</div><div class="pf-names">Arm · Realtek<br>Qualcomm · Ambarella</div></div>
+        <div class="pf-op">+</div>
+        <div class="pf-box"><div class="pf-label">AI 演算法整合商</div><div class="pf-names">AIOTEK</div></div>
+        <div class="pf-op">=</div>
+        <div class="pf-box"><div class="pf-label">宣德 ODM AI 攝影機</div><div class="pf-names">SpeedTech</div></div>
+      </div>
+    </div>
+
+    <div class="block-title" style="margin-top:30px;"><span class="bar"></span>延伸項目與應用</div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div class="spec-top">寵物看護 App 整合</div>
+        <dl><div class="row"><dt>應用</dt><dd>邊緣 AI 攝影機 + 寵物辨識推播</dd></div></dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="6" y="10" width="12" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <div class="spec-top">智慧門鎖 / 居家保全 App 整合</div>
+        <dl><div class="row"><dt>應用</dt><dd>邊緣 AI 攝影機 + 門鎖／保全事件辨識</dd></div></dl>
+      </div>
+    </div>
+
+    <div class="pager-row">
+      <span class="stub"></span>
+      <a class="pager-mid" href="index0804.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>返回列表</a>
+      <a href="#sec-networking">下一個產品<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 網通與無線設備 ============ -->
+<div id="sec-networking"></div>
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>產品專區</span><span>›</span><span>整機組裝類 FATP</span><span>›</span><b>網通系列</b></div></div>
+<div class="ph-hero"><div class="wrap"><h2>網通系列</h2></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center" style="justify-content:center;margin-bottom:6px;">
+      <span class="bar"></span>串聯全球網路，打造穩定連結
+    </div>
+    <p style="text-align:center;color:var(--text-gray);font-size:13px;max-width:680px;margin:0 auto;line-height:1.8;">我們為全球網通品牌提供一站式 FATP 服務，涵蓋路由器、網關與小型基地台。透過自動化組裝與精密檢測設備，確保產品具備高數據傳輸穩定性及安全性。</p>
+
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M4 8a12 12 0 0 1 16 0M7 11.5a7.5 7.5 0 0 1 10 0M10.5 15a3 3 0 0 1 3 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+        <div class="f-label">FEATURE 01</div>
+        <p>路由器與基地台整機組裝經驗</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M4 20l3-9 4 6 3-11 3 8 3-5"/></svg></div>
+        <div class="f-label">FEATURE 02</div>
+        <p>具備 10G / 25G / 100G 高速訊號測試能力</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.5 7.5a7 7 0 0 0 0 9M16.5 7.5a7 7 0 0 1 0 9M4 4a11 11 0 0 0 0 16M20 4a11 11 0 0 1 0 16"/></svg></div>
+        <div class="f-label">FEATURE 03</div>
+        <p>多協定測試環境（RF, Wi-Fi, 5G, NB-IoT）</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <div class="f-label">FEATURE 04</div>
+        <p>自動化產測與嚴格品質監控系統</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="intro-panel">
+      <div class="kicker">一站式網通產品整合服務</div>
+      <h3>從高速訊號測試到整機組裝</h3>
+      <p>宣德為全球網通品牌提供一站式 FATP 服務，結合自動化組裝與 10G / 25G / 100G 高速訊號測試設備，支援 RF、Wi-Fi、5G、NB-IoT 等多協定測試環境，協助客戶確保產品在複雜網路環境下的數據傳輸穩定性與安全性。</p>
+    </div>
+
+    <div class="feature-card-grid">
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M4 20l3-9 4 6 3-11 3 8 3-5"/></svg></div>
+        <h4>10G / 25G / 100G<br>高速訊號測試</h4>
+        <p>高速訊號驗證，確保傳輸穩定。</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><path d="M7.5 7.5a7 7 0 0 0 0 9M16.5 7.5a7 7 0 0 1 0 9"/></svg></div>
+        <h4>RF, Wi-Fi, 5G, NB-IoT<br>多協定驗證</h4>
+        <p>支援多種無線通訊標準，滿足不同產品驗證需求。</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+        <h4>自動化產測系統</h4>
+        <p>結合智慧化測試設備，提高生產效率與產品良率。</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+        <h4>嚴格品質監控流程</h4>
+        <p>建立完善品質管理，確保產品可靠。</p>
+      </div>
+    </div>
+
+    <div class="banner-photo">
+      <div class="banner-cap">
+        <div class="en">High-Speed Connectivity Testing</div>
+        <div class="zh">全面高速訊號測試驗證，確保穩定安全的數據傳輸</div>
+      </div>
+    </div>
+
+    <div class="block-title"><span class="bar"></span>產品規格</div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="7" rx="3"/><circle cx="8" cy="12.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="16" cy="12.5" r="1.3" fill="currentColor" stroke="none"/></svg></div>
+        <div class="spec-top">5G CPE 室內單元（Qualcomm 平台）</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>Qualcomm IPQ8072A + SDX62</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>2.4GHz(4x4) / 5GHz(4x4) / 6GHz(4x4)</dd></div>
+          <div class="row"><dt>連網</dt><dd>5G FR1 全頻段 + 4G LTE 全頻段</dd></div>
+          <div class="row"><dt>埠數</dt><dd>1G Ethernet x2、2.5G Ethernet x1</dd></div>
+          <div class="row"><dt>規範</dt><dd>3GPP Release 16、FOTA 支援</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>Φ120 x 120 x 219.3 mm</dd></div>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+        <div class="spec-top">5G CPE 室內單元（MTK 平台）</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>MTK T750 + MT7915 + MT7975</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>Wi-Fi 6E 雙頻支援</dd></div>
+          <div class="row"><dt>連網</dt><dd>5G FR1 全頻段 + 4G LTE 全頻段</dd></div>
+          <div class="row"><dt>埠數</dt><dd>1G Ethernet x4</dd></div>
+          <div class="row"><dt>規範</dt><dd>3GPP Release 16、FOTA 支援</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>210 x 146 x 79 mm</dd></div>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <div class="spec-top">5G MiFi 移動熱點</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>Qualcomm SDX62</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>2.4GHz(2x2) / 5GHz(2x2)</dd></div>
+          <div class="row"><dt>連網</dt><dd>5G FR1 全頻段 + 4G LTE 全頻段</dd></div>
+          <div class="row"><dt>介面</dt><dd>USB Type-C 連接、4000mAh 電池</dd></div>
+          <div class="row"><dt>規範</dt><dd>3GPP Release 16、FOTA 支援</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>依客戶需求</dd></div>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <div class="spec-photo"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 3 6.3"/><path d="M4 12v5h5"/></svg></div>
+        <div class="spec-top">GPON 光纖網路設備</div>
+        <dl>
+          <div class="row"><dt>晶片</dt><dd>MTK EN7529 + MT7916 + MT7976</dd></div>
+          <div class="row"><dt>WAN</dt><dd>GPON ITU-T G.984</dd></div>
+          <div class="row"><dt>Wi-Fi</dt><dd>AX3000，2.4G(2x2) + 5G(2x2)</dd></div>
+          <div class="row"><dt>埠數</dt><dd>1G Ethernet x4、FXS x1、USB2.0/3.0</dd></div>
+          <div class="row"><dt>光介面</dt><dd>SC/APC</dd></div>
+          <div class="row"><dt>尺寸</dt><dd>150 x 180 x 30 mm</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="pager-row">
+      <a href="#sec-industrial"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>上一個產品</a>
+      <a class="pager-mid" href="index0804.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>返回列表</a>
+      <a href="#sec-acoustics">下一個產品<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 智慧聲學與消費電子 ============ -->
+<div id="sec-acoustics"></div>
+<div class="crumb"><div class="wrap"><span>首頁</span><span>›</span><span>產品專區</span><span>›</span><span>整機組裝類 FATP</span><span>›</span><b>聲學系列</b></div></div>
+<div class="ph-hero"><div class="wrap"><h2>聲學系列</h2></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="block-title center" style="justify-content:center;margin-bottom:6px;">
+      <span class="bar"></span>精雕聲學工藝，成就極致音效
+    </div>
+    <p style="text-align:center;color:var(--text-gray);font-size:13px;max-width:680px;margin:0 auto;line-height:1.8;">整合聲學腔體、麥克風、喇叭與 PCBA，搭配即時頻響測試，應用於藍牙耳機與智慧手錶。音頻設備、聲學傳感器及相關解決方案的組裝。</p>
+
+    <div class="circle-row">
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M9 18V6l8-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></div>
+        <div class="f-label">FEATURE 01</div>
+        <p>精密聲學模組整合與自動化校準</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+        <div class="f-label">FEATURE 02</div>
+        <p>微型化組裝與高良率生產技術</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <div class="f-label">FEATURE 03</div>
+        <p>完善的音質測試與環境驗證系統</p>
+      </div>
+      <div class="circle-item">
+        <div class="circle-ring"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="f-label">FEATURE 04</div>
+        <p>支援從零組件到整機（ODM/OEM）開發</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+
+    <div class="banner-photo">
+      <div class="banner-cap">
+        <div class="en">Empowering the Sound of Innovation</div>
+        <div class="zh">精雕聲學工藝，成就極致音效，支援 ODM/OEM 全流程開發</div>
+      </div>
+    </div>
+
+    <div class="block-title"><span class="bar"></span>耳機／穿戴式相關應用</div>
+    <div class="module-grid">
+      <div class="module-chip"><div class="m-icon"><svg viewBox="0 0 24 24"><path d="M4 10a4 4 0 0 1 4-4h1v10H8a4 4 0 0 1-4-4z"/><path d="M20 10a4 4 0 0 0-4-4h-1v10h1a4 4 0 0 0 4-4z"/></svg></div>TWS／耳機微型喇叭</div>
+      <div class="module-chip"><div class="m-icon"><svg viewBox="0 0 24 24"><rect x="7" y="4" width="10" height="14" rx="3"/><path d="M9 1.5h6"/></svg></div>智慧手錶喇叭</div>
+    </div>
+
+    <div class="pager-row">
+      <a href="#sec-networking"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>上一個產品</a>
+      <a class="pager-mid" href="index0804.html"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>返回列表</a>
+      <a href="#sec-industrial">下一個產品<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-main">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="f-logo"><div class="real-logo"><svg viewBox="0 0 232 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M89.0107 0.381913C89.3425 0.169043 89.7307 0.100174 90.1064 0L68.9557 10.6685C68.6364 10.8501 68.2983 11.0003 67.9727 11.1631C66.2571 12.0584 64.6792 13.223 63.3957 14.6692C61.7051 16.6664 60.6407 19.1082 59.8831 21.5875C59.1943 23.785 58.7247 26.0452 58.2865 28.3117C57.773 30.8849 57.3097 33.4643 56.8651 36.0501C56.6272 36.9704 56.502 37.9158 56.2202 38.8299C56.0512 39.5812 55.8821 40.3263 55.6191 41.0525C55.1996 42.7179 54.5359 44.3082 53.7908 45.8546C53.5842 46.4682 53.1084 46.9377 52.8141 47.5075C52.2819 48.215 51.8185 48.9788 51.1486 49.561C50.3283 50.4188 49.4267 51.1889 48.475 51.8838C47.9929 52.1906 47.517 52.4911 47.0474 52.8167L10.2998 72L36.5284 42.073C36.7037 41.159 36.8853 40.2511 37.0794 39.337C37.1483 38.6609 37.3862 38.0035 37.3612 37.321L0 60.1043L38.3755 32.112C38.7011 31.9117 38.7136 31.4421 38.6385 31.1165L0.713788 54.5322L35.4577 28.656C35.4577 28.656 38.2941 28.5183 39.3961 28.4807C39.5652 28.1489 39.6528 27.7857 39.753 27.4351C40.2101 26.0515 40.6734 24.6678 41.1743 23.303C41.6126 22.2637 42.0572 21.2306 42.5518 20.2163C43.3908 18.4758 44.4365 16.8355 45.6136 15.3016C46.8846 13.7363 48.3623 12.3089 50.1217 11.2946C52.1379 10.0925 54.4545 9.38504 56.8025 9.30365C57.6541 9.17844 58.5056 9.29739 59.3509 9.37252C60.1774 9.40383 60.9851 9.6167 61.8053 9.72313C62.3563 9.64174 62.8572 9.37878 63.3957 9.2473M54.9179 13.5423C54.2417 13.6487 53.6907 14.2998 53.7345 14.9885C53.722 15.2953 53.9035 15.5583 54.0601 15.815C54.4358 16.1343 55.0243 16.272 55.4626 15.9965C55.976 15.7837 56.2578 15.2077 56.2641 14.6755C56.2766 14.0056 55.5941 13.367 54.9179 13.5423Z" fill="#F68427"/>
+<path d="M6.26129 27.9795L11.8652 28.1485L5.05286 32.4811L6.26129 27.9795Z" fill="#F68427"/>
+<path d="M13.1863 28.1992L19.2723 28.2806L4.45178 37.434L13.1863 28.1992Z" fill="#F68427"/>
+<path d="M20.6247 28.249L26.5855 28.3242L3.89453 42.9621L20.6247 28.249Z" fill="#F68427"/>
+<path d="M27.8878 28.4434C32.6026 28.4747 28.8834 28.4434 34.0051 28.4872C3.21831 48.5971 32.8969 29.1634 2.42313 48.9164C27.1866 29.1195 6.0359 45.9049 27.8878 28.4434Z" fill="#F68427"/>
+<path d="M90.6504 49.0189L90.2324 51.1223C89.5178 50.7358 88.8031 50.4481 88.0885 50.2549C87.3873 50.0571 86.7041 49.9582 86.0434 49.9582C84.7535 49.9582 83.7287 50.2369 82.9691 50.7987C82.2095 51.3605 81.8275 52.1065 81.8275 53.0413C81.8275 53.5537 81.9668 53.9492 82.2455 54.2233C82.5287 54.493 83.2523 54.7851 84.4209 55.0997L85.7108 55.4188C87.1671 55.7963 88.1829 56.2772 88.7537 56.8615C89.32 57.4367 89.6032 58.2457 89.6032 59.2929C89.6032 60.8973 88.9739 62.2052 87.7064 63.2164C86.4479 64.2276 84.7849 64.731 82.7219 64.731C81.8769 64.731 81.0275 64.6456 80.1735 64.4748C79.3195 64.313 78.4655 64.0613 77.6026 63.7198L78.0385 61.4996C78.8296 61.9895 79.6206 62.358 80.4072 62.6097C81.2072 62.8569 81.9983 62.9827 82.7893 62.9827C84.1332 62.9827 85.2119 62.6816 86.021 62.0883C86.83 61.4906 87.2345 60.7086 87.2345 59.7513C87.2345 59.1086 87.0727 58.6277 86.7446 58.2996C86.4255 57.9671 85.7333 57.6615 84.6636 57.3918L83.3736 57.0637C81.9039 56.6772 80.8971 56.2368 80.3578 55.7379C79.8229 55.2345 79.5577 54.5289 79.5577 53.6256C79.5577 52.0391 80.1645 50.7447 81.378 49.7335C82.6051 48.7178 84.1917 48.21 86.1468 48.21C86.9109 48.21 87.6615 48.2774 88.4121 48.4122C89.1582 48.547 89.9043 48.7493 90.6504 49.0189Z" fill="white"/>
+<path d="M102.184 57.0638C102.184 56.0166 101.954 55.2167 101.5 54.6639C101.046 54.1066 100.39 53.8279 99.5362 53.8279C98.9519 53.8279 98.3946 53.9807 97.8642 54.2773C97.3339 54.5785 96.8664 55.0099 96.4529 55.5807C96.0484 56.1425 95.7248 56.8211 95.4821 57.6166C95.2394 58.4121 95.1225 59.2031 95.1225 59.9851C95.1225 60.9783 95.3472 61.7469 95.8012 62.2907C96.2596 62.821 96.9069 63.0906 97.7429 63.0906C98.3631 63.0906 98.9339 62.9423 99.4643 62.6502C99.9947 62.3581 100.453 61.9356 100.826 61.3828C101.235 60.7986 101.559 60.1109 101.81 59.3244C102.058 58.5334 102.184 57.7784 102.184 57.0638ZM96.1023 54.2863C96.6282 53.5987 97.2485 53.0774 97.9586 52.7223C98.6777 52.3628 99.4733 52.1875 100.35 52.1875C101.572 52.1875 102.521 52.5875 103.195 53.392C103.874 54.1875 104.211 55.311 104.211 56.7537C104.211 57.9312 103.999 59.0593 103.581 60.1334C103.159 61.203 102.557 62.1558 101.766 63.0053C101.24 63.567 100.646 63.994 99.9857 64.2951C99.325 64.5872 98.6283 64.7311 97.8957 64.7311C97.0462 64.7311 96.3361 64.5558 95.7608 64.2097C95.1854 63.8547 94.754 63.3288 94.4708 62.6322L93.2438 68.9647H91.2796L94.4888 52.4751H96.4529L96.1023 54.2863Z" fill="white"/>
+<path d="M115.721 57.3829C115.744 57.266 115.757 57.1492 115.762 57.0279C115.78 56.911 115.784 56.7897 115.784 56.6683C115.784 55.8009 115.528 55.1133 115.016 54.6099C114.512 54.1021 113.82 53.8504 112.948 53.8504C111.973 53.8504 111.11 54.1605 110.364 54.7807C109.618 55.3919 109.051 56.2638 108.669 57.3919L115.721 57.3829ZM117.429 58.9199H108.296C108.251 59.1896 108.224 59.4008 108.211 59.5581C108.197 59.7154 108.188 59.8503 108.188 59.9626C108.188 60.9514 108.489 61.7154 109.096 62.2592C109.707 62.7985 110.566 63.0682 111.676 63.0682C112.53 63.0682 113.339 62.9738 114.099 62.7805C114.858 62.5873 115.568 62.3086 116.22 61.9356L115.847 63.8771C115.146 64.1648 114.413 64.376 113.663 64.5198C112.917 64.6592 112.153 64.7311 111.379 64.7311C109.721 64.7311 108.444 64.3356 107.55 63.5491C106.66 62.7491 106.215 61.6255 106.215 60.1649C106.215 58.9199 106.435 57.7649 106.876 56.6998C107.325 55.6256 107.977 54.6683 108.84 53.8279C109.393 53.3021 110.054 52.8976 110.813 52.6145C111.582 52.3313 112.395 52.1875 113.258 52.1875C114.607 52.1875 115.681 52.592 116.476 53.401C117.281 54.2144 117.685 55.302 117.685 56.6683C117.685 56.9964 117.663 57.3469 117.618 57.7245C117.577 58.093 117.515 58.493 117.429 58.9199Z" fill="white"/>
+<path d="M129.165 57.3829C129.183 57.266 129.196 57.1492 129.205 57.0279C129.219 56.911 129.228 56.7897 129.228 56.6683C129.228 55.8009 128.971 55.1133 128.459 54.6099C127.956 54.1021 127.263 53.8504 126.387 53.8504C125.416 53.8504 124.553 54.1605 123.807 54.7807C123.061 55.3919 122.495 56.2638 122.113 57.3919L129.165 57.3829ZM130.868 58.9199H121.74C121.695 59.1896 121.668 59.4008 121.654 59.5581C121.636 59.7154 121.632 59.8503 121.632 59.9626C121.632 60.9514 121.933 61.7154 122.54 62.2592C123.151 62.7985 124.009 63.0682 125.12 63.0682C125.973 63.0682 126.778 62.9738 127.542 62.7805C128.302 62.5873 129.007 62.3086 129.664 61.9356L129.291 63.8771C128.585 64.1648 127.857 64.376 127.102 64.5198C126.356 64.6592 125.596 64.7311 124.818 64.7311C123.164 64.7311 121.888 64.3356 120.989 63.5491C120.104 62.7491 119.659 61.6255 119.659 60.1649C119.659 58.9199 119.879 57.7649 120.319 56.6998C120.769 55.6256 121.42 54.6683 122.283 53.8279C122.836 53.3021 123.492 52.8976 124.257 52.6145C125.025 52.3313 125.839 52.1875 126.697 52.1875C128.05 52.1875 129.124 52.592 129.92 53.401C130.724 54.2144 131.124 55.302 131.124 56.6683C131.124 56.9964 131.106 57.3469 131.061 57.7245C131.021 58.093 130.954 58.493 130.868 58.9199Z" fill="white"/>
+<path d="M141.228 62.6319C140.702 63.3196 140.078 63.8409 139.363 64.2004C138.644 64.5555 137.848 64.7308 136.972 64.7308C135.776 64.7308 134.832 64.3263 134.136 63.5173C133.443 62.6993 133.097 61.5803 133.097 60.1646C133.097 58.9871 133.309 57.8635 133.727 56.7938C134.149 55.7197 134.756 54.7624 135.551 53.913C136.077 53.3512 136.671 52.9243 137.336 52.6366C137.997 52.3355 138.689 52.1872 139.412 52.1872C140.181 52.1872 140.86 52.3715 141.439 52.74C142.033 53.113 142.487 53.6389 142.806 54.331L144.087 47.8232H146.06L142.828 64.4207H140.855L141.228 62.6319ZM135.138 59.814C135.138 60.8432 135.367 61.6477 135.83 62.2229C136.298 62.8027 136.945 63.0903 137.772 63.0903C138.383 63.0903 138.949 62.942 139.466 62.6499C139.992 62.3533 140.455 61.9173 140.855 61.3376C141.273 60.7398 141.606 60.0522 141.848 59.2702C142.087 58.4882 142.208 57.7152 142.208 56.9556C142.208 55.9669 141.974 55.1939 141.507 54.6411C141.044 54.0838 140.401 53.8096 139.583 53.8096C138.967 53.8096 138.392 53.9535 137.857 54.2456C137.322 54.5377 136.868 54.9557 136.491 55.504C136.077 56.0927 135.749 56.7804 135.498 57.5624C135.259 58.3444 135.138 59.0949 135.138 59.814Z" fill="white"/>
+<path d="M148.974 48.4971H162.449L162.107 50.3083H156.422L153.689 64.4203H151.523L154.255 50.3083H148.624L148.974 48.4971Z" fill="white"/>
+<path d="M168.858 57.3829C168.881 57.266 168.894 57.1492 168.903 57.0279C168.917 56.911 168.926 56.7897 168.926 56.6683C168.926 55.8009 168.67 55.1133 168.157 54.6099C167.649 54.1021 166.962 53.8504 166.085 53.8504C165.11 53.8504 164.251 54.1605 163.505 54.7807C162.759 55.3919 162.193 56.2638 161.806 57.3919L168.858 57.3829ZM170.566 58.9199H161.433C161.393 59.1896 161.366 59.4008 161.348 59.5581C161.334 59.7154 161.33 59.8503 161.33 59.9626C161.33 60.9514 161.631 61.7154 162.233 62.2592C162.845 62.7985 163.707 63.0682 164.818 63.0682C165.672 63.0682 166.476 62.9738 167.24 62.7805C168 62.5873 168.705 62.3086 169.362 61.9356L168.989 63.8771C168.283 64.1648 167.555 64.376 166.8 64.5198C166.054 64.6592 165.294 64.7311 164.516 64.7311C162.862 64.7311 161.586 64.3356 160.687 63.5491C159.797 62.7491 159.357 61.6255 159.357 60.1649C159.357 58.9199 159.577 57.7649 160.017 56.6998C160.462 55.6256 161.119 54.6683 161.977 53.8279C162.534 53.3021 163.191 52.8976 163.955 52.6145C164.719 52.3313 165.537 52.1875 166.395 52.1875C167.748 52.1875 168.822 52.592 169.618 53.401C170.422 54.2144 170.822 55.302 170.822 56.6683C170.822 56.9964 170.8 57.3469 170.759 57.7245C170.715 58.093 170.652 58.493 170.566 58.9199Z" fill="white"/>
+<path d="M183.506 52.9336L183.111 54.8751C182.643 54.5335 182.14 54.2773 181.609 54.1066C181.084 53.9358 180.535 53.8504 179.964 53.8504C179.34 53.8504 178.742 53.9627 178.171 54.183C177.609 54.4032 177.137 54.7133 176.755 55.1223C176.144 55.738 175.668 56.4661 175.335 57.2975C175.002 58.129 174.836 58.9874 174.836 59.8772C174.836 60.9514 175.101 61.7514 175.636 62.2772C176.175 62.803 176.993 63.0682 178.086 63.0682C178.63 63.0682 179.2 62.9873 179.807 62.821C180.418 62.6592 181.052 62.412 181.713 62.0884L181.34 64.03C180.773 64.2637 180.185 64.4389 179.582 64.5513C178.985 64.6726 178.369 64.7311 177.735 64.7311C176.149 64.7311 174.93 64.3356 174.076 63.5491C173.223 62.7491 172.796 61.6165 172.796 60.1469C172.796 58.9065 173.016 57.7694 173.456 56.7312C173.906 55.6841 174.566 54.7492 175.443 53.9133C176.041 53.347 176.742 52.9156 177.542 52.6234C178.346 52.3313 179.227 52.1875 180.18 52.1875C180.733 52.1875 181.286 52.2504 181.834 52.3808C182.378 52.5021 182.94 52.6864 183.506 52.9336Z" fill="white"/>
+<path d="M196.001 57.2118L194.603 64.4207H192.63L194.028 57.2837C194.091 56.9511 194.14 56.6545 194.176 56.3983C194.212 56.1422 194.23 55.9399 194.23 55.7916C194.23 55.1939 194.042 54.731 193.664 54.3939C193.286 54.0613 192.761 53.895 192.086 53.895C191.03 53.895 190.118 54.2501 189.345 54.9602C188.576 55.6703 188.077 56.6186 187.848 57.7961L186.558 64.4207H184.594L187.826 47.8232H189.79L188.522 54.3534C189.021 53.6838 189.655 53.158 190.432 52.7715C191.205 52.3805 192.019 52.1872 192.873 52.1872C193.925 52.1872 194.743 52.4703 195.318 53.0411C195.898 53.6074 196.19 54.4074 196.19 55.4411C196.19 55.6972 196.172 55.9714 196.136 56.2635C196.109 56.5512 196.064 56.8703 196.001 57.2118Z" fill="white"/>
+<path d="M85.9236 19.007H102.143V21.8343H85.9236V19.007ZM80.8642 35.7326H107.232V38.9467H80.8642V35.7326ZM88.8996 30.078V31.7446H98.9588V30.078H88.8996ZM88.8996 26.0008V27.6079H98.9588V26.0008H88.8996ZM85.4772 23.3223H102.56V34.4231H85.4772V23.3223ZM81.3404 14.2452H106.845V20.8819H103.185V17.3999H84.8224V20.8819H81.3404V14.2452ZM91.3996 12.5786L94.8816 11.5965C95.2189 12.1521 95.5363 12.7572 95.8339 13.4119C96.1315 14.0667 96.3399 14.652 96.4589 15.1678L92.7686 16.269C92.6892 15.7928 92.5205 15.2075 92.2626 14.5131C92.0047 13.7988 91.717 13.154 91.3996 12.5786ZM123.392 13.9476H142.142V16.7452H123.392V13.9476ZM123.006 27.5781H142.261V30.4054H123.006V27.5781ZM130.356 30.9411L133.005 30.0482C133.323 30.5839 133.67 31.1891 134.047 31.8637C134.424 32.5184 134.711 33.0839 134.91 33.56L132.172 34.5719C131.973 34.0957 131.696 33.5104 131.339 32.816C131.001 32.1216 130.674 31.4966 130.356 30.9411ZM127.113 32.2505H130.208V35.8814C130.208 36.2385 130.277 36.4667 130.416 36.5659C130.555 36.6651 130.862 36.7147 131.339 36.7147C131.458 36.7147 131.646 36.7147 131.904 36.7147C132.162 36.7147 132.44 36.7147 132.737 36.7147C133.055 36.7147 133.352 36.7147 133.63 36.7147C133.908 36.7147 134.116 36.7147 134.255 36.7147C134.553 36.7147 134.771 36.6651 134.91 36.5659C135.049 36.4468 135.148 36.2087 135.207 35.8516C135.267 35.4746 135.317 34.929 135.356 34.2148C135.674 34.433 136.1 34.6413 136.636 34.8397C137.192 35.0381 137.678 35.177 138.094 35.2564C137.995 36.3675 137.817 37.2107 137.559 37.7861C137.301 38.3813 136.934 38.7979 136.457 39.036C136.001 39.2741 135.386 39.3931 134.612 39.3931C134.454 39.3931 134.206 39.3931 133.868 39.3931C133.531 39.3931 133.164 39.3931 132.767 39.3931C132.37 39.3931 132.003 39.3931 131.666 39.3931C131.329 39.3931 131.081 39.3931 130.922 39.3931C129.89 39.3931 129.097 39.284 128.541 39.0658C128.005 38.8475 127.628 38.4805 127.41 37.9646C127.212 37.4686 127.113 36.7841 127.113 35.9111V32.2505ZM123.958 31.5958L126.666 32.6077C126.388 33.6195 126.051 34.681 125.654 35.7921C125.277 36.9032 124.811 37.8753 124.256 38.7086L121.607 37.1313C121.944 36.6552 122.262 36.1095 122.559 35.4945C122.857 34.8794 123.125 34.2346 123.363 33.56C123.601 32.8656 123.799 32.2109 123.958 31.5958ZM136.755 32.5779L139.344 31.4172C139.801 31.9926 140.237 32.6176 140.654 33.2922C141.09 33.9668 141.477 34.6314 141.814 35.2862C142.152 35.9409 142.4 36.546 142.558 37.1016L139.761 38.3515C139.622 37.8158 139.394 37.2206 139.076 36.5659C138.779 35.8913 138.422 35.2068 138.005 34.5124C137.608 33.7981 137.192 33.1533 136.755 32.5779ZM136.19 20.7926V23.6794H138.332V20.7926H136.19ZM131.696 20.7926V23.6794H133.779V20.7926H131.696ZM127.232 20.7926V23.6794H129.255V20.7926H127.232ZM124.464 18.263H141.249V26.2091H124.464V18.263ZM131.041 11.7156L134.791 11.8346C134.692 12.7274 134.573 13.6203 134.434 14.5131C134.315 15.4059 134.196 16.2591 134.077 17.0725C133.958 17.8661 133.829 18.5606 133.69 19.1558L130.356 18.9475C130.476 18.2927 130.585 17.5487 130.684 16.7154C130.783 15.8622 130.862 14.9992 130.922 14.1262C130.981 13.2532 131.021 12.4497 131.041 11.7156ZM120.476 18.382L123.66 19.5129C123.025 20.8422 122.281 22.2013 121.428 23.5901C120.575 24.979 119.672 26.2984 118.72 27.5483C117.787 28.7983 116.855 29.8994 115.922 30.8518C115.803 30.5939 115.625 30.2566 115.387 29.8399C115.149 29.4034 114.901 28.9669 114.643 28.5304C114.405 28.094 114.177 27.7368 113.958 27.4591C114.772 26.725 115.575 25.8619 116.369 24.8699C117.163 23.8778 117.916 22.8263 118.631 21.7152C119.345 20.6041 119.96 19.4931 120.476 18.382ZM120 11.8049L123.184 13.1441C122.529 14.0766 121.785 15.0488 120.952 16.0607C120.139 17.0725 119.285 18.0447 118.393 18.9772C117.52 19.9097 116.666 20.743 115.833 21.4771C115.714 21.2192 115.555 20.9117 115.357 20.5545C115.178 20.1776 114.98 19.8105 114.762 19.4534C114.563 19.0764 114.375 18.7689 114.196 18.5308C114.871 17.9554 115.575 17.2808 116.309 16.5071C117.063 15.7134 117.758 14.9099 118.393 14.0964C119.047 13.2631 119.583 12.4993 120 11.8049ZM118.095 24.8103L119.762 23.1437L121.398 23.6794V39.78H118.095V24.8103ZM153.153 14.6024H156.606V39.7503H153.153V14.6024ZM148.63 20.1974H160.534V23.5009H148.63V20.1974ZM153.332 21.5366L155.415 22.4295C155.137 23.5009 154.8 24.6119 154.403 25.7627C154.006 26.9134 153.57 28.0543 153.094 29.1852C152.618 30.2963 152.112 31.3478 151.576 32.3398C151.04 33.3319 150.485 34.1949 149.909 34.929C149.731 34.4132 149.473 33.8378 149.136 33.2029C148.818 32.5482 148.521 31.9926 148.243 31.5363C148.759 30.9411 149.265 30.2467 149.761 29.453C150.276 28.6396 150.762 27.7765 151.219 26.8638C151.675 25.9512 152.082 25.0385 152.439 24.1258C152.796 23.2132 153.094 22.3501 153.332 21.5366ZM158.451 12.0727L160.445 14.9893C159.413 15.3662 158.292 15.7035 157.082 16.0011C155.891 16.2987 154.671 16.5567 153.421 16.7749C152.171 16.9733 150.961 17.142 149.79 17.2808C149.731 16.884 149.602 16.4277 149.403 15.9119C149.205 15.3762 149.017 14.9099 148.838 14.5131C149.989 14.3345 151.139 14.1262 152.29 13.8881C153.441 13.6302 154.552 13.3524 155.623 13.0548C156.695 12.7374 157.637 12.41 158.451 12.0727ZM156.516 23.6794C156.715 23.858 156.992 24.1457 157.35 24.5425C157.727 24.9393 158.123 25.3857 158.54 25.8817C158.976 26.3579 159.373 26.8043 159.73 27.221C160.088 27.6178 160.336 27.9154 160.474 28.1138L158.421 30.9113C158.242 30.5145 158.004 30.0582 157.707 29.5423C157.429 29.0066 157.121 28.461 156.784 27.9055C156.447 27.3499 156.119 26.8242 155.802 26.3281C155.485 25.8321 155.207 25.4254 154.969 25.1079L156.516 23.6794ZM169.611 11.7751H173.153V39.7205H169.611V11.7751ZM160.028 31.0006L176.099 28.2328L176.664 31.5958L160.593 34.3933L160.028 31.0006ZM161.962 15.6142L164.284 13.6203C164.839 14.0171 165.405 14.4635 165.98 14.9595C166.575 15.4555 167.131 15.9615 167.647 16.4773C168.182 16.9932 168.599 17.4693 168.897 17.9058L166.397 20.1379C166.139 19.7014 165.762 19.2153 165.266 18.6796C164.77 18.1439 164.234 17.6082 163.659 17.0725C163.083 16.5368 162.518 16.0507 161.962 15.6142ZM160.861 23.4711L163.153 21.4176C163.728 21.8144 164.333 22.2707 164.968 22.7866C165.603 23.2826 166.189 23.7985 166.724 24.3342C167.28 24.85 167.726 25.3163 168.063 25.7329L165.623 28.0543C165.325 27.5979 164.909 27.1019 164.373 26.5662C163.837 26.0107 163.262 25.4651 162.647 24.9294C162.032 24.3937 161.437 23.9076 160.861 23.4711ZM193.36 16.0607H209.996V19.3641H193.36V16.0607ZM193.866 22.9354H206.604V26.1496H193.866V22.9354ZM199.759 11.8049H203.3V24.6913H199.759V11.8049ZM197.735 25.4948C198.826 28.2527 200.493 30.6137 202.735 32.5779C204.977 34.5223 207.784 35.9012 211.157 36.7147C210.899 36.9726 210.621 37.2801 210.324 37.6373C210.026 37.9944 209.748 38.3614 209.491 38.7384C209.252 39.1352 209.044 39.4923 208.866 39.8098C205.294 38.7582 202.348 37.1016 200.027 34.8397C197.725 32.5779 195.89 29.7705 194.521 26.4174L197.735 25.4948ZM206.217 22.9354H206.901L207.497 22.8164L209.788 23.7389C209.193 25.9413 208.379 27.9055 207.348 29.6316C206.336 31.3577 205.126 32.8656 203.717 34.1552C202.328 35.4449 200.771 36.546 199.044 37.4587C197.338 38.3714 195.503 39.1154 193.539 39.6908C193.42 39.3931 193.251 39.036 193.033 38.6194C192.815 38.2226 192.576 37.8257 192.319 37.4289C192.08 37.052 191.852 36.7345 191.634 36.4766C193.42 36.0599 195.096 35.4746 196.664 34.7207C198.251 33.9668 199.679 33.0442 200.949 31.9529C202.219 30.8617 203.3 29.6118 204.193 28.2031C205.106 26.7746 205.78 25.2072 206.217 23.5009V22.9354ZM182.676 26.9234C183.549 26.7448 184.541 26.5365 185.652 26.2984C186.763 26.0405 187.924 25.7627 189.134 25.4651C190.364 25.1476 191.575 24.8401 192.765 24.5425L193.211 27.8162C191.584 28.2725 189.918 28.7288 188.212 29.1852C186.525 29.6217 184.987 30.0086 183.599 30.3459L182.676 26.9234ZM183.063 17.4892H192.973V20.7926H183.063V17.4892ZM186.515 11.8049H190.027V35.8218C190.027 36.675 189.928 37.3396 189.729 37.8158C189.551 38.3118 189.204 38.6987 188.688 38.9765C188.192 39.2344 187.577 39.4031 186.843 39.4824C186.108 39.5618 185.206 39.6015 184.134 39.6015C184.075 39.1451 183.946 38.5995 183.747 37.9646C183.549 37.3496 183.341 36.8139 183.122 36.3575C183.718 36.3774 184.283 36.3873 184.819 36.3873C185.374 36.3873 185.751 36.3873 185.95 36.3873C186.327 36.3873 186.515 36.1889 186.515 35.7921V11.8049Z" fill="white"/>
+</svg></div></div>
+        <div class="social">
+          <span><svg viewBox="0 0 24 24"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v6h3v-6h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        </div>
+        <div class="contact">
+          電話：+886-3-2120088<br>
+          傳真：+886-3-2121771<br>
+          地址：桃園市龜山區民生北路一段568號
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>關於我們</h5>
+        <ul><li>公司簡介</li><li>年度紀事</li><li>供應商須知</li><li>政策及驗證系統</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>產品專區</h5>
+        <ul><li>整機組裝類 FATP</li><li>連接器 Components Level</li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>企業永續</h5>
+        <ul><li>ESG 永續報告書</li><li>智慧財產管理</li><li>資訊安全管理</li><li>環境保護</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright© Speed Tech Corp. All rights reserved — 頁面設計原型，僅供內部評估使用</span>
+      <div class="flinks"><span>員工專區</span><span>聯絡我們</span><span>隱私權政策</span><span>網站地圖</span></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
