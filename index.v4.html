@@ -170,16 +170,39 @@
     <div class="section-head">
       <h2>全部頁面</h2>
 <div class="hint ai-style-change-1" style="line-height: 1.8; display: block;">
-  <div class="ai-style-change-2">
-    <div class="ai-style-change-3">1. 公司資訊改 "世界地圖" 風格 = 完成</div>
-    <div class="ai-style-change-4">2. 產品分類重新分配 "OEM / ODM / 連接器" = 完成</div>
-    <div class="ai-style-change-5">3. 年度紀事增加 "宣德工業" = 完成</div>
-    <div class="ai-style-change-6">4. 供應商管理政策 新增 "DPP" 內容 = 進行中、待QAS確認內容中</div>
-    <div class="ai-style-change-7">5. 政策及驗證系統 "宣德智能" 改 "宣德工業" = 進行中</div>
-    <div class="ai-style-change-8">08/18：資料確認、提交設計</div>
-    <div class="ai-style-change-9">08/24：確認設計、開始切版</div>
-    <div class="ai-style-change-10">08/31：完成切版上線</div>
-  </div>
+<div class="schedule-grid">
+    <div class="schedule-item">1. 公司資訊改 "世界地圖" 風格 = 完成</div>
+  <div class="schedule-item">2. 產品分類重新分配 "OEM / ODM / 連接器" = 完成</div>
+  <div class="schedule-item">3. 年度紀事增加 "宣德工業" = 完成</div>
+  <div class="schedule-item">4. 供應商管理政策 新增 "DPP" 內容 = 進行中、待QAS確認內容中</div>
+  <div class="schedule-item">5. 政策及驗證系統 "宣德智能" 改 "宣德工業" = 進行中</div>
+  <div class="schedule-item">08/18：資料確認、提交設計</div>
+  <div class="schedule-item">08/24：確認設計、開始切版</div>
+  <div class="schedule-item">08/31：完成切版上線</div>
+</div>
+
+<style>
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    column-gap: 40px;
+    row-gap: 4px;
+    justify-content: start;
+    margin-top: 10px;
+  }
+  .schedule-item {
+    font-size: 12.5px;
+    color: #8892a0;
+    white-space: nowrap;
+    line-height: 1.8;
+  }
+  /* 窄螢幕自動切換回單欄 */
+  @media (max-width: 600px) {
+    .schedule-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 </div>
     </div>
 
